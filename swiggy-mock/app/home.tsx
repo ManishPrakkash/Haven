@@ -1,15 +1,15 @@
 import {
-    Ionicons,
-    MaterialCommunityIcons,
-    MaterialIcons,
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
 } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useMemo } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
-    SafeAreaView,
-    useSafeAreaInsets,
+  SafeAreaView,
+  useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
 import { getWorkerProfileById, workerProfiles } from "@/constants/workers";
@@ -20,6 +20,7 @@ const TAB_BAR_HEIGHT = 60;
 
 const navTabs = [
   { id: "home", label: "Home", icon: "home" },
+  { id: "orders", label: "Orders", icon: "document-text" },
   { id: "profiles", label: "Profiles", icon: "person" },
   { id: "earnings", label: "Earnings", icon: "wallet" },
   { id: "settings", label: "Settings", icon: "settings" },
@@ -207,9 +208,10 @@ export default function WorkerHomeScreen() {
           return (
             <Pressable
               key={tab.id}
-              onPress={() =>
-                tab.id === "profiles" && router.push("/profile-select")
-              }
+              onPress={() => {
+                if (tab.id === "profiles") router.push("/profile-select");
+                if (tab.id === "orders") router.push("/orders");
+              }}
               style={styles.tabItem}
             >
               <Ionicons

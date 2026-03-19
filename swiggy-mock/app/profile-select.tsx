@@ -2,10 +2,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useMemo, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import {
-    SafeAreaView,
-    useSafeAreaInsets,
+  SafeAreaView,
+  useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
 import { WorkerProfileCard } from "@/components/profile/worker-profile-card";
@@ -20,6 +20,7 @@ type NavTab = {
 
 const navTabs: NavTab[] = [
   { id: "home", label: "Home", icon: "home" },
+  { id: "orders", label: "Orders", icon: "document-text" },
   { id: "profiles", label: "Profiles", icon: "person" },
   { id: "earnings", label: "Earnings", icon: "wallet" },
   { id: "settings", label: "Settings", icon: "settings" },
@@ -89,7 +90,14 @@ export default function ProfileSelectScreen() {
             const isActive = tab.id === "profiles";
 
             return (
-              <View key={tab.id} style={styles.tabItem}>
+              <Pressable
+                key={tab.id}
+                style={styles.tabItem}
+                onPress={() => {
+                  if (tab.id === "home") router.push("/home");
+                  if (tab.id === "orders") router.push("/orders");
+                }}
+              >
                 <Ionicons
                   name={tab.icon}
                   size={18}
@@ -102,7 +110,7 @@ export default function ProfileSelectScreen() {
                 >
                   {tab.label}
                 </Text>
-              </View>
+              </Pressable>
             );
           })}
         </View>
