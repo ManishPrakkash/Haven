@@ -10,12 +10,17 @@ type WorkerProfileCardProps = {
   onSelect: (workerId: string) => void;
 };
 
-function getVehicleIconName(vehicle: string): keyof typeof MaterialCommunityIcons.glyphMap {
+function getVehicleIconName(
+  vehicle: string,
+): keyof typeof MaterialCommunityIcons.glyphMap {
   if (vehicle.toLowerCase().includes("scooter")) {
     return "scooter";
   }
 
-  if (vehicle.toLowerCase().includes("cycle") || vehicle.toLowerCase().includes("bicycle")) {
+  if (
+    vehicle.toLowerCase().includes("cycle") ||
+    vehicle.toLowerCase().includes("bicycle")
+  ) {
     return "bicycle";
   }
 

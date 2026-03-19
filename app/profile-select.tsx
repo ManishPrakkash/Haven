@@ -2,7 +2,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { useMemo, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+    SafeAreaView,
+    useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 import { WorkerProfileCard } from "@/components/profile/worker-profile-card";
 import { SwiggyColors, SwiggyTypography } from "@/constants/swiggy-theme";
@@ -46,7 +49,8 @@ export default function ProfileSelectScreen() {
           contentContainerStyle={[
             styles.listContent,
             {
-              paddingBottom: TAB_BAR_BASE_HEIGHT + Math.max(insets.bottom, 6) + 14,
+              paddingBottom:
+                TAB_BAR_BASE_HEIGHT + Math.max(insets.bottom, 6) + 14,
             },
           ]}
           showsVerticalScrollIndicator={false}
