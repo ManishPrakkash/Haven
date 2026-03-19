@@ -10,6 +10,18 @@ type WorkerProfileCardProps = {
   onSelect: (workerId: string) => void;
 };
 
+function getVehicleIconName(vehicle: string): keyof typeof MaterialCommunityIcons.glyphMap {
+  if (vehicle.toLowerCase().includes("scooter")) {
+    return "scooter";
+  }
+
+  if (vehicle.toLowerCase().includes("cycle") || vehicle.toLowerCase().includes("bicycle")) {
+    return "bicycle";
+  }
+
+  return "motorbike";
+}
+
 function formatRupee(value: number) {
   return value.toLocaleString("en-IN");
 }
@@ -23,14 +35,22 @@ function getInitials(name: string) {
     .join("");
 }
 
-export function WorkerProfileCard({ worker, isSelected, onSelect }: WorkerProfileCardProps) {
+export function WorkerProfileCard({
+  worker,
+  isSelected,
+  onSelect,
+}: WorkerProfileCardProps) {
   return (
     <Pressable
-      style={[styles.card, isSelected ? styles.cardSelected : styles.cardIdle]}
+      style={({ pressed }) => [
+        styles.card,
+        isSelected ? styles.cardSelected : styles.cardIdle,
+        pressed && styles.cardPressed,
+      ]}
       android_ripple={{ color: "rgba(252,128,25,0.1)" }}
-      onPress={() => onSelect(worker.id)}>
-      <View
-        style={[styles.avatar, { backgroundColor: worker.avatarColor }]}>
+      onPress={() => onSelect(worker.id)}
+    >
+      <View style={[styles.avatar, { backgroundColor: worker.avatarColor }]}>
         <Text style={styles.avatarText}>{getInitials(worker.name)}</Text>
       </View>
 
@@ -45,11 +65,15 @@ export function WorkerProfileCard({ worker, isSelected, onSelect }: WorkerProfil
         </View>
 
         <View style={styles.metaRow}>
-          <Ionicons name="location-sharp" size={12} color={SwiggyColors.textSecondary} />
+          <Ionicons
+            name="location-sharp"
+            size={12}
+            color={SwiggyColors.textSecondary}
+          />
           <Text style={styles.metaText}>{worker.city}</Text>
-          <Text style={styles.dotText}>•</Text>
+          <Text style={styles.dotText}>{"\u2022"}</Text>
           <MaterialCommunityIcons
-            name="motorbike"
+            name={getVehicleIconName(worker.vehicle)}
             size={12}
             color={SwiggyColors.textSecondary}
           />
@@ -58,20 +82,30 @@ export function WorkerProfileCard({ worker, isSelected, onSelect }: WorkerProfil
 
         <View style={styles.bottomRow}>
           <View style={styles.metaRow}>
-            <Ionicons name="time" size={12} color={SwiggyColors.textSecondary} />
+            <Ionicons
+              name="time"
+              size={12}
+              color={SwiggyColors.textSecondary}
+            />
             <Text style={styles.metaText}>{worker.hoursPerWeek} hrs/wk</Text>
-            <Text style={styles.dotText}>•</Text>
+            <Text style={styles.dotText}>{"\u2022"}</Text>
             <MaterialCommunityIcons
               name="currency-inr"
               size={12}
               color={SwiggyColors.textSecondary}
             />
-            <Text style={styles.metaText}>Rs.{formatRupee(worker.earningsPerWeek)}/wk</Text>
+            <Text style={styles.metaText}>
+              Rs.{formatRupee(worker.earningsPerWeek)}/wk
+            </Text>
           </View>
 
           {isSelected ? (
             <View style={styles.selectedBadge}>
-              <Ionicons name="checkmark" size={12} color={SwiggyColors.online} />
+              <Ionicons
+                name="checkmark"
+                size={12}
+                color={SwiggyColors.online}
+              />
               <Text style={styles.selectedText}>Selected</Text>
             </View>
           ) : (
@@ -86,32 +120,39 @@ export function WorkerProfileCard({ worker, isSelected, onSelect }: WorkerProfil
 const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
-    borderRadius: 12,
+    minHeight: 124,
+    borderRadius: 14,
     borderWidth: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
+    paddingHorizontal: 11,
+    paddingVertical: 14,
     marginBottom: 12,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
+    shadowOpacity: 0.06,
+    shadowRadius: 5,
     elevation: 2,
   },
   cardSelected: {
     borderColor: SwiggyColors.primary,
+    borderWidth: 1.5,
     backgroundColor: SwiggyColors.card,
   },
   cardIdle: {
     borderColor: SwiggyColors.border,
-    backgroundColor: "#FAFAFC",
+    backgroundColor: SwiggyColors.card,
+  },
+  cardPressed: {
+    opacity: 0.92,
   },
   avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.7)",
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 12,
+    marginRight: 13,
   },
   avatarText: {
     ...SwiggyTypography.bodySmall,
@@ -120,12 +161,13 @@ const styles = StyleSheet.create({
   },
   contentWrap: {
     flex: 1,
+    justifyContent: "flex-start",
   },
   topRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 8,
+    gap: 7,
   },
   nameText: {
     ...SwiggyTypography.bodyLarge,
@@ -136,19 +178,21 @@ const styles = StyleSheet.create({
   codeTag: {
     backgroundColor: SwiggyColors.primary,
     paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingVertical: 3,
     borderRadius: 4,
   },
   codeText: {
-    ...SwiggyTypography.caption,
+    ...SwiggyTypography.bodySmall,
+    fontSize: 9,
+    lineHeight: 11,
     color: SwiggyColors.white,
     fontWeight: "700",
   },
   metaRow: {
-    marginTop: 6,
+    marginTop: 7,
     flexDirection: "row",
     alignItems: "center",
-    gap: 4,
+    gap: 3,
   },
   metaText: {
     ...SwiggyTypography.bodySmall,
@@ -160,7 +204,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
   },
   bottomRow: {
-    marginTop: 6,
+    marginTop: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -169,14 +213,16 @@ const styles = StyleSheet.create({
     ...SwiggyTypography.bodySmall,
     color: SwiggyColors.primary,
     fontWeight: "600",
+    marginTop: 1,
   },
   selectedBadge: {
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
+    minHeight: 24,
     paddingVertical: 3,
-    paddingHorizontal: 8,
-    borderRadius: 10,
+    paddingHorizontal: 10,
+    borderRadius: 11,
     backgroundColor: SwiggyColors.onlineBg,
   },
   selectedText: {

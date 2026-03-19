@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { useMemo, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { WorkerProfileCard } from "@/components/profile/worker-profile-card";
 import { SwiggyColors, SwiggyTypography } from "@/constants/swiggy-theme";
@@ -21,7 +21,10 @@ const navTabs: NavTab[] = [
   { id: "settings", label: "Settings", icon: "settings" },
 ];
 
+const TAB_BAR_BASE_HEIGHT = 58;
+
 export default function ProfileSelectScreen() {
+  const insets = useSafeAreaInsets();
   const defaultSelectedId = useMemo(() => workerProfiles[0]?.id ?? "", []);
   const [selectedWorkerId, setSelectedWorkerId] = useState(defaultSelectedId);
 
@@ -32,13 +35,20 @@ export default function ProfileSelectScreen() {
       <View style={styles.screenContainer}>
         <View style={styles.headerWrap}>
           <Text style={styles.screenTitle}>Select Delivery Partner</Text>
-          <Text style={styles.screenSubtitle}>Switch worker profile to simulate delivery data</Text>
+          <Text style={styles.screenSubtitle}>
+            Switch worker profile to simulate delivery data
+          </Text>
         </View>
 
         <FlatList
           data={workerProfiles}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContent}
+          contentContainerStyle={[
+            styles.listContent,
+            {
+              paddingBottom: TAB_BAR_BASE_HEIGHT + Math.max(insets.bottom, 6) + 14,
+            },
+          ]}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <WorkerProfileCard
@@ -49,7 +59,15 @@ export default function ProfileSelectScreen() {
           )}
         />
 
-        <View style={styles.tabBar}>
+        <View
+          style={[
+            styles.tabBar,
+            {
+              height: TAB_BAR_BASE_HEIGHT + Math.max(insets.bottom, 6),
+              paddingBottom: Math.max(insets.bottom, 6),
+            },
+          ]}
+        >
           {navTabs.map((tab) => {
             const isActive = tab.id === "profiles";
 
@@ -58,9 +76,15 @@ export default function ProfileSelectScreen() {
                 <Ionicons
                   name={tab.icon}
                   size={18}
-                  color={isActive ? SwiggyColors.primary : SwiggyColors.textDisabled}
+                  color={
+                    isActive ? SwiggyColors.primary : SwiggyColors.textDisabled
+                  }
                 />
-                <Text style={[styles.tabLabel, isActive && styles.tabLabelActive]}>{tab.label}</Text>
+                <Text
+                  style={[styles.tabLabel, isActive && styles.tabLabelActive]}
+                >
+                  {tab.label}
+                </Text>
               </View>
             );
           })}
@@ -73,15 +97,15 @@ export default function ProfileSelectScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#D8D8DE",
+    backgroundColor: "#D5D5DB",
   },
   screenContainer: {
     flex: 1,
   },
   headerWrap: {
-    paddingTop: 10,
-    paddingHorizontal: 14,
-    paddingBottom: 6,
+    paddingTop: 8,
+    paddingHorizontal: 12,
+    paddingBottom: 10,
   },
   screenTitle: {
     ...SwiggyTypography.sectionTitle,
@@ -91,12 +115,12 @@ const styles = StyleSheet.create({
   screenSubtitle: {
     ...SwiggyTypography.bodySmall,
     color: SwiggyColors.textSecondary,
-    marginTop: 2,
+    marginTop: 3,
+    fontSize: 12,
   },
   listContent: {
     paddingHorizontal: 10,
     paddingTop: 4,
-    paddingBottom: 92,
   },
   tabBar: {
     position: "absolute",
@@ -106,7 +130,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#D8D8DD",
     backgroundColor: SwiggyColors.card,
-    paddingVertical: 8,
+    paddingTop: 8,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
@@ -114,13 +138,14 @@ const styles = StyleSheet.create({
   tabItem: {
     alignItems: "center",
     justifyContent: "center",
-    minWidth: 56,
-    gap: 2,
+    minWidth: 60,
+    gap: 3,
   },
   tabLabel: {
     ...SwiggyTypography.caption,
     color: SwiggyColors.textDisabled,
-    fontSize: 10,
+    fontSize: 9,
+    lineHeight: 10,
   },
   tabLabelActive: {
     color: SwiggyColors.primary,
