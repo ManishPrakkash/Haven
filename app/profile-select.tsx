@@ -36,11 +36,13 @@ export default function ProfileSelectScreen() {
       <StatusBar style="dark" />
 
       <View style={styles.screenContainer}>
-        <View style={styles.headerWrap}>
-          <Text style={styles.screenTitle}>Select Delivery Partner</Text>
-          <Text style={styles.screenSubtitle}>
-            Switch worker profile to simulate delivery data
-          </Text>
+        <View style={styles.headerSection}>
+          <View style={styles.headerWrap}>
+            <Text style={styles.screenTitle}>Select Delivery Partner</Text>
+            <Text style={styles.screenSubtitle}>
+              Switch worker profile to simulate delivery data
+            </Text>
+          </View>
         </View>
 
         <FlatList
@@ -106,10 +108,21 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
   },
+  headerSection: {
+    backgroundColor: "#E2E2E7",
+    borderBottomWidth: 1,
+    borderBottomColor: "#CFD0D8",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
+    zIndex: 2,
+  },
   headerWrap: {
-    paddingTop: 8,
+    paddingTop: 10,
     paddingHorizontal: 12,
-    paddingBottom: 10,
+    paddingBottom: 12,
   },
   screenTitle: {
     ...SwiggyTypography.sectionTitle,
@@ -124,7 +137,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: 10,
-    paddingTop: 4,
+    paddingTop: 10,
   },
   tabBar: {
     position: "absolute",
