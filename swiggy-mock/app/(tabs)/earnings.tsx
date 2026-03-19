@@ -3,9 +3,12 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Pla
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import { useUserStore } from '../store/userStore';
 
 export default function EarningsScreen() {
   const insets = useSafeAreaInsets();
+  const { profile } = useUserStore();
+  const { weekTotal, deliveries, peakBonus, tips, onlineHours, onlineProgress, deliveryTargetText, deliveryProgress, distance, distanceProgress } = profile.earningsStats;
 
   // Mock bar chart data
   const chartData = [
@@ -45,7 +48,7 @@ export default function EarningsScreen() {
         {/* SUMMARY HEADER */}
         <View style={styles.summaryHeader}>
           <Text style={styles.summaryTitle}>This Week</Text>
-          <Text style={styles.summaryAmount}>Rs.4,200</Text>
+          <Text style={styles.summaryAmount}>Rs.{weekTotal}</Text>
         </View>
 
         {/* GRAPH CARD */}
@@ -57,7 +60,7 @@ export default function EarningsScreen() {
                   <View 
                     style={[
                       styles.bar, 
-                      { height: data.height },
+                      { height: data.height as any },
                       data.active ? styles.barActive : styles.barInactive
                     ]} 
                   />
@@ -90,7 +93,7 @@ export default function EarningsScreen() {
               </View>
               <Text style={styles.rowLabel}>Deliveries</Text>
             </View>
-            <Text style={styles.rowValue}>Rs.3,400</Text>
+            <Text style={styles.rowValue}>Rs.{deliveries}</Text>
           </View>
           
           <View style={styles.divider} />
@@ -103,7 +106,7 @@ export default function EarningsScreen() {
               </View>
               <Text style={styles.rowLabel}>Peak Hours Bonus</Text>
             </View>
-            <Text style={styles.rowValue}>Rs.600</Text>
+            <Text style={styles.rowValue}>Rs.{peakBonus}</Text>
           </View>
 
           <View style={styles.divider} />
@@ -116,7 +119,7 @@ export default function EarningsScreen() {
               </View>
               <Text style={styles.rowLabel}>Tips</Text>
             </View>
-            <Text style={styles.rowValue}>Rs.200</Text>
+            <Text style={styles.rowValue}>Rs.{tips}</Text>
           </View>
 
           <View style={styles.divider} />
@@ -129,7 +132,7 @@ export default function EarningsScreen() {
               </View>
               <Text style={styles.rowLabelBold}>Total</Text>
             </View>
-            <Text style={styles.rowValueBold}>Rs.4,200</Text>
+            <Text style={styles.rowValueBold}>Rs.{weekTotal}</Text>
           </View>
         </View>
 
@@ -147,12 +150,12 @@ export default function EarningsScreen() {
                 <Ionicons name="time" size={16} color="#6B7280" />
                 <Text style={styles.activityLabel}>Online Hours</Text>
               </View>
-              <Text style={styles.activityValueOrange}>8.5 hrs</Text>
+              <Text style={styles.activityValueOrange}>{onlineHours} hrs</Text>
             </View>
             {/* Progress Bar */}
             <View style={styles.progressBarTrack}>
-              <View style={[styles.progressBarFill, { width: '85%' }]} />
-              <View style={[styles.progressGap, { left: '85%' }]} />
+              <View style={[styles.progressBarFill, { width: `${onlineProgress}%` }]} />
+              <View style={[styles.progressGap, { left: `${onlineProgress}%` }]} />
             </View>
           </View>
 
@@ -163,12 +166,12 @@ export default function EarningsScreen() {
                 <MaterialCommunityIcons name="moped" size={16} color="#6B7280" />
                 <Text style={styles.activityLabel}>Deliveries Target</Text>
               </View>
-              <Text style={styles.activityValueOrange}>12 / 15</Text>
+              <Text style={styles.activityValueOrange}>{deliveryTargetText}</Text>
             </View>
             {/* Progress Bar */}
             <View style={styles.progressBarTrack}>
-              <View style={[styles.progressBarFill, { width: '80%' }]} />
-              <View style={[styles.progressGap, { left: '80%' }]} />
+              <View style={[styles.progressBarFill, { width: `${deliveryProgress}%` }]} />
+              <View style={[styles.progressGap, { left: `${deliveryProgress}%` }]} />
             </View>
           </View>
 
@@ -179,11 +182,11 @@ export default function EarningsScreen() {
                 <MaterialCommunityIcons name="transit-connection-variant" size={16} color="#6B7280" />
                 <Text style={styles.activityLabel}>Distance</Text>
               </View>
-              <Text style={styles.activityValueOrange}>42 km</Text>
+              <Text style={styles.activityValueOrange}>{distance}</Text>
             </View>
             <View style={styles.progressBarTrack}>
-              <View style={[styles.progressBarFill, { width: '70%' }]} />
-              <View style={[styles.progressGap, { left: '70%' }]} />
+              <View style={[styles.progressBarFill, { width: `${distanceProgress}%` }]} />
+              <View style={[styles.progressGap, { left: `${distanceProgress}%` }]} />
             </View>
           </View>
         </View>

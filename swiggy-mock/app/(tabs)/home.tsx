@@ -5,53 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-// Mock worker data
-const workerProfiles = [
-  {
-    id: '1',
-    name: 'Ilamsaravanbalaji',
-    city: 'Chennai',
-    todayEarnings: 1247,
-    deliveriesToday: 12,
-    hoursToday: 6.5,
-    rating: 4.8,
-    isOnline: false,
-    deliveryZone: 'Anna Nagar'
-  },
-  {
-    id: '2', 
-    name: 'Kavinkumar',
-    city: 'Chennai',
-    todayEarnings: 980,
-    deliveriesToday: 8,
-    hoursToday: 5.2,
-    rating: 4.6,
-    isOnline: false,
-    deliveryZone: 'T. Nagar'
-  },
-  {
-    id: '3',
-    name: 'Keerthi Aanand', 
-    city: 'Chennai',
-    todayEarnings: 1560,
-    deliveriesToday: 15,
-    hoursToday: 7.8,
-    rating: 4.9,
-    isOnline: false,
-    deliveryZone: 'Adyar'
-  },
-  {
-    id: '4',
-    name: 'Manish Prakkash',
-    city: 'Chennai', 
-    todayEarnings: 1120,
-    deliveriesToday: 10,
-    hoursToday: 6.0,
-    rating: 4.7,
-    isOnline: false,
-    deliveryZone: 'Velachery'
-  }
-];
+import { useUserStore } from '../store/userStore';
 
 const zoneAlerts = [
   { id: 'rain', label: 'Heavy Rain', icon: 'weather-rainy', color: '#87A9DE' },
@@ -61,33 +15,18 @@ const zoneAlerts = [
   { id: 'curfew', label: 'Curfew in effect', icon: 'clock-alert-outline', color: '#E4B271' },
 ];
 
-
-
 function formatCurrency(value: number) {
   return `₹${value.toLocaleString('en-IN')}`;
 }
 
-function toWorkerId(value: string | string[] | undefined) {
-  return Array.isArray(value) ? value[0] : value;
-}
-
-function getWorkerProfileById(id: string) {
-  return workerProfiles.find(worker => worker.id === id);
-}
-
-// ---------- COMPONENT ----------
 export default function WorkerHomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const params = useLocalSearchParams<{ workerId?: string | string[] }>();
+  const { profile } = useUserStore();
 
-  const worker = useMemo(() => {
-    const id = toWorkerId(params.workerId);
-    return getWorkerProfileById(id) ?? workerProfiles[0];
-  }, [params.workerId]);
-
-  const firstName = worker.name.split(' ')[0];
-  const isOnline = worker.isOnline;
+  const firstName = profile.name.split(' ')[0];
+  const { todayEarnings, deliveriesToday, hoursToday, isOnline, deliveryZone } = profile.homeStats;
+  const rating = profile.performance.rating;
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -100,7 +39,7 @@ export default function WorkerHomeScreen() {
           <View>
             <Text style={styles.name}>{firstName}</Text>
             <View style={styles.locationRow}>
-              <Text style={styles.city}>{worker.city}</Text>
+              <Text style={styles.city}>{profile.city}</Text>
               <MaterialIcons name="keyboard-arrow-down" size={16} color="#FC8019" />
             </View>
           </View>
@@ -126,16 +65,16 @@ export default function WorkerHomeScreen() {
         <View style={styles.card}>
           <View style={styles.earningsTop}>
             <Text style={styles.greeting}>Good morning, {firstName}!</Text>
-            <Text style={styles.amount}>{formatCurrency(worker.todayEarnings)}</Text>
+            <Text style={styles.amount}>{formatCurrency(todayEarnings)}</Text>
             <Text style={styles.caption}>Today's Earnings</Text>
           </View>
 
           <View style={styles.metrics}>
-            <Metric label="DELIVERIES" value={worker.deliveriesToday} icon="bicycle" />
+            <Metric label="DELIVERIES" value={deliveriesToday} icon="bicycle" />
             <Divider />
-            <Metric label="HOURS" value={`${worker.hoursToday.toFixed(1)}h`} icon="time-outline" />
+            <Metric label="HOURS" value={`${hoursToday.toFixed(1)}h`} icon="time-outline" />
             <Divider />
-            <Metric label="RATING" value={worker.rating.toFixed(1)} icon="star" />
+            <Metric label="RATING" value={rating} icon="star" />
           </View>
         </View>
 
@@ -158,7 +97,7 @@ export default function WorkerHomeScreen() {
         <View style={styles.card}>
           <View style={styles.zoneHeader}>
             <Text style={styles.zoneTitle}>Delivery Zone</Text>
-            <Text style={styles.zoneName}>{worker.deliveryZone}</Text>
+            <Text style={styles.zoneName}>{deliveryZone}</Text>
           </View>
 
           <View style={styles.map}>

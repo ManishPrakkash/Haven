@@ -11,7 +11,7 @@ export const PROFILES_DATA = [
     vehicle: 'Electric Scooter',
     vehicleIcon: 'moped',
     weeklyHours: '48 hrs/wk',
-    avgEarnings: 'Rs.4,200/wk',
+    avgEarnings: 'Rs.4,200',
     partnerSince: 'Oct 2023',
     insurance: 'GigShield Active',
     performance: {
@@ -22,6 +22,25 @@ export const PROFILES_DATA = [
       streak: 15,
       isTopPerformer: true,
       zone: 'Anna Nagar Zone'
+    },
+    homeStats: {
+      todayEarnings: 1247,
+      deliveriesToday: 12,
+      hoursToday: 6.5,
+      isOnline: false,
+      deliveryZone: 'Anna Nagar'
+    },
+    earningsStats: {
+      weekTotal: '4,200',
+      deliveries: '3,400',
+      peakBonus: '600',
+      tips: '200',
+      onlineHours: '8.5',
+      onlineProgress: 85,
+      deliveryTargetText: '12 / 15',
+      deliveryProgress: 80,
+      distance: '42 km',
+      distanceProgress: 70
     }
   },
   {
@@ -34,7 +53,7 @@ export const PROFILES_DATA = [
     vehicle: 'Motorcycle',
     vehicleIcon: 'motorbike',
     weeklyHours: '36 hrs/wk',
-    avgEarnings: 'Rs.3,100/wk',
+    avgEarnings: 'Rs.3,100',
     partnerSince: 'Jan 2024',
     insurance: 'GigShield Active',
     performance: {
@@ -45,6 +64,25 @@ export const PROFILES_DATA = [
       streak: 5,
       isTopPerformer: false,
       zone: 'Peelamedu Zone'
+    },
+    homeStats: {
+      todayEarnings: 980,
+      deliveriesToday: 8,
+      hoursToday: 5.2,
+      isOnline: false,
+      deliveryZone: 'T. Nagar'
+    },
+    earningsStats: {
+      weekTotal: '3,100',
+      deliveries: '2,800',
+      peakBonus: '200',
+      tips: '100',
+      onlineHours: '5.2',
+      onlineProgress: 52,
+      deliveryTargetText: '8 / 15',
+      deliveryProgress: 53,
+      distance: '28 km',
+      distanceProgress: 40
     }
   },
   {
@@ -57,7 +95,7 @@ export const PROFILES_DATA = [
     vehicle: 'Bicycle',
     vehicleIcon: 'bicycle',
     weeklyHours: '20 hrs/wk',
-    avgEarnings: 'Rs.1,500/wk',
+    avgEarnings: 'Rs.1,500',
     partnerSince: 'Mar 2024',
     insurance: 'GigShield Active',
     performance: {
@@ -68,6 +106,25 @@ export const PROFILES_DATA = [
       streak: 30,
       isTopPerformer: true,
       zone: 'Indiranagar Zone'
+    },
+    homeStats: {
+      todayEarnings: 1560,
+      deliveriesToday: 15,
+      hoursToday: 7.8,
+      isOnline: false,
+      deliveryZone: 'Adyar'
+    },
+    earningsStats: {
+      weekTotal: '1,500',
+      deliveries: '1,100',
+      peakBonus: '300',
+      tips: '100',
+      onlineHours: '7.8',
+      onlineProgress: 95,
+      deliveryTargetText: '15 / 15',
+      deliveryProgress: 100,
+      distance: '65 km',
+      distanceProgress: 90
     }
   },
   {
@@ -80,7 +137,7 @@ export const PROFILES_DATA = [
     vehicle: 'Electric Scooter',
     vehicleIcon: 'moped',
     weeklyHours: '55 hrs/wk',
-    avgEarnings: 'Rs.6,800/wk',
+    avgEarnings: 'Rs.6,800',
     partnerSince: 'Jul 2022',
     insurance: 'GigShield Active',
     performance: {
@@ -91,6 +148,25 @@ export const PROFILES_DATA = [
       streak: 2,
       isTopPerformer: false,
       zone: 'Kukatpally Zone'
+    },
+    homeStats: {
+      todayEarnings: 1120,
+      deliveriesToday: 10,
+      hoursToday: 6.0,
+      isOnline: false,
+      deliveryZone: 'Velachery'
+    },
+    earningsStats: {
+      weekTotal: '6,800',
+      deliveries: '5,000',
+      peakBonus: '1,500',
+      tips: '300',
+      onlineHours: '6.0',
+      onlineProgress: 60,
+      deliveryTargetText: '10 / 15',
+      deliveryProgress: 66,
+      distance: '35 km',
+      distanceProgress: 50
     }
   }
 ];
