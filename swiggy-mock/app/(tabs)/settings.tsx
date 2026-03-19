@@ -2,8 +2,46 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Platform, Modal } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Svg, { Circle } from 'react-native-svg';
 import { StatusBar } from 'expo-status-bar';
 import { useUserStore, PROFILES_DATA } from '../store/userStore';
+
+const CircularProgress = ({ size, strokeWidth, progress, children }: { size: number, strokeWidth: number, progress: number, children?: React.ReactNode }) => {
+  const center = size / 2;
+  const radius = center - strokeWidth / 2;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (progress / 100) * circumference;
+
+  return (
+    <View style={{ width: size, height: size, justifyContent: 'center', alignItems: 'center' }}>
+      <Svg style={{ position: 'absolute' }} width={size} height={size}>
+        <Circle
+          cx={center}
+          cy={center}
+          r={radius}
+          stroke="#F3F4F6"
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        <Circle
+          cx={center}
+          cy={center}
+          r={radius}
+          stroke="#FC8019"
+          strokeWidth={strokeWidth}
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
+          fill="none"
+          rotation="-90"
+          originX={center}
+          originY={center}
+        />
+      </Svg>
+      {children}
+    </View>
+  );
+};
 
 export default function PerformanceScreen() {
   const insets = useSafeAreaInsets();
@@ -49,12 +87,10 @@ export default function PerformanceScreen() {
         {/* CUSTOMER RATING CARD */}
         <View style={styles.mainCard}>
           <View style={styles.ratingCircleContainer}>
-            {/* The actual circle border */}
-            <View style={styles.largeCircle}>
-              <View style={styles.circleGapOverride} />
+            <CircularProgress size={160} strokeWidth={12} progress={(parseFloat(rating) / 5) * 100}>
               <Text style={styles.ratingNumber}>{rating}</Text>
               <Ionicons name="star" size={24} color="#FC8019" style={{ marginTop: 2 }} />
-            </View>
+            </CircularProgress>
           </View>
           <Text style={styles.ratingLabel}>CUSTOMER RATING</Text>
         </View>
@@ -63,29 +99,26 @@ export default function PerformanceScreen() {
         <View style={styles.metricsRow}>
           {/* Attendance */}
           <View style={styles.metricCard}>
-            <View style={styles.smallCircle}>
-              <View style={styles.smallCircleGapOverride} />
+            <CircularProgress size={60} strokeWidth={5} progress={attendance}>
               <Text style={styles.metricValue}>{attendance}%</Text>
-            </View>
-            <Text style={styles.metricLabel}>Attendance</Text>
+            </CircularProgress>
+            <Text style={[styles.metricLabel, { marginTop: 10 }]}>Attendance</Text>
           </View>
 
           {/* On-Time */}
           <View style={styles.metricCard}>
-            <View style={styles.smallCircle}>
-              <View style={styles.smallCircleGapOverride} />
+            <CircularProgress size={60} strokeWidth={5} progress={onTime}>
               <Text style={styles.metricValue}>{onTime}%</Text>
-            </View>
-            <Text style={styles.metricLabel}>On-Time</Text>
+            </CircularProgress>
+            <Text style={[styles.metricLabel, { marginTop: 10 }]}>On-Time</Text>
           </View>
 
           {/* Acceptance */}
           <View style={styles.metricCard}>
-            <View style={styles.smallCircle}>
-              <View style={styles.smallCircleGapOverride} />
+            <CircularProgress size={60} strokeWidth={5} progress={acceptance}>
               <Text style={styles.metricValue}>{acceptance}%</Text>
-            </View>
-            <Text style={styles.metricLabel}>Acceptance</Text>
+            </CircularProgress>
+            <Text style={[styles.metricLabel, { marginTop: 10 }]}>Acceptance</Text>
           </View>
         </View>
 
@@ -249,25 +282,7 @@ const styles = StyleSheet.create({
   ratingCircleContainer: {
     marginBottom: 20,
   },
-  largeCircle: {
-    width: 160,
-    height: 160,
-    borderRadius: 80,
-    borderWidth: 10,
-    borderColor: '#FC8019',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative',
-  },
-  // Simulation of a non-perfect closed circle (the white gap in the arc design)
-  circleGapOverride: {
-    position: 'absolute',
-    top: -10,
-    left: '25%',
-    width: 25,
-    height: 10,
-    backgroundColor: '#F4F4F5', // Soft gray to simulate the uncompleted part
-  },
+
   ratingNumber: {
     fontSize: 36,
     fontWeight: 'bold',
@@ -295,25 +310,6 @@ const styles = StyleSheet.create({
       ios: { shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 4 },
       android: { elevation: 1 },
     }),
-  },
-  smallCircle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 4,
-    borderColor: '#FC8019',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
-    position: 'relative',
-  },
-  smallCircleGapOverride: {
-    position: 'absolute',
-    top: -4,
-    left: '30%',
-    width: 10,
-    height: 4,
-    backgroundColor: '#F4F4F5',
   },
   metricValue: {
     fontSize: 13,
