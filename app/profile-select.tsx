@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useMemo, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
@@ -27,9 +28,19 @@ const navTabs: NavTab[] = [
 const TAB_BAR_BASE_HEIGHT = 58;
 
 export default function ProfileSelectScreen() {
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   const defaultSelectedId = useMemo(() => workerProfiles[0]?.id ?? "", []);
   const [selectedWorkerId, setSelectedWorkerId] = useState(defaultSelectedId);
+
+  const handleWorkerSelect = (workerId: string) => {
+    setSelectedWorkerId(workerId);
+
+    router.push({
+      pathname: "/home",
+      params: { workerId },
+    });
+  };
 
   return (
     <SafeAreaView edges={["top", "left", "right"]} style={styles.safeArea}>
@@ -60,7 +71,7 @@ export default function ProfileSelectScreen() {
             <WorkerProfileCard
               worker={item}
               isSelected={item.id === selectedWorkerId}
-              onSelect={setSelectedWorkerId}
+              onSelect={handleWorkerSelect}
             />
           )}
         />
