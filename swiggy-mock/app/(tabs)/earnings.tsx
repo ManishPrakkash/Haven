@@ -1,156 +1,446 @@
-import { Ionicons } from "@expo/vector-icons";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import { SwiggyColors } from "../../constants/swiggy-theme";
-import { useOrders } from "../../hooks/use-orders";
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 
 export default function EarningsScreen() {
-  const { deliveryStats, loading } = useOrders();
+  const insets = useSafeAreaInsets();
 
-  if (loading) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Earnings</Text>
-        </View>
-        <View style={styles.loadingContainer}>
-          <Text style={styles.loadingText}>Loading earnings...</Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
+  // Mock bar chart data
+  const chartData = [
+    { day: 'M', height: '40%', active: false },
+    { day: 'T', height: '30%', active: false },
+    { day: 'W', height: '50%', active: false },
+    { day: 'T', height: '80%', active: true },
+    { day: 'F', height: '60%', active: false },
+    { day: 'S', height: '90%', active: false },
+    { day: 'S', height: '70%', active: false },
+  ];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar style="dark" />
+      
+      {/* HEADER */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Earnings</Text>
       </View>
-      
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.earningsCard}>
-          <View style={styles.earningsHeader}>
-            <Text style={styles.earningsLabel}>Today's Earnings</Text>
-            <Ionicons name="wallet" size={24} color={SwiggyColors.primary} />
-          </View>
-          <Text style={styles.earningsAmount}>Rs.{deliveryStats?.earnings || 0}</Text>
-          <Text style={styles.earningsSubtext}>
-            From {deliveryStats?.completed || 0} deliveries
-          </Text>
+
+      <ScrollView 
+        style={styles.scrollBackground} 
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 40 }]} 
+        showsVerticalScrollIndicator={false}
+      >
+        {/* TABS */}
+        <View style={styles.tabsContainer}>
+          <TouchableOpacity style={[styles.tab, styles.activeTab]}>
+            <Text style={styles.activeTabText}>This Week</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.tab}>
+            <Text style={styles.inactiveTabText}>This Month</Text>
+          </TouchableOpacity>
         </View>
 
-        <View style={styles.statsContainer}>
-          <View style={styles.statCard}>
-            <Ionicons name="document-text" size={20} color={SwiggyColors.primary} />
-            <Text style={styles.statNumber}>{deliveryStats?.total || 0}</Text>
-            <Text style={styles.statLabel}>Total Orders</Text>
-          </View>
-          
-          <View style={styles.statCard}>
-            <Ionicons name="checkmark-circle" size={20} color={SwiggyColors.online} />
-            <Text style={styles.statNumber}>{deliveryStats?.completed || 0}</Text>
-            <Text style={styles.statLabel}>Completed</Text>
-          </View>
-          
-          <View style={styles.statCard}>
-            <Ionicons name="trending-up" size={20} color={SwiggyColors.star} />
-            <Text style={styles.statNumber}>
-              Rs.{deliveryStats?.completed ? Math.round(deliveryStats.earnings / deliveryStats.completed) : 0}
-            </Text>
-            <Text style={styles.statLabel}>Avg per Order</Text>
+        {/* SUMMARY HEADER */}
+        <View style={styles.summaryHeader}>
+          <Text style={styles.summaryTitle}>This Week</Text>
+          <Text style={styles.summaryAmount}>Rs.4,200</Text>
+        </View>
+
+        {/* GRAPH CARD */}
+        <View style={styles.card}>
+          <View style={styles.chartContainer}>
+            <View style={styles.barsArea}>
+              {chartData.map((data, index) => (
+                <View key={index} style={styles.barColumn}>
+                  <View 
+                    style={[
+                      styles.bar, 
+                      { height: data.height },
+                      data.active ? styles.barActive : styles.barInactive
+                    ]} 
+                  />
+                </View>
+              ))}
+            </View>
+            <View style={styles.daysRow}>
+              {chartData.map((data, index) => (
+                <Text 
+                  key={index} 
+                  style={[
+                    styles.dayText,
+                    data.active ? styles.dayTextActive : styles.dayTextInactive
+                  ]}
+                >
+                  {data.day}
+                </Text>
+              ))}
+            </View>
           </View>
         </View>
+
+        {/* BREAKDOWN CARD */}
+        <View style={styles.card}>
+          {/* Deliveries */}
+          <View style={styles.breakdownRow}>
+            <View style={styles.rowLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#FFEDD5' }]}>
+                <Ionicons name="bag-handle" size={16} color="#F97316" />
+              </View>
+              <Text style={styles.rowLabel}>Deliveries</Text>
+            </View>
+            <Text style={styles.rowValue}>Rs.3,400</Text>
+          </View>
+          
+          <View style={styles.divider} />
+
+          {/* Peak Hours Bonus */}
+          <View style={styles.breakdownRow}>
+            <View style={styles.rowLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#FEE2E2' }]}>
+                <MaterialCommunityIcons name="fire" size={18} color="#EF4444" />
+              </View>
+              <Text style={styles.rowLabel}>Peak Hours Bonus</Text>
+            </View>
+            <Text style={styles.rowValue}>Rs.600</Text>
+          </View>
+
+          <View style={styles.divider} />
+
+          {/* Tips */}
+          <View style={styles.breakdownRow}>
+            <View style={styles.rowLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#FDF2F8' }]}>
+                <Ionicons name="heart" size={16} color="#EC4899" />
+              </View>
+              <Text style={styles.rowLabel}>Tips</Text>
+            </View>
+            <Text style={styles.rowValue}>Rs.200</Text>
+          </View>
+
+          <View style={styles.divider} />
+
+          {/* Total */}
+          <View style={styles.breakdownRow}>
+            <View style={styles.rowLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#1F2937' }]}>
+                <Ionicons name="bar-chart" size={16} color="#FFF" />
+              </View>
+              <Text style={styles.rowLabelBold}>Total</Text>
+            </View>
+            <Text style={styles.rowValueBold}>Rs.4,200</Text>
+          </View>
+        </View>
+
+        {/* ADJUST TODAY'S ACTIVITY CARD */}
+        <View style={styles.card}>
+          <View style={styles.activityHeader}>
+            <Text style={styles.activityTitle}>Adjust Today's Activity</Text>
+            <Ionicons name="sync-outline" size={18} color="#6B7280" />
+          </View>
+
+          {/* Online Hours */}
+          <View style={styles.activityRow}>
+            <View style={styles.activityRowTop}>
+              <View style={styles.activityRowLeft}>
+                <Ionicons name="time" size={16} color="#6B7280" />
+                <Text style={styles.activityLabel}>Online Hours</Text>
+              </View>
+              <Text style={styles.activityValueOrange}>8.5 hrs</Text>
+            </View>
+            {/* Progress Bar */}
+            <View style={styles.progressBarTrack}>
+              <View style={[styles.progressBarFill, { width: '85%' }]} />
+              <View style={[styles.progressGap, { left: '85%' }]} />
+            </View>
+          </View>
+
+          {/* Deliveries Target */}
+          <View style={styles.activityRow}>
+            <View style={styles.activityRowTop}>
+              <View style={styles.activityRowLeft}>
+                <MaterialCommunityIcons name="moped" size={16} color="#6B7280" />
+                <Text style={styles.activityLabel}>Deliveries Target</Text>
+              </View>
+              <Text style={styles.activityValueOrange}>12 / 15</Text>
+            </View>
+            {/* Progress Bar */}
+            <View style={styles.progressBarTrack}>
+              <View style={[styles.progressBarFill, { width: '80%' }]} />
+              <View style={[styles.progressGap, { left: '80%' }]} />
+            </View>
+          </View>
+
+          {/* Distance */}
+          <View style={styles.activityRow}>
+            <View style={styles.activityRowTop}>
+              <View style={styles.activityRowLeft}>
+                <MaterialCommunityIcons name="transit-connection-variant" size={16} color="#6B7280" />
+                <Text style={styles.activityLabel}>Distance</Text>
+              </View>
+              <Text style={styles.activityValueOrange}>42 km</Text>
+            </View>
+            <View style={styles.progressBarTrack}>
+              <View style={[styles.progressBarFill, { width: '70%' }]} />
+              <View style={[styles.progressGap, { left: '70%' }]} />
+            </View>
+          </View>
+        </View>
+
+        {/* SYNC BUTTON */}
+        <TouchableOpacity style={styles.syncBtn}>
+          <Text style={styles.syncBtnText}>Sync to GigShield</Text>
+        </TouchableOpacity>
+        <Text style={styles.lastSyncedText}>Last synced: 2 min ago</Text>
+
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    backgroundColor: SwiggyColors.background,
+    backgroundColor: '#fff',
   },
   header: {
     paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 8,
-    backgroundColor: SwiggyColors.background,
+    paddingVertical: 14,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F3F4F6', // optional subtle separator
   },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: SwiggyColors.textPrimary,
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#1A1A1A',
   },
-  loadingContainer: {
+  scrollBackground: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#F3F4F6', // Matches design gray background
   },
-  loadingText: {
-    fontSize: 16,
-    color: SwiggyColors.textSecondary,
-  },
-  content: {
-    flex: 1,
+  scrollContent: {
     paddingHorizontal: 16,
+    paddingTop: 16,
   },
-  earningsCard: {
-    backgroundColor: SwiggyColors.card,
-    borderRadius: 16,
-    padding: 24,
+  tabsContainer: {
+    flexDirection: 'row',
     marginBottom: 24,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 3,
+    gap: 12, // React native gap
   },
-  earningsHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  tab: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  activeTab: {
+    backgroundColor: '#FC8019',
+    borderColor: '#FC8019',
+  },
+  activeTabText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  inactiveTabText: {
+    color: '#6B7280',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  summaryHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 16,
   },
-  earningsLabel: {
+  summaryTitle: {
     fontSize: 16,
-    fontWeight: "600",
-    color: SwiggyColors.textSecondary,
+    fontWeight: 'bold',
+    color: '#1A1A1A',
   },
-  earningsAmount: {
-    fontSize: 36,
-    fontWeight: "bold",
-    color: SwiggyColors.textPrimary,
+  summaryAmount: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FC8019',
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
+  },
+  chartContainer: {
+    height: 180,
+    justifyContent: 'flex-end',
+  },
+  barsArea: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    marginBottom: 12,
+  },
+  barColumn: {
+    width: 25,
+    height: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  bar: {
+    width: 8,
+    borderRadius: 4,
+  },
+  barActive: {
+    backgroundColor: '#FC8019', // Orange for 'T'
+  },
+  barInactive: {
+    backgroundColor: '#F3F4F6', // light gray
+  },
+  daysRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+  },
+  dayText: {
+    width: 25,
+    textAlign: 'center',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  dayTextActive: {
+    color: '#FC8019', // Orange
+  },
+  dayTextInactive: {
+    color: '#6B7280', // Gray
+  },
+  breakdownRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  rowLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  rowLabel: {
+    fontSize: 14,
+    color: '#374151',
+  },
+  rowLabelBold: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+  },
+  rowValue: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#374151',
+  },
+  rowValueBold: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#F3F4F6',
+    marginVertical: 4,
+  },
+  activityHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  activityTitle: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+  },
+  activityRow: {
+    marginBottom: 18,
+  },
+  activityRowTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 8,
   },
-  earningsSubtext: {
-    fontSize: 14,
-    color: SwiggyColors.textSecondary,
+  activityRowLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  statsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 12,
+  activityLabel: {
+    fontSize: 13,
+    color: '#6B7280',
+    marginLeft: 8,
   },
-  statCard: {
-    flex: 1,
-    backgroundColor: SwiggyColors.card,
+  activityValueOrange: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#FC8019',
+  },
+  progressBarTrack: {
+    height: 6,
+    backgroundColor: '#E5E7EB',
+    borderRadius: 3,
+    flexDirection: 'row',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: '#FC8019',
+    borderRadius: 3,
+  },
+  progressGap: {
+    position: 'absolute',
+    width: 3,
+    height: '100%',
+    backgroundColor: '#fff',
+    marginLeft: -1.5,
+  },
+  syncBtn: {
+    backgroundColor: '#FC8019',
     borderRadius: 12,
-    padding: 16,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.03,
-    shadowRadius: 2,
-    elevation: 1,
-  },
-  statNumber: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: SwiggyColors.textPrimary,
+    paddingVertical: 14,
+    alignItems: 'center',
     marginTop: 8,
-    marginBottom: 4,
+    marginBottom: 12,
   },
-  statLabel: {
+  syncBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  lastSyncedText: {
+    textAlign: 'center',
+    color: '#8797B2',
     fontSize: 12,
-    color: SwiggyColors.textSecondary,
-    textAlign: "center",
   },
 });

@@ -1,573 +1,459 @@
-import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import {
-  ActivityIndicator,
-  Pressable,
-  RefreshControl,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import { SwiggyColors } from "../../constants/swiggy-theme";
-import { useOrders } from "../../hooks/use-orders";
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Pressable, Platform } from 'react-native';
+import { Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+
+const pastOrders = [
+  { id: 'ORD-9842', restaurant: 'Burger King, OMR', time: '12:30 PM', distance: '4.1 km', amount: 62 },
+  { id: 'ORD-9811', restaurant: 'Fresh Menu, Velachery', time: '11:15 AM', distance: '1.8 km', amount: 38 },
+  { id: 'ORD-9788', restaurant: 'Starbucks, Adyar', time: '10:45 AM', distance: '2.5 km', amount: 41 },
+];
 
 export default function OrdersScreen() {
+  const insets = useSafeAreaInsets();
   const router = useRouter();
-  const {
-    pendingOrder,
-    todayDeliveries,
-    loading,
-    error,
-    refreshing,
-    acceptOrder,
-    rejectOrder,
-    refreshOrders,
-  } = useOrders();
-
-  const handleAcceptOrder = async (orderId: string) => {
-    const success = await acceptOrder(orderId);
-    if (success) {
-      // Order is already handled in the hook
-    }
-  };
-
-  const handleRejectOrder = async (orderId: string) => {
-    const success = await rejectOrder(orderId);
-    if (success) {
-      // Order is already handled in the hook
-    }
-  };
-
-  if (loading && !refreshing) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.headerWrapper}>
-          <View style={styles.headerRow}>
-            <Pressable onPress={() => router.back()} style={styles.headerIconLeft}>
-              <Ionicons name="arrow-back" size={24} color="#1A1A1A" />
-            </Pressable>
-            <Text style={styles.headerTitle}>Orders</Text>
-            <View style={styles.headerRight}>
-              <View style={styles.onlineDot} />
-              <Text style={styles.onlinePillText}>ONLINE</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={SwiggyColors.primary} />
-          <Text style={styles.loadingText}>Loading orders...</Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerWrapper}>
-        <View style={styles.headerRow}>
-          <Pressable onPress={() => router.back()} style={styles.headerIconLeft}>
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar style="dark" />
+      
+      {/* HEADER */}
+      <View style={styles.header}>
+        <View style={styles.headerLeft}>
+          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
             <Ionicons name="arrow-back" size={24} color="#1A1A1A" />
-          </Pressable>
+          </TouchableOpacity>
           <Text style={styles.headerTitle}>Orders</Text>
-          <View style={styles.headerRight}>
-            <View style={styles.onlineDot} />
-            <Text style={styles.onlinePillText}>ONLINE</Text>
-          </View>
+        </View>
+        <View style={styles.onlineBadge}>
+          <View style={styles.onlineDot} />
+          <Text style={styles.onlineText}>ONLINE</Text>
         </View>
       </View>
 
-      {error && (
-        <View style={styles.errorContainer}>
-          <Ionicons name="warning" size={20} color={SwiggyColors.offline} />
-          <Text style={styles.errorText}>{error}</Text>
-          <Pressable style={styles.retryButton} onPress={refreshOrders}>
-            <Text style={styles.retryButtonText}>Retry</Text>
-          </Pressable>
-        </View>
-      )}
-
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={refreshOrders}
-            colors={[SwiggyColors.primary]}
-            tintColor={SwiggyColors.primary}
-          />
-        }
-      >
-        {pendingOrder && (
-          <View style={styles.pendingOrderCard}>
-            <View style={styles.pendingCardTopBorder} />
-            <View style={styles.cardContent}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.orderId}>{pendingOrder.id}</Text>
-                <View style={styles.timeContainer}>
-                  <Ionicons name="time" size={12} color="#686B78" />
-                  <Text style={styles.timeText}>{pendingOrder.time}</Text>
-                </View>
-              </View>
-
-              <Text style={styles.restaurantName}>{pendingOrder.restaurant}</Text>
-
-              <View style={styles.addressContainer}>
-                <View style={styles.addressRow}>
-                  <View style={styles.iconColumn}>
-                    <View style={styles.pickupDotContainer}>
-                      <View style={styles.pickupDot} />
-                    </View>
-                  </View>
-                  <View style={styles.addressTextColumn}>
-                    <Text style={styles.addressLabel}>PICKUP</Text>
-                    <Text style={styles.addressText}>{pendingOrder.pickup}</Text>
-                  </View>
-                </View>
-
-                <View style={styles.iconColumnLine}>
-                  <View style={styles.dottedLine} />
-                </View>
-
-                <View style={styles.addressRow}>
-                  <View style={styles.iconColumn}>
-                    <View style={styles.dropDotContainer}>
-                      <View style={styles.dropDot} />
-                    </View>
-                  </View>
-                  <View style={styles.addressTextColumn}>
-                    <Text style={styles.addressLabel}>DROP</Text>
-                    <Text style={styles.addressText}>{pendingOrder.drop}</Text>
-                  </View>
-                </View>
-              </View>
-
-              <View style={styles.separator} />
-
-              <View style={styles.cardFooter}>
-                <View style={styles.distanceContainer}>
-                  <Ionicons
-                    name="git-compare-outline"
-                    size={16}
-                    color={SwiggyColors.primary}
-                    style={{ transform: [{ rotate: "90deg" }] }}
-                  />
-                  <Text style={styles.distanceText}>{pendingOrder.distance} km</Text>
-                </View>
-                <Text style={styles.feeText}>Rs.{pendingOrder.fee}</Text>
-              </View>
-
-              <View style={styles.buttonRow}>
-                <Pressable style={styles.rejectButton} onPress={() => handleRejectOrder(pendingOrder.id)}>
-                  <Text style={styles.rejectButtonText}>Reject</Text>
-                </Pressable>
-                <Pressable style={styles.acceptButton} onPress={() => handleAcceptOrder(pendingOrder.id)}>
-                  <Text style={styles.acceptButtonText}>Accept</Text>
-                </Pressable>
+      <ScrollView style={styles.scrollBackground} contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 20 }]} showsVerticalScrollIndicator={false}>
+        {/* CURRENT ORDER CARD */}
+        <View style={styles.currentOrderCard}>
+          <View style={styles.currentOrderCardTopBorder} />
+          
+          <View style={styles.innerCardPadding}>
+            {/* Header: ID and Time */}
+            <View style={styles.currentOrderHeader}>
+              <Text style={styles.orderId}>ORD-9921</Text>
+              <View style={styles.timeContainer}>
+                <MaterialCommunityIcons name="clock-time-four" size={14} color="#888" />
+                <Text style={styles.timeText}>2 min ago</Text>
               </View>
             </View>
-          </View>
-        )}
 
-        <View style={styles.deliveriesHeader}>
-          <Text style={styles.deliveriesTitle}>Today's Deliveries</Text>
-          <Text style={styles.deliveriesCount}>{todayDeliveries.length} deliveries</Text>
+            {/* Restaurant Name */}
+            <Text style={styles.restaurantName}>Pizza Hub, Anna Nagar</Text>
+
+            {/* Timeline / Route */}
+            <View style={styles.routeContainer}>
+              <View style={styles.routeTimeline}>
+                <View style={styles.pickupDotOuter}>
+                  <View style={styles.pickupDotInner} />
+                </View>
+                {/* Dotted Line */}
+                <View style={styles.dottedLineContainer}>
+                  {[...Array(6)].map((_, i) => (
+                    <View key={i} style={styles.dotSegment} />
+                  ))}
+                </View>
+                <View style={styles.dropDotOuter}>
+                  <View style={styles.dropDotInner} />
+                </View>
+              </View>
+              
+              <View style={styles.routeDetails}>
+                <View style={styles.routeStop}>
+                  <Text style={styles.routeLabelBlue}>PICKUP</Text>
+                  <Text style={styles.routeAddress}>23, Nehru Street</Text>
+                </View>
+                <View style={[styles.routeStop, { marginTop: 16 }]}>
+                  <Text style={styles.routeLabelBlue}>DROP</Text>
+                  <Text style={styles.routeAddress}>7, MKB Nagar</Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.divider} />
+
+            {/* Distance and Price */}
+            <View style={styles.distancePriceRow}>
+              <View style={styles.distanceContainer}>
+                <MaterialCommunityIcons name="transit-connection-variant" size={18} color="#FC8019" style={{ transform: [{ rotate: '90deg' }] }} />
+                <Text style={styles.distanceText}>2.3 km</Text>
+              </View>
+              <Text style={styles.priceText}>Rs.45</Text>
+            </View>
+
+            {/* Action Buttons */}
+            <View style={styles.actionButtons}>
+              <TouchableOpacity style={styles.rejectBtn}>
+                <Text style={styles.rejectBtnText}>Reject</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.acceptBtn}>
+                <Text style={styles.acceptBtnText}>Accept</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
 
-        {todayDeliveries.map((order) => (
-          <View key={order.id} style={styles.deliveryCard}>
-            <View style={styles.deliveryCardAccent} />
-            <View style={styles.deliveryInfo}>
-              <Text style={styles.deliveryOrderId}>{order.id}</Text>
-              <Text style={styles.deliveryRestaurant}>{order.restaurant}</Text>
-              <Text style={styles.deliveryTime}>
-                {order.time} • {order.distance} km
-              </Text>
-            </View>
-            <View style={styles.deliveryRight}>
-              <View style={styles.deliveredBadge}>
-                <Text style={styles.deliveredText}>DELIVERED</Text>
-              </View>
-              <Text style={styles.deliveryFee}>Rs.{order.fee}</Text>
-            </View>
-          </View>
-        ))}
+        {/* TODAY'S DELIVERIES HEADER */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Today's Deliveries</Text>
+          <Text style={styles.deliveryCount}>12 deliveries</Text>
+        </View>
 
-        {todayDeliveries.length === 0 && !pendingOrder && (
-          <View style={styles.emptyState}>
-            <Ionicons name="document-text-outline" size={48} color={SwiggyColors.textDisabled} />
-            <Text style={styles.emptyStateTitle}>No orders yet</Text>
-            <Text style={styles.emptyStateText}>New orders will appear here</Text>
-          </View>
-        )}
+        {/* DELIVERIES LIST */}
+        <View style={styles.deliveriesList}>
+          {pastOrders.map((order) => (
+            <View key={order.id} style={styles.pastOrderCard}>
+              <View style={styles.greenLeftBorder} />
+              <View style={styles.pastOrderCardInner}>
+                <View style={styles.pastOrderHeader}>
+                  <Text style={styles.pastOrderId}>{order.id}</Text>
+                  <View style={styles.deliveredBadge}>
+                    <Text style={styles.deliveredBadgeText}>DELIVERED</Text>
+                  </View>
+                </View>
+                <Text style={styles.pastRestaurantName}>{order.restaurant}</Text>
+                <View style={styles.pastOrderFooter}>
+                  <Text style={styles.pastOrderMeta}>{order.time} • {order.distance}</Text>
+                  <Text style={styles.pastOrderPrice}>Rs.{order.amount}</Text>
+                </View>
+              </View>
+            </View>
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    backgroundColor: "#F8F8F8",
+    backgroundColor: '#fff',
   },
-  // Header styles
-  headerWrapper: {
-    backgroundColor: "#F8F8F8",
-  },
-  headerRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 12,
+    paddingVertical: 14,
+    backgroundColor: '#fff',
   },
-  headerIconLeft: {
-    paddingRight: 16,
+  scrollBackground: {
+    flex: 1,
+    backgroundColor: '#F3F4F6',
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backButton: {
+    marginRight: 16,
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#1A1A1A",
+    fontWeight: 'bold',
+    color: '#1A1A1A',
   },
-  headerRight: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#E8F5E8",
-    borderRadius: 20,
-    paddingHorizontal: 12,
+  onlineBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#E8F5E9', // Light green background
+    paddingHorizontal: 10,
     paddingVertical: 6,
+    borderRadius: 20,
   },
   onlineDot: {
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: "#4CAF50",
+    backgroundColor: '#4CAF50',
     marginRight: 6,
   },
-  onlinePillText: {
-    color: "#4CAF50",
-    fontWeight: "600",
-    fontSize: 11,
+  onlineText: {
+    color: '#4CAF50',
+    fontWeight: 'bold',
+    fontSize: 12,
     letterSpacing: 0.5,
   },
-  // Loading & Error States
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 16,
-  },
-  loadingText: {
-    marginTop: 16,
-    fontSize: 16,
-    color: SwiggyColors.textSecondary,
-    fontWeight: "500",
-  },
-  errorContainer: {
-    marginHorizontal: 16,
-    marginVertical: 8,
-    backgroundColor: SwiggyColors.offlineBg,
-    borderRadius: 8,
-    padding: 12,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  errorText: {
-    flex: 1,
-    marginLeft: 8,
-    fontSize: 14,
-    color: SwiggyColors.offline,
-    fontWeight: "500",
-  },
-  retryButton: {
-    backgroundColor: SwiggyColors.offline,
-    borderRadius: 6,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-  },
-  retryButtonText: {
-    color: "#FFF",
-    fontSize: 12,
-    fontWeight: "bold",
-  },
-  // Scroll View
   scrollContent: {
     paddingHorizontal: 16,
-    paddingBottom: 24,
+    paddingTop: 8,
   },
-  // Pending Order Card
-  pendingOrderCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+  currentOrderCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    overflow: 'hidden',
+    marginBottom: 24,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
-  pendingCardTopBorder: {
+  currentOrderCardTopBorder: {
     height: 4,
-    backgroundColor: "#FC8019",
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+    backgroundColor: '#FC8019', // Orange border at the top
+    width: '100%',
   },
-  cardContent: {
+  innerCardPadding: {
     padding: 16,
   },
-  cardHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  currentOrderHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 12,
   },
   orderId: {
-    fontSize: 12,
-    color: "#8E8E93",
-    fontWeight: "500",
+    fontSize: 13,
+    color: '#6B7280',
+    fontWeight: '600',
   },
   timeContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   timeText: {
     fontSize: 12,
-    color: "#8E8E93",
+    color: '#6B7280',
     marginLeft: 4,
-    fontWeight: "500",
   },
   restaurantName: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#1A1A1A",
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+    marginBottom: 20,
+  },
+  routeContainer: {
+    flexDirection: 'row',
     marginBottom: 16,
   },
-  // Address Section
-  addressContainer: {
-    marginBottom: 16,
-  },
-  addressRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  iconColumn: {
+  routeTimeline: {
     width: 24,
-    alignItems: "center",
+    alignItems: 'center',
+    marginRight: 12,
   },
-  addressTextColumn: {
-    marginLeft: 8,
-    flex: 1,
-  },
-  pickupDotContainer: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: "#E8F5E8",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  pickupDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "#4CAF50",
-  },
-  dropDotContainer: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: "#FFF3E0",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  dropDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "#FF6B35",
-  },
-  iconColumnLine: {
-    width: 24,
-    alignItems: "center",
+  pickupDotOuter: {
+    width: 20,
     height: 20,
+    borderRadius: 10,
+    backgroundColor: '#E8F5E9', // Light green
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  dottedLine: {
-    width: 1,
+  pickupDotInner: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#4CAF50', // Solid green
+  },
+  dropDotOuter: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#FFF3E0', // Light orange
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dropDotInner: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#FC8019', // Solid orange
+  },
+  dottedLineContainer: {
     flex: 1,
-    borderStyle: "dashed",
-    borderWidth: 1,
-    borderColor: "#E0E0E0",
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: 2,
+    marginVertical: 4,
   },
-  addressLabel: {
+  dotSegment: {
+    width: 2,
+    height: 4,
+    backgroundColor: '#D1D5DB', // Gray line dots
+    borderRadius: 1,
+  },
+  routeDetails: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  routeStop: {
+    justifyContent: 'center',
+  },
+  routeLabelBlue: {
     fontSize: 10,
-    fontWeight: "600",
-    color: "#8E8E93",
+    fontWeight: 'bold',
+    color: '#8797B2', // Slate/blueish color for "PICKUP" / "DROP" labels
     letterSpacing: 0.5,
     marginBottom: 2,
   },
-  addressText: {
+  routeAddress: {
     fontSize: 14,
-    color: "#1A1A1A",
-    fontWeight: "400",
+    color: '#374151',
+    fontWeight: '500',
   },
-  // Divider
-  separator: {
+  divider: {
     height: 1,
-    backgroundColor: "#F0F0F0",
-    marginBottom: 12,
+    backgroundColor: '#F3F4F6',
+    marginVertical: 16,
   },
-  // Card Footer
-  cardFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 16,
+  distancePriceRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   distanceContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   distanceText: {
-    marginLeft: 6,
     fontSize: 14,
-    color: "#8E8E93",
-    fontWeight: "500",
+    fontWeight: '600',
+    color: '#4B5563',
+    marginLeft: 6,
   },
-  feeText: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#3AB04B",
+  priceText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#4CAF50', // Green price
   },
-  // Action Buttons
-  buttonRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  actionButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12, // React Native gap
+  },
+  rejectBtn: {
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#EF4444', // Red outline
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rejectBtnText: {
+    color: '#EF4444',
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  acceptBtn: {
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 12,
+    backgroundColor: '#38A169', // Solid green background
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  acceptBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+  },
+  deliveryCount: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#FC8019', // Orange color
+  },
+  deliveriesList: {
     gap: 12,
   },
-  rejectButton: {
+  pastOrderCard: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    overflow: 'hidden',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
+  },
+  greenLeftBorder: {
+    width: 6,
+    backgroundColor: '#38A169', // Green left border indicator
+  },
+  pastOrderCardInner: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: "#FF3B30",
-    borderRadius: 8,
-    paddingVertical: 12,
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    padding: 16,
   },
-  rejectButtonText: {
-    color: "#FF3B30",
-    fontWeight: "600",
-    fontSize: 14,
-  },
-  acceptButton: {
-    flex: 1,
-    backgroundColor: "#4CAF50",
-    borderRadius: 8,
-    paddingVertical: 12,
-    alignItems: "center",
-  },
-  acceptButtonText: {
-    color: "#FFFFFF",
-    fontWeight: "600",
-    fontSize: 14,
-  },
-  // Today's Deliveries Section
-  deliveriesHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 16,
-    marginTop: 8,
-  },
-  deliveriesTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#1A1A1A",
-  },
-  deliveriesCount: {
-    color: "#FC8019",
-    fontWeight: "500",
-    fontSize: 14,
-  },
-  // Delivery Cards
-  deliveryCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 8,
+  pastOrderHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 8,
-    flexDirection: "row",
-    overflow: "hidden",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 1,
   },
-  deliveryCardAccent: {
-    width: 4,
-    backgroundColor: "#4CAF50",
-  },
-  deliveryInfo: {
-    flex: 1,
-    padding: 12,
-    paddingLeft: 12,
-  },
-  deliveryOrderId: {
-    fontSize: 11,
-    color: "#8E8E93",
-    fontWeight: "500",
-    marginBottom: 2,
-  },
-  deliveryRestaurant: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: "#1A1A1A",
-    marginBottom: 4,
-  },
-  deliveryTime: {
-    fontSize: 12,
-    color: "#8E8E93",
-  },
-  deliveryRight: {
-    padding: 12,
-    alignItems: "flex-end",
-    justifyContent: "space-between",
+  pastOrderId: {
+    fontSize: 13,
+    color: '#8797B2', // Slate match from pickup label
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
   },
   deliveredBadge: {
-    backgroundColor: "#E8F5E8",
-    borderRadius: 10,
+    backgroundColor: '#E8F8EE',
     paddingHorizontal: 8,
     paddingVertical: 4,
-    marginBottom: 4,
+    borderRadius: 8,
   },
-  deliveredText: {
-    color: "#4CAF50",
-    fontSize: 9,
-    fontWeight: "600",
-    letterSpacing: 0.3,
+  deliveredBadgeText: {
+    color: '#38A169',
+    fontSize: 10,
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
   },
-  deliveryFee: {
+  pastRestaurantName: {
     fontSize: 15,
-    fontWeight: "600",
-    color: "#1A1A1A",
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+    marginBottom: 12,
   },
-  // Empty State
-  emptyState: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 48,
-    paddingHorizontal: 16,
+  pastOrderFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  emptyStateTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: SwiggyColors.textPrimary,
-    marginTop: 16,
+  pastOrderMeta: {
+    fontSize: 13,
+    color: '#888',
   },
-  emptyStateText: {
-    fontSize: 14,
-    color: SwiggyColors.textSecondary,
-    marginTop: 4,
-    textAlign: "center",
+  pastOrderPrice: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#333',
   },
 });
