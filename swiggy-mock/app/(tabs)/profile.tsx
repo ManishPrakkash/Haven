@@ -1,74 +1,13 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Platform, Modal } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-
-const PROFILES_DATA = [
-  {
-    id: '1',
-    name: 'Ilamsaravanbalaji',
-    city: 'Chennai',
-    badge: 'SW-CHE-004821',
-    status: 'Active Partner',
-    mobile: '+91 9876543210',
-    vehicle: 'Electric Scooter',
-    vehicleIcon: 'moped',
-    weeklyHours: '48 hrs/wk',
-    avgEarnings: 'Rs.4,200/wk',
-    partnerSince: 'Oct 2023',
-    insurance: 'GigShield Active',
-  },
-  {
-    id: '2',
-    name: 'Kavinkumar',
-    city: 'Coimbatore',
-    badge: 'SW-CBE-009122',
-    status: 'Active Partner',
-    mobile: '+91 9123456780',
-    vehicle: 'Motorcycle',
-    vehicleIcon: 'motorbike',
-    weeklyHours: '36 hrs/wk',
-    avgEarnings: 'Rs.3,100/wk',
-    partnerSince: 'Jan 2024',
-    insurance: 'GigShield Active',
-  },
-  {
-    id: '3',
-    name: 'Keerthi Aanand',
-    city: 'Bangalore',
-    badge: 'SW-BLR-001155',
-    status: 'Premium Partner',
-    mobile: '+91 9988776655',
-    vehicle: 'Bicycle',
-    vehicleIcon: 'bicycle',
-    weeklyHours: '20 hrs/wk',
-    avgEarnings: 'Rs.1,500/wk',
-    partnerSince: 'Mar 2024',
-    insurance: 'GigShield Active',
-  },
-  {
-    id: '4',
-    name: 'Manish Prakkash',
-    city: 'Hyderabad',
-    badge: 'SW-HYD-007744',
-    status: 'Active Partner',
-    mobile: '+91 9876512345',
-    vehicle: 'Electric Scooter',
-    vehicleIcon: 'moped',
-    weeklyHours: '55 hrs/wk',
-    avgEarnings: 'Rs.6,800/wk',
-    partnerSince: 'Jul 2022',
-    insurance: 'GigShield Active',
-  }
-];
+import { useUserStore } from '../store/userStore';
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
-  const [currentUserIndex, setCurrentUserIndex] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-
-  const profile = PROFILES_DATA[currentUserIndex];
+  const { profile } = useUserStore();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -77,9 +16,8 @@ export default function ProfileScreen() {
       {/* HEADER SECTION (White Background) */}
       <View style={styles.headerContainer}>
         <View style={styles.topRightActions}>
-          <TouchableOpacity onPress={() => setShowModal(true)} style={styles.switchUserBtn}>
-            <MaterialCommunityIcons name="account-switch-outline" size={20} color="#FC8019" />
-            <Text style={styles.switchUserText}>Switch User</Text>
+          <TouchableOpacity>
+            <MaterialCommunityIcons name="dots-vertical" size={24} color="#6B7280" />
           </TouchableOpacity>
         </View>
 
@@ -202,61 +140,9 @@ export default function ProfileScreen() {
           </View>
         </View>
 
-        {/* BOTTOM SWITCH BUTTON (ALSO OPENS MODAL) */}
-        <TouchableOpacity style={styles.switchButton} onPress={() => setShowModal(true)}>
-          <MaterialCommunityIcons name="account-switch" size={20} color="#FC8019" />
-          <Text style={styles.switchButtonText}>Switch Delivery Partner</Text>
-        </TouchableOpacity>
-
         {/* FOOTER VERSION */}
         <Text style={styles.footerVersion}>Mock Swiggy v1.0.0 | GigShield Simulator</Text>
       </ScrollView>
-
-      {/* USER SELECTION MODAL */}
-      <Modal
-        visible={showModal}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={() => setShowModal(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Select Mock User</Text>
-            {PROFILES_DATA.map((p, index) => (
-              <TouchableOpacity
-                key={p.id}
-                style={[
-                  styles.modalUserRow,
-                  index === currentUserIndex && styles.modalUserRowActive
-                ]}
-                onPress={() => {
-                  setCurrentUserIndex(index);
-                  setShowModal(false);
-                }}
-              >
-                <MaterialCommunityIcons 
-                  name="account-circle" 
-                  size={24} 
-                  color={index === currentUserIndex ? '#FC8019' : '#9CA3AF'} 
-                />
-                <Text style={[
-                  styles.modalUserName,
-                  index === currentUserIndex && { color: '#FC8019', fontWeight: 'bold' }
-                ]}>
-                  {p.name}
-                </Text>
-                {index === currentUserIndex && (
-                  <Ionicons name="checkmark" size={20} color="#FC8019" style={{ marginLeft: 'auto' }} />
-                )}
-              </TouchableOpacity>
-            ))}
-            
-            <TouchableOpacity style={styles.modalCloseBtn} onPress={() => setShowModal(false)}>
-              <Text style={styles.modalCloseText}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
 
     </SafeAreaView>
   );
@@ -276,22 +162,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: 16,
     paddingTop: 10,
-  },
-  switchUserBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: '#FFF3EB',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#FEEBC8',
-  },
-  switchUserText: {
-    color: '#FC8019',
-    fontSize: 12,
-    fontWeight: 'bold',
   },
   profileHeader: {
     flexDirection: 'row',
@@ -422,76 +292,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3F4F6',
     marginLeft: 60, // Align divider with content, leaving icon space clear
   },
-  switchButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#FC8019',
-    borderRadius: 12,
-    paddingVertical: 14,
-    marginBottom: 24,
-    gap: 8,
-  },
-  switchButtonText: {
-    color: '#FC8019',
-    fontWeight: 'bold',
-    fontSize: 15,
-  },
   footerVersion: {
     textAlign: 'center',
     color: '#8797B2',
     fontSize: 11,
-  },
-  // MODAL STYLES
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    width: '100%',
-    borderRadius: 16,
-    padding: 20,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#1A1A1A',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  modalUserRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    marginBottom: 8,
-    backgroundColor: '#F9FAFB',
-    gap: 12, // standard gap 
-  },
-  modalUserRowActive: {
-    backgroundColor: '#FFF3EB',
-    borderColor: '#FEEBC8',
-    borderWidth: 1,
-  },
-  modalUserName: {
-    fontSize: 16,
-    color: '#4B5563',
-  },
-  modalCloseBtn: {
-    marginTop: 12,
-    paddingVertical: 14,
-    alignItems: 'center',
-  },
-  modalCloseText: {
-    color: '#6B7280',
-    fontWeight: 'bold',
-    fontSize: 16,
+    marginTop: 20,
   },
 });
