@@ -95,3 +95,39 @@ Research indicates that age directly correlates with road exposure and risk-taki
 ## 6. Fraud Detection
 
 <br><br><br>
+
+## 7. Tech Stack
+
+### User
+
+| Category | Technology |
+| :--- | :--- |
+| Framework | React Native 0.74 (Expo SDK 51) |
+| Language | TypeScript |
+| State | Zustand 4.x |
+| Navigation | Expo Router v3 |
+| Identity/Security | Expo Camera & Biometrics |
+| Communication | Firebase FCM & Expo Notifications |
+| UI/UX | Lottie & Reanimated |
+
+### Admin
+
+| Category | Technology |
+| :--- | :--- |
+| Framework | Next.js 14 (App Router) |
+| Styling | Tailwind CSS & shadcn/ui |
+| Data Fetching | TanStack Query v5 |
+| Analytics | Recharts |
+| Auth | NestJS Admin JWT |
+| Hosting | Firebase Hosting |
+
+### Backend Server
+
+| Category | Technology |
+| :--- | :--- |
+| Runtime | Node.js 20 LTS (NestJS 10) |
+| Database | Supabase (PostgreSQL) |
+| Scheduler | @nestjs/schedule (CRON) |
+| External APIs | OpenWeatherMap & WAQI |
+| CI/CD | GitHub Actions & Railway |
+| Validation | Zod |
