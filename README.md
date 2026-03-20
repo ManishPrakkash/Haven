@@ -126,14 +126,14 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PARAMETRIC vs TRADITIONAL — WHY IT MATTERS</strong>
 
-| | Traditional Insurance | Haven (Parametric) |
+| Feature/Metric | 🏛️ Traditional Insurance | ⚡ Haven (Parametric) |
 |:---|:---:|:---:|
-| **Claim Filing** | Manual forms & documentation | ❌ None — automatic |
-| **Proof Required** | Worker testimony, photos, adjuster | Sensor data IS the proof |
-| **Processing Time** | Weeks to months | **2–36 hours** |
-| **Decision Basis** | Subjective damage assessment | Objective threshold breach |
-| **Fraud Vector** | Fake/exaggerated damage | Must spoof GPS + weather + peers |
-| **Worker Action** | Multiple touchpoints required | Zero — just stay enrolled |
+| **📝 Claim Filing** | Manual forms & documentation | **❌ None — Fully Automatic** |
+| **🔍 Proof Required** | Worker testimony, photos, adjuster | **📡 Sensor data IS the proof** |
+| **⏳ Processing Time** | Weeks to months | **⚡ 2–36 hours** |
+| **⚖️ Decision Basis** | Subjective damage assessment | **🎯 Objective threshold breach** |
+| **🚨 Fraud Vector** | Fake/exaggerated physical damage | **🛡️ Hardened GPS + Weather spoofing** |
+| **👤 Worker Action** | Multiple touchpoints required | **😎 Zero — Just stay enrolled** |
 
 </div>
 
@@ -173,17 +173,17 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
   <li><strong>2 weeks</strong> standard activation period.</li>
 </ul>
 
-| Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
+| 👤 Age Band | 💳 Avg Salary | 📊 Base Rate | 🌪️ Risk Zone | 💰 Weekly Premium | 🛡️ Daily Payout | ⏳ Waiting Time |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 20 - 25 | ₹600 | 7% | Low | ₹42 | ₹420 | 2 Weeks |
-| 20 - 25 | ₹600 | 7% | Mid | ₹46 | ₹420 | 2 Weeks |
-| 20 - 25 | ₹600 | 7% | High | ₹50 | ₹420 | 2 Weeks |
-| 26 - 40 | ₹900 | 7% | Low | ₹76 | ₹630 | 2 Weeks |
-| 26 - 40 | ₹900 | 7% | Mid | ₹83 | ₹630 | 2 Weeks |
-| 26 - 40 | ₹900 | 7% | High | ₹91 | ₹630 | 2 Weeks |
-| 40+ | ₹1,200 | 7% | Low | ₹126 | ₹840 | 2 Weeks |
-| 40+ | ₹1,200 | 7% | Mid | ₹139 | ₹840 | 2 Weeks |
-| 40+ | ₹1,200 | 7% | High | ₹151 | ₹840 | 2 Weeks |
+| 20 - 25 | ₹600 | 7% | Low | **₹42** | **₹420** | 2 Weeks |
+| 20 - 25 | ₹600 | 7% | Mid | **₹46** | **₹420** | 2 Weeks |
+| 20 - 25 | ₹600 | 7% | High | **₹50** | **₹420** | 2 Weeks |
+| 26 - 40 | ₹900 | 7% | Low | **₹76** | **₹630** | 2 Weeks |
+| 26 - 40 | ₹900 | 7% | Mid | **₹83** | **₹630** | 2 Weeks |
+| 26 - 40 | ₹900 | 7% | High | **₹91** | **₹630** | 2 Weeks |
+| 40+ | ₹1,200 | 7% | Low | **₹126** | **₹840** | 2 Weeks |
+| 40+ | ₹1,200 | 7% | Mid | **₹139** | **₹840** | 2 Weeks |
+| 40+ | ₹1,200 | 7% | High | **₹151** | **₹840** | 2 Weeks |
 
 <br>
 
@@ -194,17 +194,17 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
   <li><strong>4 weeks</strong> standard activation period.</li>
 </ul>
 
-| Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
+| 👤 Age Band | 💳 Avg Salary | 📊 Base Rate | 🌪️ Risk Zone | 💰 Weekly Premium | 🛡️ Daily Payout | ⏳ Waiting Time |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 20 - 25 | ₹600 | 10% | Low | ₹60 | ₹600 | 4 Weeks |
-| 20 - 25 | ₹600 | 10% | Mid | ₹66 | ₹600 | 4 Weeks |
-| 20 - 25 | ₹600 | 10% | High | ₹72 | ₹600 | 4 Weeks |
-| 26 - 40 | ₹900 | 10% | Low | ₹108 | ₹900 | 4 Weeks |
-| 26 - 40 | ₹900 | 10% | Mid | ₹119 | ₹900 | 4 Weeks |
-| 26 - 40 | ₹900 | 10% | High | ₹130 | ₹900 | 4 Weeks |
-| 40+ | ₹1,200 | 10% | Low | ₹180 | ₹1,200 | 4 Weeks |
-| 40+ | ₹1,200 | 10% | Mid | ₹198 | ₹1,200 | 4 Weeks |
-| 40+ | ₹1,200 | 10% | High | ₹216 | ₹1,200 | 4 Weeks |
+| 20 - 25 | ₹600 | 10% | Low | **₹60** | **₹600** | 4 Weeks |
+| 20 - 25 | ₹600 | 10% | Mid | **₹66** | **₹600** | 4 Weeks |
+| 20 - 25 | ₹600 | 10% | High | **₹72** | **₹600** | 4 Weeks |
+| 26 - 40 | ₹900 | 10% | Low | **₹108** | **₹900** | 4 Weeks |
+| 26 - 40 | ₹900 | 10% | Mid | **₹119** | **₹900** | 4 Weeks |
+| 26 - 40 | ₹900 | 10% | High | **₹130** | **₹900** | 4 Weeks |
+| 40+ | ₹1,200 | 10% | Low | **₹180** | **₹1,200** | 4 Weeks |
+| 40+ | ₹1,200 | 10% | Mid | **₹198** | **₹1,200** | 4 Weeks |
+| 40+ | ₹1,200 | 10% | High | **₹216** | **₹1,200** | 4 Weeks |
 
 <br>
 
@@ -215,17 +215,17 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
   <li><strong>0 days</strong> (Instant activation the moment you sign the policy).</li>
 </ul>
 
-| Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
+| 👤 Age Band | 💳 Avg Salary | 📊 Base Rate | 🌪️ Risk Zone | 💰 Weekly Premium | 🛡️ Daily Payout | ⏳ Waiting Time |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 20 - 25 | ₹600 | 20% | Low | ₹120 | ₹600 | 0 Days |
-| 20 - 25 | ₹600 | 20% | Mid | ₹132 | ₹600 | 0 Days |
-| 20 - 25 | ₹600 | 20% | High | ₹144 | ₹600 | 0 Days |
-| 26 - 40 | ₹900 | 20% | Low | ₹216 | ₹900 | 0 Days |
-| 26 - 40 | ₹900 | 20% | Mid | ₹238 | ₹900 | 0 Days |
-| 26 - 40 | ₹900 | 20% | High | ₹259 | ₹900 | 0 Days |
-| 40+ | ₹1,200 | 20% | Low | ₹360 | ₹1,200 | 0 Days |
-| 40+ | ₹1,200 | 20% | Mid | ₹396 | ₹1,200 | 0 Days |
-| 40+ | ₹1,200 | 20% | High | ₹432 | ₹1,200 | 0 Days |
+| 20 - 25 | ₹600 | 20% | Low | **₹120** | **₹600** | 0 Days |
+| 20 - 25 | ₹600 | 20% | Mid | **₹132** | **₹600** | 0 Days |
+| 20 - 25 | ₹600 | 20% | High | **₹144** | **₹600** | 0 Days |
+| 26 - 40 | ₹900 | 20% | Low | **₹216** | **₹900** | 0 Days |
+| 26 - 40 | ₹900 | 20% | Mid | **₹238** | **₹900** | 0 Days |
+| 26 - 40 | ₹900 | 20% | High | **₹259** | **₹900** | 0 Days |
+| 40+ | ₹1,200 | 20% | Low | **₹360** | **₹1,200** | 0 Days |
+| 40+ | ₹1,200 | 20% | Mid | **₹396** | **₹1,200** | 0 Days |
+| 40+ | ₹1,200 | 20% | High | **₹432** | **₹1,200** | 0 Days |
 
 <br>
 
@@ -308,7 +308,7 @@ These triggers are derived from real-time environmental signals and network-leve
 </p>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
-1. ENVIRONMENTAL TRIGGER (EXTERNAL DISRUPTION SIGNAL)
+🌍 1. ENVIRONMENTAL TRIGGER (EXTERNAL DISRUPTION SIGNAL)
 </strong>
 
 <p>
@@ -355,7 +355,7 @@ This ensures that transient API spikes or false weather readings do not trigger 
 <hr>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
-2. BEHAVIORAL TRIGGER (NETWORK DISRUPTION SIGNAL)
+🤝 2. BEHAVIORAL TRIGGER (NETWORK DISRUPTION SIGNAL)
 </strong>
 
 <p>
@@ -538,26 +538,32 @@ Premium = Avg Daily Salary × Base Rate × Risk Multiplier × Age Multiplier
 </div>
 <br><br>
 
-<strong style="color: #E0234E; font-size: 1.05em;">B. XGBoost: Catching "Invisible" Fraud</strong>
-<p>While Phase 1 relies on strict Gate-vetoes (like checking if GPS velocity exceeds 80km/h to catch basic app spoofing), the Phase 4 XGBoost implementation acts as the ultimate safety net.</p>
-<ul style="margin-top: 5px; margin-bottom: 20px;">
+<div style="background-color: #fcf4f6; padding: 15px; border-radius: 6px; border-left: 4px solid #E0234E; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+<strong style="color: #E0234E; font-size: 1.05em;">🧠 B. XGBoost: Catching "Invisible" Fraud</strong>
+<p style="margin-top: 10px; margin-bottom: 10px;">While Phase 1 relies on strict Gate-vetoes (like checking if GPS velocity exceeds 80km/h to catch basic app spoofing), the Phase 4 XGBoost implementation acts as the ultimate safety net.</p>
+<ul style="margin-top: 5px; margin-bottom: 0;">
   <li><strong>Feature Engineering:</strong> The model ingests multi-dimensional tensors including battery drop rate, API request timing jitter (bots have zero jitter), and IP clustering.</li>
   <li><strong>The Goal:</strong> To catch organized fraud rings that know exactly how to bypass explicit rule-based systems but cannot perfectly mimic human behavioral randomness.</li>
 </ul>
+</div>
 
-<strong style="color: #F97316; font-size: 1.05em;">C. Isolation Forest: The Data Sanitizer</strong>
-<p>While Phase 1 relies on identifying simple outliers, the Isolation Forest implementation acts as our primary defense for income integrity.</p>
-<ul style="margin-top: 5px; margin-bottom: 20px;">
+<div style="background-color: #fff7ed; padding: 15px; border-radius: 6px; border-left: 4px solid #F97316; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+<strong style="color: #F97316; font-size: 1.05em;">🌲 C. Isolation Forest: The Data Sanitizer</strong>
+<p style="margin-top: 10px; margin-bottom: 10px;">While Phase 1 relies on identifying simple outliers, the Isolation Forest implementation acts as our primary defense for income integrity.</p>
+<ul style="margin-top: 5px; margin-bottom: 0;">
   <li><strong>Feature Engineering:</strong> The model ingests multi-dimensional tensors including daily earnings, order count, average order value, and peak transaction frequency.</li>
   <li><strong>The Goal:</strong> To isolate "Pump and Dump" schemes by identifying artificial spikes in earnings that don't match typical human work patterns or city-wide medians.</li>
 </ul>
+</div>
 
-<strong style="color: #3ECF8E; font-size: 1.05em;">D. Real-Time Autonomous Rebalancing</strong>
-<p>An insurance pool goes bankrupt if claims exceed premiums. The AI continuously monitors the <strong>Weekly Loss Ratio</strong> (Payouts / Premiums).</p>
-<ul style="margin-top: 5px;">
+<div style="background-color: #f0fdf4; padding: 15px; border-radius: 6px; border-left: 4px solid #3ECF8E; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+<strong style="color: #3ECF8E; font-size: 1.05em;">⚖️ D. Real-Time Autonomous Rebalancing</strong>
+<p style="margin-top: 10px; margin-bottom: 10px;">An insurance pool goes bankrupt if claims exceed premiums. The AI continuously monitors the <strong>Weekly Loss Ratio</strong> (Payouts / Premiums).</p>
+<ul style="margin-top: 5px; margin-bottom: 0;">
   <li>If the loss ratio creeps above <strong>80%</strong>, the Regression model automatically applies a dampening weight to high-risk zones, slightly increasing new premiums to safeguard the pool's solvency.</li>
   <li>Conversely, users with an 8-week clean record receive automated <strong>12% No-Claim Bonus (NCB)</strong> tier advancements managed purely by the algorithm.</li>
 </ul>
+</div>
 
 </div>
 
@@ -577,20 +583,20 @@ To ensure the integrity of the parametric insurance pool, Haven operates on a <s
 </p>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
-SPATIAL INTELLIGENCE: UBER S3 VS. GOOGLE S2
+🗺️ SPATIAL INTELLIGENCE: UBER H3 VS. GOOGLE S2
 </strong>
 
 <p>
-While Google S2 is the industry standard for spherical geometry and generalized mapping, <strong>we used Uber S3 (Hexagonal Hierarchical Spatial Index)</strong> for real-time location tracing and anti-spoofing operations.
+While Google S2 is the industry standard for spherical geometry and generalized mapping, <strong>we used Uber H3 (Hexagonal Hierarchical Spatial Index)</strong> for real-time location tracing and anti-spoofing operations.
 </p>
 
 <ul style="margin-top: 10px; margin-bottom: 25px; line-height: 1.6;">
-  <li><strong>Why Uber S3 over Google S2?</strong> Google S2 maps reality onto squares, which results in variable distances between the center of a cell and its neighbors. In contrast, Uber S3 maps the world into hexagons. A hexagon has the mathematical property that the distance from its center to all neighboring centroids is exactly equal.</li>
-  <li><strong>The Anti-Spoofing Advantage:</strong> When evaluating GPS teleportation or calculating "Peer Corroboration" radii, Uber S3 prevents edge false-positives. A worker cannot game the boundaries of a hexagonal grid the way they can with corner-biased S2 squares, ensuring our fraud models isolate genuine geographical anomalies perfectly.</li>
+  <li><strong>Why Uber H3 over Google S2?</strong> Google S2 maps reality onto squares, which results in variable distances between the center of a cell and its neighbors. In contrast, Uber H3 maps the world into hexagons. A hexagon has the mathematical property that the distance from its center to all neighboring centroids is exactly equal.</li>
+  <li><strong>The Anti-Spoofing Advantage:</strong> When evaluating GPS teleportation or calculating "Peer Corroboration" radii, Uber H3 prevents edge false-positives. A worker cannot game the boundaries of a hexagonal grid the way they can with corner-biased S2 squares, ensuring our fraud models isolate genuine geographical anomalies perfectly.</li>
 </ul>
 
-<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
-AI SECURITY & ADVERSARIAL DISRUPTION WORKFLOWS
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #E0234E; font-weight: 800;">
+🛡️ AI SECURITY & ADVERSARIAL DISRUPTION WORKFLOWS
 </strong>
 
 <p>
