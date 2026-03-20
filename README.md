@@ -51,71 +51,35 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 <br>
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
-<div>
-  <!-- Step 1 -->
-  <div style="border: 1px solid #d0d7de; border-radius: 6px; margin-bottom: 16px; padding: 16px; border-left: 4px solid #34495e;">
-    <div style="font-family: 'Courier New', monospace; font-size: 1.1em; font-weight: 800; color: #2c3e50; margin-bottom: 8px;">
-      01. PLATFORM AUTH
-    </div>
-    <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; line-height: 1.5; font-size: 0.95em;">
-      The worker installs Haven. The first gate is Platform Verification. The user enters their unique ID from platforms like Swiggy or Zomato. The app connects to our Mock Swiggy App(for data source we created it) API to verify active status and historical earning data.
-    </div>
-  </div>
+> ### `01` PLATFORM AUTH
+> The worker installs Haven. The first gate is Platform Verification. The user enters their unique ID from platforms like Swiggy or Zomato. The app connects to our Mock Swiggy App(for data source we created it) API to verify active status and historical earning data.
 
-  <!-- Step 2 -->
-  <div style="border: 1px solid #d0d7de; border-radius: 6px; margin-bottom: 16px; padding: 16px; border-left: 4px solid #34495e;">
-    <div style="font-family: 'Courier New', monospace; font-size: 1.1em; font-weight: 800; color: #2c3e50; margin-bottom: 8px;">
-      02. DIGILOCKER KYC
-    </div>
-    <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; line-height: 1.5; font-size: 0.95em;">
-      Haven integrates with DigiLocker for seamless KYC. We fetch verified Name, DOB, Gender, and PAN. This data feeds into the AI Risk Engine to determine age-based multipliers and ensure eligibility (20+).
-    </div>
-  </div>
+<br>
 
-  <!-- Step 3 -->
-  <div style="border: 1px solid #d0d7de; border-radius: 6px; margin-bottom: 16px; padding: 16px; border-left: 4px solid #34495e;">
-    <div style="font-family: 'Courier New', monospace; font-size: 1.1em; font-weight: 800; color: #2c3e50; margin-bottom: 8px;">
-      03. DYNAMIC PLANS
-    </div>
-    <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; line-height: 1.5; font-size: 0.95em;">
-      The user is presented with three tailored plans. The premiums are dynamic—calculated via custom pricing based on average daily salary and primary operating zone risk level.
-    </div>
-  </div>
+> ### `02` DIGILOCKER KYC
+> Haven integrates with DigiLocker for seamless KYC. We fetch verified Name, DOB, Gender, and PAN. This data feeds into the AI Risk Engine to determine age-based multipliers and ensure eligibility (20+).
 
-  <!-- Step 4 -->
-  <div style="border: 1px solid #d0d7de; border-radius: 6px; margin-bottom: 16px; padding: 16px; border-left: 4px solid #34495e;">
-    <div style="font-family: 'Courier New', monospace; font-size: 1.1em; font-weight: 800; color: #2c3e50; margin-bottom: 8px;">
-      04. BANK & MPIN
-    </div>
-    <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; line-height: 1.5; font-size: 0.95em;">
-      The user provides bank account details auto-payouts and sets a secure 6-digit MPIN for high-level policy changes or sensitive logs.
-    </div>
-  </div>
+<br>
 
-  <!-- Step 5 -->
-  <div style="border: 1px solid #d0d7de; border-radius: 6px; margin-bottom: 16px; padding: 16px; border-left: 4px solid #34495e;">
-    <div style="font-family: 'Courier New', monospace; font-size: 1.1em; font-weight: 800; color: #2c3e50; margin-bottom: 8px;">
-      05. LIVENESS & SIGNING
-    </div>
-    <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; line-height: 1.5; font-size: 0.95em;">
-      Before policy activation:
-      <ul style="margin: 6px 0 0 0; padding-left: 20px;">
-        <li style="margin-bottom: 4px;"><em>Liveness Check:</em> AI verifies user authenticity against the DigiLocker ID.</li>
-        <li><em>Virtual Signing:</em> Digital acceptance of Terms & Conditions via secure gesture signature.</li>
-      </ul>
-    </div>
-  </div>
+> ### `03` DYNAMIC PLANS
+> The user is presented with three tailored plans. The premiums are dynamic—calculated via custom pricing based on average daily salary and primary operating zone risk level.
 
-  <!-- Step 6 -->
-  <div style="border: 1px solid #d0d7de; border-radius: 6px; margin-bottom: 16px; padding: 16px; border-left: 4px solid #34495e;">
-    <div style="font-family: 'Courier New', monospace; font-size: 1.1em; font-weight: 800; color: #2c3e50; margin-bottom: 8px;">
-      06. PERSONA DASHBOARD
-    </div>
-    <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; line-height: 1.5; font-size: 0.95em;">
-      Displays <code style="font-family: 'Courier New', monospace; font-size: 0.9em; padding: 2px 6px; border-radius: 4px;">[ SAFE ]</code> vs. <code style="font-family: 'Courier New', monospace; font-size: 0.9em; padding: 2px 6px; border-radius: 4px;">[ HIGH RISK ]</code> status in real-time. If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.
-    </div>
-  </div>
-</div>
+<br>
+
+> ### `04` BANK & MPIN
+> The user provides bank account details auto-payouts and sets a secure 6-digit MPIN for high-level policy changes or sensitive logs.
+
+<br>
+
+> ### `05` LIVENESS & SIGNING
+> Before policy activation:
+> * *Liveness Check:* AI verifies user authenticity against the DigiLocker ID.
+> * *Virtual Signing:* Digital acceptance of Terms & Conditions via secure gesture signature.
+
+<br>
+
+> ### `06` PERSONA DASHBOARD
+> Displays `[ SAFE ]` vs. `[ HIGH RISK ]` status in real-time. If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.
 </div>
 
 ---
