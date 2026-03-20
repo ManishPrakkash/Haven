@@ -34,7 +34,7 @@ Traditional insurance requires physical damage and long claim cycles. For a gig 
 ### II. END-TO-END USER WORKFLOW
 
 <div align="center">
-  <i>(Architectural Diagram to be added here)</i>
+  <img src="workflow.png" alt="Haven Insurance Onboarding Road" width="800"/>
 </div>
 <br>
 
