@@ -837,7 +837,7 @@ Haven is structurally designed to transition from a conceptual pilot into a nati
 </p>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
-🚀 1. THE NEXT PHASE (BETA CAPTURE & REFINEMENT)
+🚀 1. THE SEED PHASE (BETA CAPTURE & REFINEMENT)
 </strong>
 <p style="margin-top: 5px; color: #34495e; font-size: 0.95em;">
 The immediate tactical objective focusing on hardening the core predictive engines and establishing the primary actuarial baseline in controlled testbeds.
