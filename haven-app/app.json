@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Haven Insurance",
+    "slug": "haven-insurance",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/android-icon-foreground.png",
+    "scheme": "haven",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F2D52"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundColor": "#0F2D52"
+      },
+      "package": "com.gigshield.haveninsurance",
+      "minSdkVersion": 21,
+      "targetSdkVersion": 34,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-secure-store",
+      "expo-camera",
+      ["expo-notifications", {
+        "color": "#0F2D52"
+      }]
+    ]
+  }
+}
