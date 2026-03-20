@@ -17,7 +17,7 @@
 
 ### 🌩️ The "Income Gap" Reality
 Traditional insurance requires physical damage and long claim cycles. For a gig worker, "damage" isn't just a broken bike; it is a 6-hour rainstorm or a local strike that makes the road inaccessible.
-> **If they don't ride, they don't eat.**
+> **"NO WORK = NO PAY" — If they don't ride, they don't eat.**
 
 #### 🚴 Scenario 1: The High-Intensity Professional
 * **Persona:** Rajesh, 34 — Full-time delivery partner in Chennai *(High-Risk Zone)*  
@@ -62,41 +62,11 @@ Once activated, the user enters a personalized dashboard. It displays their <mar
 
 ## 💎 3. Premium Plans
 
-Premiums are seamlessly collected weekly via the formula:
-
-> `Premium = Avg Daily Salary × Base Rate × Risk Multiplier × Age Multiplier`
-
-### 🛡️ Protection Tiers
-
 | Plan Tier | Base Rate | Payout | Waiting Period | Focus |
 | :--- | :--- | :--- | :--- | :--- |
 | **Plan 1 (Economy)** | `7%` | **70%** | 2 Weeks | Budget-friendly safety net. |
 | **Plan 2 (Value)** | `10%` | **100%** | 4 Weeks | Full income replacement for veterans. |
 | **Plan 3 (Elite)** | `20%` | **100%** | *Zero* | Immediate, high-priority protection. |
-
-<details open>
-<summary><b>📖 Breakdown of Multipliers & Benchmarks</b></summary>
-<br>
-
-#### 1️⃣ Average Daily Salary (The Baseline)
-* **Definition:** A system-calculated average of the worker's earnings over a 7–30 day lookback period.
-* **Research Grounding:** Based on current industry data, this benchmark typically ranges from `₹600` for supplemental earners to `₹1,200+` for high-intensity professional riders *(Source: TheFinthusiastic Gig Economy Analysis)*.
-
-#### 2️⃣ Plan-Based Base Rates
-* **Plan 1 (Economy):** `7%` Base Rate → Provides 70% income replacement.
-* **Plan 2 (Value):** `10%` Base Rate → Provides 100% income replacement.
-* **Plan 3 (Elite):** `20%` Base Rate → Provides 100% income replacement with **Zero Waiting Period**.
-
-#### 3️⃣ Risk Multipliers (Geographic & Operational Risk)
-* **Low Risk `(1.0x)`:** Standard operating environments with high infrastructure resilience.
-* **Medium Risk `(1.1x)`:** Zones with moderate exposure to environmental or social disruptions.
-* **High Risk `(1.2x)`:** Tier-1 Metros (e.g., Chennai, Mumbai) with high historical disaster frequency.
-
-#### 4️⃣ Age-Based Multipliers
-* **20–25 Years `(1.0x)`:** The foundational age bracket comprising a significant portion of the workforce.
-* **26–40 Years `(1.2x)`:** Professional-tier workers with higher daily intensity.
-* **Above 40 Years `(1.5x)`:** High-risk bracket due to health and safety considerations in extreme weather.
-</details>
 
 ---
 
