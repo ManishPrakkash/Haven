@@ -46,10 +46,23 @@ export default function PerformanceScreen() {
   const insets = useSafeAreaInsets();
   const { currentUserIndex, setCurrentUserIndex, profile } = useUserStore();
   const [showModal, setShowModal] = useState(false);
+  const [activeTab, setActiveTab] = useState<'week' | 'month'>('week');
 
   const { rating, attendance, onTime, acceptance, streak, isTopPerformer, zone } = profile.performance;
 
-  const chartData = {
+  const monthMockData = {
+    rating: (Math.max(1, parseFloat(rating) - 0.2)).toFixed(1).toString(),
+    attendance: Math.max(0, attendance - 12),
+    onTime: Math.max(0, onTime - 5),
+    acceptance: Math.max(0, acceptance - 8),
+    streak: streak + 14,
+  };
+
+  const displayData = activeTab === 'week' ? {
+    rating, attendance, onTime, acceptance, streak
+  } : monthMockData;
+
+  const weekChartData = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
       {
@@ -66,8 +79,27 @@ export default function PerformanceScreen() {
         strokeWidth: 2
       }
     ],
-    legend: ["Attendance Trend"]
+    legend: ["Weekly Trend"]
   };
+
+  const monthChartData = {
+    labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+    datasets: [
+      {
+        data: [
+          displayData.attendance - 15,
+          displayData.attendance - 8,
+          displayData.attendance + 5,
+          displayData.attendance,
+        ],
+        color: (opacity = 1) => `rgba(252, 128, 25, ${opacity})`,
+        strokeWidth: 2
+      }
+    ],
+    legend: ["Monthly Trend"]
+  };
+
+  const chartData = activeTab === 'week' ? weekChartData : monthChartData;
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -95,19 +127,25 @@ export default function PerformanceScreen() {
       >
         {/* TABS */}
         <View style={styles.tabsContainer}>
-          <TouchableOpacity style={[styles.tab, styles.activeTab]}>
-            <Text style={styles.activeTabText}>This Week</Text>
+          <TouchableOpacity 
+            style={[styles.tab, activeTab === 'week' && styles.activeTab]}
+            onPress={() => setActiveTab('week')}
+          >
+            <Text style={activeTab === 'week' ? styles.activeTabText : styles.inactiveTabText}>This Week</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.tab}>
-            <Text style={styles.inactiveTabText}>This Month</Text>
+          <TouchableOpacity 
+            style={[styles.tab, activeTab === 'month' && styles.activeTab]}
+            onPress={() => setActiveTab('month')}
+          >
+            <Text style={activeTab === 'month' ? styles.activeTabText : styles.inactiveTabText}>This Month</Text>
           </TouchableOpacity>
         </View>
 
         {/* CUSTOMER RATING CARD */}
         <View style={styles.mainCard}>
           <View style={styles.ratingCircleContainer}>
-            <CircularProgress size={160} strokeWidth={12} progress={(parseFloat(rating) / 5) * 100}>
-              <Text style={styles.ratingNumber}>{rating}</Text>
+            <CircularProgress size={160} strokeWidth={12} progress={(parseFloat(displayData.rating) / 5) * 100}>
+              <Text style={styles.ratingNumber}>{displayData.rating}</Text>
               <Ionicons name="star" size={24} color="#FC8019" style={{ marginTop: 2 }} />
             </CircularProgress>
           </View>
@@ -118,24 +156,24 @@ export default function PerformanceScreen() {
         <View style={styles.metricsRow}>
           {/* Attendance */}
           <View style={styles.metricCard}>
-            <CircularProgress size={60} strokeWidth={5} progress={attendance}>
-              <Text style={styles.metricValue}>{attendance}%</Text>
+            <CircularProgress size={60} strokeWidth={5} progress={displayData.attendance}>
+              <Text style={styles.metricValue}>{displayData.attendance}%</Text>
             </CircularProgress>
             <Text style={[styles.metricLabel, { marginTop: 10 }]}>Attendance</Text>
           </View>
 
           {/* On-Time */}
           <View style={styles.metricCard}>
-            <CircularProgress size={60} strokeWidth={5} progress={onTime}>
-              <Text style={styles.metricValue}>{onTime}%</Text>
+            <CircularProgress size={60} strokeWidth={5} progress={displayData.onTime}>
+              <Text style={styles.metricValue}>{displayData.onTime}%</Text>
             </CircularProgress>
             <Text style={[styles.metricLabel, { marginTop: 10 }]}>On-Time</Text>
           </View>
 
           {/* Acceptance */}
           <View style={styles.metricCard}>
-            <CircularProgress size={60} strokeWidth={5} progress={acceptance}>
-              <Text style={styles.metricValue}>{acceptance}%</Text>
+            <CircularProgress size={60} strokeWidth={5} progress={displayData.acceptance}>
+              <Text style={styles.metricValue}>{displayData.acceptance}%</Text>
             </CircularProgress>
             <Text style={[styles.metricLabel, { marginTop: 10 }]}>Acceptance</Text>
           </View>
@@ -181,7 +219,7 @@ export default function PerformanceScreen() {
           </View>
           <View style={styles.detailTextContainer}>
             <Text style={styles.streakText}>
-              <Text style={styles.streakNumber}>{streak}</Text> days
+              <Text style={styles.streakNumber}>{displayData.streak}</Text> days
             </Text>
             <Text style={styles.streakSubtitle}>Keep going! You're on a streak.</Text>
           </View>
