@@ -196,54 +196,77 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 <p>The core of Haven’s financial logic is the Automated Actuarial Engine. Unlike traditional "flat-rate" insurance, Haven calculates a personalized weekly premium by analyzing a worker's specific earning power and environmental risk in real-time.</p>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">1. TERMINOLOGY & DEFINITIONS</strong>
-<p>To ensure mathematical transparency, we define the variables that drive our engine:</p>
-<ul>
-  <li><strong>Avg Daily Salary ($S_d$):</strong> A 30-day weighted moving average of the worker's earnings, fetched via the Mock Swiggy API. It establishes the baseline income that needs protection.</li>
-  <li><strong>Base Rate ($R_b$):</strong> The primary percentage assigned based on the user's chosen plan:<br>Economy (Plan 1): 7%<br>Value (Plan 2): 10%<br>Elite (Plan 3): 20%</li>
-  <li><strong>Risk Multiplier ($M_r$):</strong> A dynamic weight (1.0x to 1.2x) predicted by our ML model based on the historical disruption frequency of the worker’s primary operating city.</li>
-  <li><strong>Age Multiplier ($M_a$):</strong> An actuarial weight (1.0x to 1.5x) reflecting risk exposure data correlated with the worker's age bracket (20-25, 26-40, 40+).</li>
+<p style="margin-bottom: 10px;">To ensure mathematical transparency, we define the variables that drive our engine:</p>
+<ul style="margin-bottom: 20px;">
+  <li><strong>Avg Daily Salary (S<sub>d</sub>):</strong> A 30-day weighted moving average of the worker's earnings, fetched via the Mock Swiggy API. It establishes the baseline income that needs protection.</li>
+  <li><strong>Base Rate (R<sub>b</sub>):</strong> The primary percentage assigned based on the user's chosen plan:
+    <ul style="margin-top: 5px;">
+      <li>Economy (Plan 1): <strong>7%</strong></li>
+      <li>Value (Plan 2): <strong>10%</strong></li>
+      <li>Elite (Plan 3): <strong>20%</strong></li>
+    </ul>
+  </li>
+  <li><strong>Risk Multiplier (M<sub>r</sub>):</strong> A dynamic weight (1.0x to 1.2x) predicted by our ML model based on the historical disruption frequency of the worker’s primary operating city.</li>
+  <li><strong>Age Multiplier (M<sub>a</sub>):</strong> An actuarial weight (1.0x to 1.5x) reflecting risk exposure data correlated with the worker's age bracket (20-25, 26-40, 40+).</li>
 </ul>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">2. THE MASTER EQUATION</strong>
-<p>Every premium is custom-generated at the start of the 7-day billing cycle using the following formula:</p>
+<p style="margin-bottom: 10px;">Every premium is custom-generated at the start of the 7-day billing cycle using the following formula:</p>
 
-$$ \text{Weekly Premium} = S_d \times R_b \times M_r \times M_a $$
+<div align="center" style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #34495e; margin: 15px 0; font-family: 'Courier New', monospace; font-size: 1.1em; font-weight: 800;">
+  Weekly Premium = S<sub>d</sub> × R<sub>b</sub> × M<sub>r</sub> × M<sub>a</sub>
+</div>
 
-<p><strong>Mathematical Walkthrough Example Persona:</strong> A 28-year-old rider in a "High Risk" zone like Chennai ($M_a = 1.2, M_r = 1.2$) earning an average of ₹900/day, who selects the Value Plan ($R_b = 10\%$).</p>
+<strong style="font-family: 'Segoe UI', sans-serif;">Mathematical Walkthrough</strong><br>
+<p style="margin-top: 5px;"><strong>Example Persona:</strong> A 28-year-old rider in a "High Risk" zone like Chennai (M<sub>a</sub> = 1.2, M<sub>r</sub> = 1.2) earning an average of ₹900/day, who selects the Value Plan (R<sub>b</sub> = 10%).</p>
 
-$$ ₹900 \times 0.10 \times 1.2 \times 1.2 = \mathbf{₹129.60 / \text{week}} $$
+<div align="center" style="background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 4px solid #27ae60; margin: 15px 0; font-family: 'Courier New', monospace; font-size: 1.1em; color: #27ae60; font-weight: 800;">
+  ₹900 × 0.10 × 1.2 × 1.2 = ₹129.60 / week
+</div>
 
-<p>This ensures that pricing is mathematically "fair"—workers in safer zones do not subsidize the higher risk of those in volatile metros.</p>
+<p style="margin-bottom: 20px;">This ensures that pricing is mathematically "fair"—workers in safer zones do not subsidize the higher risk of those in volatile metros.</p>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">3. THE MACHINE LEARNING ARCHITECTURE</strong>
-<p>We deploy a two-stage predictive pipeline to ensure the inputs are sanitized (free of fraud) and architected (fairly weighted).</p>
+<p style="margin-bottom: 20px;">We deploy a two-stage predictive pipeline to ensure the inputs are sanitized (free of fraud) and architected (fairly weighted).</p>
 
-<p><strong>Model A: Isolation Forest (The Data Sanitizer)</strong><br><em>Role: Unsupervised Anomaly Detection for Income Integrity.</em></p>
-<p>In decentralized gig work, "Income Inflation" is a structural risk where users might attempt to fake high-value transactions to secure higher insurance payouts. Isolation Forest is our first line of defense, identifying these "Pump and Dump" schemes by explicitly isolating anomalies rather than profiling normal behavior.</p>
-<p><strong>Technical Implementation:</strong> We represent each user’s income profile as a feature vector $\mathbf{x} \in \mathbb{R}^4$:</p>
+<strong style="font-family: 'Segoe UI', sans-serif; color: #2980b9;">Model A: Isolation Forest (The Data Sanitizer)</strong><br>
+<em>Role: Unsupervised Anomaly Detection for Income Integrity.</em>
+<p style="margin-top: 5px; margin-bottom: 15px;">In decentralized gig work, "Income Inflation" is a structural risk where users might attempt to fake high-value transactions to secure higher insurance payouts. Isolation Forest is our first line of defense, identifying these "Pump and Dump" schemes by explicitly isolating anomalies rather than profiling normal behavior.</p>
 
-$$ \mathbf{x} = [\text{Daily Earnings}, \text{Order Count}, \text{Avg Order Value}, \text{Peak Frequency}] $$
+<p><strong>Technical Implementation:</strong> We represent each user’s income profile as a feature vector x ∈ ℝ<sup>4</sup>:</p>
+
+<div align="center" style="background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 4px solid #34495e; margin: 15px 0; font-family: 'Courier New', monospace; font-weight: 800;">
+  x = [Daily Earnings, Order Count, Avg Order Value, Peak Frequency]
+</div>
 
 <ul>
-  <li><strong>Recursive Partitioning:</strong> The model builds an ensemble of $i$Trees. Because fraudulent "spikes" are few and different, they are isolated in very few splits, resulting in a short Path Length $h(x)$.</li>
-  <li><strong>Anomaly Scoring:</strong> We calculate the score $s(x, n)$ to determine if the income data is "truthful":</li>
+  <li><strong>Recursive Partitioning:</strong> The model builds an ensemble of iTrees. Because fraudulent "spikes" are few and different, they are isolated in very few splits, resulting in a short Path Length h(x).</li>
+  <li><strong>Anomaly Scoring:</strong> We calculate the score s(x, n) to determine if the income data is "truthful":</li>
 </ul>
 
-$$ s(x, n) = 2^{-\frac{E(h(x))}{c(n)}} $$
+<div align="center" style="background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 4px solid #34495e; margin: 15px 0; font-family: 'Courier New', monospace; font-weight: 800;">
+  s(x, n) = 2<sup>-[E(h(x)) / c(n)]</sup>
+</div>
 
-<p><strong>Outcome:</strong> If $s \to 1$ (High Anomaly), the system ignores the reported $S_d$ and normalizes it to the 90th Percentile Median for that worker's city tier, protecting the insurance pool's liquidity.</p>
+<p style="margin-bottom: 30px;"><strong>Outcome:</strong> If s → 1 (High Anomaly), the system ignores the reported S<sub>d</sub> and normalizes it to the 90th Percentile Median for that worker's city tier, protecting the insurance pool's liquidity.</p>
 
-<p><strong>Model B: XGBoost Regression (The Risk Architect)</strong><br><em>Role: Supervised Non-Linear Risk Scoring.</em></p>
-<p>Once the data is sanitized, XGBoost (Extreme Gradient Boosting) calculates the specific Risk ($M_r$) and Age ($M_a$) multipliers. We use XGBoost because the relationship between age, city density, and risk is non-linear—a 10% increase in age does not result in a flat 10% change in risk.</p>
+
+<strong style="font-family: 'Segoe UI', sans-serif; color: #2980b9;">Model B: XGBoost Regression (The Risk Architect)</strong><br>
+<em>Role: Supervised Non-Linear Risk Scoring.</em>
+<p style="margin-top: 5px; margin-bottom: 15px;">Once the data is sanitized, XGBoost (Extreme Gradient Boosting) calculates the specific Risk (M<sub>r</sub>) and Age (M<sub>a</sub>) multipliers. We use XGBoost because the relationship between age, city density, and risk is non-linear—a 10% increase in age does not result in a flat 10% change in risk.</p>
+
 <p><strong>Architectural Design:</strong> Even without a finalized live training set, the model is architected to minimize a Regularized Objective Function, ensuring premiums remain stable across diverse urban clusters.</p>
 
-$$ \mathcal{L}(\phi) = \sum_i l(\hat{y}_i, y_i) + \sum_k \Omega(f_k) $$
+<div align="center" style="background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 4px solid #34495e; margin: 15px 0; font-family: 'Courier New', monospace; font-weight: 800;">
+   L(Φ) = Σ l(ŷ<sub>i</sub>, y<sub>i</sub>) + Σ Ω(f<sub>k</sub>)
+</div>
 
-<ul>
+<ul style="margin-bottom: 15px;">
   <li><strong>Gradient Boosting:</strong> The model builds additive trees sequentially, where each new tree corrects the "residual errors" (pricing mistakes) of the previous trees using a second-order Taylor expansion for high-precision convergence.</li>
-  <li><strong>Regularization ($\Omega$):</strong> We apply L1/L2 regularization to prevent the model from "overfitting" to a single freak weather event. This ensures that a flood in Chennai doesn't unfairly skyrocket premiums for every worker in the region.</li>
+  <li><strong>Regularization (Ω):</strong> We apply L1/L2 regularization to prevent the model from "overfitting" to a single freak weather event. This ensures that a flood in Chennai doesn't unfairly skyrocket premiums for every worker in the region.</li>
 </ul>
-<p><strong>Outcome:</strong> The final leaves of the trees provide the precise numerical weights ($M_r, M_a$) fed directly into our master formula.</p>
+
+<p><strong>Outcome:</strong> The final leaves of the trees provide the precise numerical weights (M<sub>r</sub>, M<sub>a</sub>) fed directly into our master formula.</p>
 </div>
 
 ---
