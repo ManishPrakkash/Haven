@@ -1,9 +1,22 @@
-<div align="center" style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
-  <h1 style="font-family: 'Trebuchet MS', sans-serif; letter-spacing: 8px;">H A V E N</h1>
-  <p><strong style="font-family: 'Garamond', 'Times New Roman', serif; letter-spacing: 1px;">PARAMETRIC INCOME PROTECTION FOR THE GIG ECONOMY</strong></p>
-  <br>
-  <p>An automated, data-driven insurance ecosystem designed to protect India's 12-million-strong gig workforce.</p>
-  <p style="font-family: 'Courier New', monospace; font-size: 0.95em; color: #2c3e50;"><strong>[ Persona Focus: Food Delivery Partners (Swiggy) ]</strong></p>
+<div align="center">
+
+  <!-- Banner -->
+  <img src="banner.png" alt="HAVEN — Parametric Income Protection for the Gig Economy" width="100%" />
+
+  <br/><br/>
+
+  <!-- Badges -->
+  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/React_Native-0.74-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React Native" /></a>
+  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/NestJS-10-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" /></a>
+  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" /></a>
+  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" /></a>
+  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/XGBoost-ML-FF6600?style=for-the-badge&logo=python&logoColor=white" alt="XGBoost" /></a>
+
+  <br/><br/>
+
+  <p><em>An automated, data-driven insurance ecosystem designed to protect India's 12-million-strong gig workforce.</em></p>
+
 </div>
 
 ---
