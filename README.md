@@ -56,11 +56,59 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 
-| Plan Tier | Base Rate | Payout | Waiting Period | Focus |
-| :--- | :--- | :--- | :--- | :--- |
-| **Plan 1 (Economy)** | `7%` | **70%** | 2 Weeks | Budget-friendly safety net. |
-| **Plan 2 (Value)** | `10%` | **100%** | 4 Weeks | Full income replacement for veterans. |
-| **Plan 3 (Elite)** | `20%` | **100%** | *Zero* | Immediate, high-priority protection. |
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PLAN 1: ECONOMY (SAFETY NET)</strong>
+<p style="margin-top: 5px; margin-bottom: 15px; font-size: 0.95em;">Designed as a budget-friendly entry point for workers seeking basic protection. This plan offers a 70% income replacement with a standard 2-week waiting period, making it ideal for those who want a baseline safety net against major environmental or social disruptions.</p>
+
+| Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 20 - 25 | ₹600 | 7% | Low | ₹42 | ₹420 | 2 Weeks |
+| 20 - 25 | ₹600 | 7% | Mid | ₹46 | ₹420 | 2 Weeks |
+| 20 - 25 | ₹600 | 7% | High | ₹50 | ₹420 | 2 Weeks |
+| 26 - 40 | ₹900 | 7% | Low | ₹76 | ₹630 | 2 Weeks |
+| 26 - 40 | ₹900 | 7% | Mid | ₹83 | ₹630 | 2 Weeks |
+| 26 - 40 | ₹900 | 7% | High | ₹91 | ₹630 | 2 Weeks |
+| 40+ | ₹1,200 | 7% | Low | ₹126 | ₹840 | 2 Weeks |
+| 40+ | ₹1,200 | 7% | Mid | ₹139 | ₹840 | 2 Weeks |
+| 40+ | ₹1,200 | 7% | High | ₹151 | ₹840 | 2 Weeks |
+
+<br>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PLAN 2: VALUE (INCOME REPLACEMENT)</strong>
+<p style="margin-top: 5px; margin-bottom: 15px; font-size: 0.95em;">The most balanced tier, aimed at full-time professionals who rely entirely on gig earnings. It provides 100% income replacement to ensure no financial gap during verified disruptions. It features a slightly longer 4-week waiting period to maintain lower premium accessibility for high-intensity workers.</p>
+
+| Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 20 - 25 | ₹600 | 10% | Low | ₹60 | ₹600 | 4 Weeks |
+| 20 - 25 | ₹600 | 10% | Mid | ₹66 | ₹600 | 4 Weeks |
+| 20 - 25 | ₹600 | 10% | High | ₹72 | ₹600 | 4 Weeks |
+| 26 - 40 | ₹900 | 10% | Low | ₹108 | ₹900 | 4 Weeks |
+| 26 - 40 | ₹900 | 10% | Mid | ₹119 | ₹900 | 4 Weeks |
+| 26 - 40 | ₹900 | 10% | High | ₹130 | ₹900 | 4 Weeks |
+| 40+ | ₹1,200 | 10% | Low | ₹180 | ₹1,200 | 4 Weeks |
+| 40+ | ₹1,200 | 10% | Mid | ₹198 | ₹1,200 | 4 Weeks |
+| 40+ | ₹1,200 | 10% | High | ₹216 | ₹1,200 | 4 Weeks |
+
+<br>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PLAN 3: ELITE (IMMEDIATE PROTECTION)</strong>
+<p style="margin-top: 5px; margin-bottom: 15px; font-size: 0.95em;">Our high-priority tier for workers in volatile zones who cannot afford any delay in coverage. Offering 100% income replacement and an industry-leading 0-day waiting period, this plan activates the moment the policy is signed, providing instant peace of mind and maximum financial resilience.</p>
+
+| Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 20 - 25 | ₹600 | 20% | Low | ₹120 | ₹600 | 0 Days |
+| 20 - 25 | ₹600 | 20% | Mid | ₹132 | ₹600 | 0 Days |
+| 20 - 25 | ₹600 | 20% | High | ₹144 | ₹600 | 0 Days |
+| 26 - 40 | ₹900 | 20% | Low | ₹216 | ₹900 | 0 Days |
+| 26 - 40 | ₹900 | 20% | Mid | ₹238 | ₹900 | 0 Days |
+| 26 - 40 | ₹900 | 20% | High | ₹259 | ₹900 | 0 Days |
+| 40+ | ₹1,200 | 20% | Low | ₹360 | ₹1,200 | 0 Days |
+| 40+ | ₹1,200 | 20% | Mid | ₹396 | ₹1,200 | 0 Days |
+| 40+ | ₹1,200 | 20% | High | ₹432 | ₹1,200 | 0 Days |
+
+<br>
+<p style="margin-top: 15px; font-size: 0.85em; color: #7f8c8d; font-style: italic; border-left: 3px solid #bdc3c7; padding-left: 10px;">
+  <strong>Data Source:</strong> All income benchmarks are derived from research findings at <a href="https://www.thefinthusiastic.com/post/india-gig-economy-all-you-need-to-know" style="color: #3498db; text-decoration: none;">https://www.thefinthusiastic.com/post/india-gig-economy-all-you-need-to-know</a>
+</p>
 
 </div>
 
