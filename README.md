@@ -100,34 +100,18 @@ Research indicates that age directly correlates with road exposure and risk-taki
 
 ### User
 
-| Category | Technology |
-| :--- | :--- |
-| Framework | React Native 0.74 (Expo SDK 51) |
-| Language | TypeScript |
-| State | Zustand 4.x |
-| Navigation | Expo Router v3 |
-| Identity/Security | Expo Camera & Biometrics |
-| Communication | Firebase FCM & Expo Notifications |
-| UI/UX | Lottie & Reanimated |
+| Framework | Language | State | Navigation | Identity/Security | Communication | UI/UX |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| React Native 0.74 (Expo SDK 51) | TypeScript | Zustand 4.x | Expo Router v3 | Expo Camera & Biometrics | Firebase FCM & Expo Notifications | Lottie & Reanimated |
 
 ### Admin
 
-| Category | Technology |
-| :--- | :--- |
-| Framework | Next.js 14 (App Router) |
-| Styling | Tailwind CSS & shadcn/ui |
-| Data Fetching | TanStack Query v5 |
-| Analytics | Recharts |
-| Auth | NestJS Admin JWT |
-| Hosting | Firebase Hosting |
+| Framework | Styling | Data Fetching | Analytics | Auth | Hosting |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Next.js 14 (App Router) | Tailwind CSS & shadcn/ui | TanStack Query v5 | Recharts | NestJS Admin JWT | Firebase Hosting |
 
 ### Backend Server
 
-| Category | Technology |
-| :--- | :--- |
-| Runtime | Node.js 20 LTS (NestJS 10) |
-| Database | Supabase (PostgreSQL) |
-| Scheduler | @nestjs/schedule (CRON) |
-| External APIs | OpenWeatherMap & WAQI |
-| CI/CD | GitHub Actions & Railway |
-| Validation | Zod |
+| Runtime | Database | Scheduler | External APIs | CI/CD | Validation |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Node.js 20 LTS (NestJS 10) | Supabase (PostgreSQL) | @nestjs/schedule (CRON) | OpenWeatherMap & WAQI | GitHub Actions & Railway | Zod |
