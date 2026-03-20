@@ -532,7 +532,7 @@ Premium = Avg Daily Salary × Base Rate × Risk Multiplier × Age Multiplier
 
 <br>
 <div align="center">
-  <img src="premium.jpg" alt="Haven Premium Calculation Flow" width="850" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+  <img src="premium.png" alt="Haven Premium Calculation Flow" width="850" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
 </div>
 <br><br>
 
