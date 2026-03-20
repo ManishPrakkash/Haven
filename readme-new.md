@@ -530,6 +530,12 @@ Premium = Avg Daily Salary × Base Rate × Risk Multiplier × Age Multiplier
 | 🛡️ **Base Rate**<br/>*(Plan Selection)* | Auto-assigned based on the worker's chosen coverage plan lock-in. | Sets the coverage ceiling (e.g., 7% for Plan 1 Economy, 10% for Plan 2 Target, 20% for Plan 3 Pro). |
 | 🌳 **Risk & Age Multipliers**<br/>*(ML Weights)* | Dynamic adjustment weights actively predicted by our **XGBoost Regression model** utilizing multi-tensor persona and operating environment data. | A 20-year old in a high-risk flood zone gets higher multipliers than a 45-year old in a safer zone, dynamically balancing the pool. |
 
+<br>
+<div align="center">
+  <img src="premium.jpg" alt="Haven Premium Calculation Flow" width="850" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+</div>
+<br><br>
+
 <strong style="color: #E0234E; font-size: 1.05em;">B. XGBoost: Catching "Invisible" Fraud</strong>
 <p>While Phase 1 relies on strict Gate-vetoes (like checking if GPS velocity exceeds 80km/h to catch basic app spoofing), the Phase 4 XGBoost implementation acts as the ultimate safety net.</p>
 <ul style="margin-top: 5px; margin-bottom: 20px;">
@@ -537,7 +543,14 @@ Premium = Avg Daily Salary × Base Rate × Risk Multiplier × Age Multiplier
   <li><strong>The Goal:</strong> To catch organized fraud rings that know exactly how to bypass explicit rule-based systems but cannot perfectly mimic human behavioral randomness.</li>
 </ul>
 
-<strong style="color: #3ECF8E; font-size: 1.05em;">C. Real-Time Autonomous Rebalancing</strong>
+<strong style="color: #F97316; font-size: 1.05em;">C. Isolation Forest: The Data Sanitizer</strong>
+<p>While Phase 1 relies on identifying simple outliers, the Isolation Forest implementation acts as our primary defense for income integrity.</p>
+<ul style="margin-top: 5px; margin-bottom: 20px;">
+  <li><strong>Feature Engineering:</strong> The model ingests multi-dimensional tensors including daily earnings, order count, average order value, and peak transaction frequency.</li>
+  <li><strong>The Goal:</strong> To isolate "Pump and Dump" schemes by identifying artificial spikes in earnings that don't match typical human work patterns or city-wide medians.</li>
+</ul>
+
+<strong style="color: #3ECF8E; font-size: 1.05em;">D. Real-Time Autonomous Rebalancing</strong>
 <p>An insurance pool goes bankrupt if claims exceed premiums. The AI continuously monitors the <strong>Weekly Loss Ratio</strong> (Payouts / Premiums).</p>
 <ul style="margin-top: 5px;">
   <li>If the loss ratio creeps above <strong>80%</strong>, the Regression model automatically applies a dampening weight to high-risk zones, slightly increasing new premiums to safeguard the pool's solvency.</li>
