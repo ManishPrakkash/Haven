@@ -833,7 +833,7 @@ Haven’s stack is intentionally selected to maximize type-safety across financi
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 
 <p>
-Haven is structurally designed to transition from a conceptual pilot into a national safety-net infrastructure. The roadmap is divided into three distinct evolutionary stages: <strong>Next</strong>, <strong>Scale</strong>, and <strong>Soar</strong>.
+Haven is structurally designed to transition from a conceptual pilot into a national safety-net infrastructure. The roadmap is divided into three distinct evolutionary stages: <strong>seed</strong>, <strong>Scale</strong>, and <strong>Soar</strong>.
 </p>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
