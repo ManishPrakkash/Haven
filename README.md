@@ -58,7 +58,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
       <img src="https://img.shields.io/badge/01-PLATFORM_AUTH-007EC6?style=for-the-badge" alt="Platform Auth">
     </td>
     <td width="80%" valign="top">
-      The worker installs Haven. The first gate is Platform Verification. The user enters their unique ID from platforms like Swiggy or Zomato. The app connects to our Mock Swiggy App(for data source we created it) API to verify active status and historical earning data.
+      The worker installs Haven. The first gate is <strong>Platform Verification</strong>. The user enters their unique ID from platforms like Swiggy. The app connects to our <strong>Mock Swiggy App(for data source we created it) API</strong> to verify <strong>active status and historical earning data</strong>.
     </td>
   </tr>
   <tr>
@@ -66,7 +66,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
       <img src="https://img.shields.io/badge/02-DIGILOCKER_KYC-8E44AD?style=for-the-badge" alt="DigiLocker KYC">
     </td>
     <td valign="top">
-      Haven integrates with DigiLocker for seamless KYC. We fetch verified Name, DOB, Gender, and PAN. This data feeds into the AI Risk Engine to determine age-based multipliers and ensure eligibility (20+).
+      <strong>Haven integrates with DigiLocker for seamless KYC.</strong> We fetch verified Name, DOB, Gender, and PAN. This data feeds into the <strong>AI Risk Engine</strong> to determine age-based multipliers and ensure eligibility.
     </td>
   </tr>
   <tr>
@@ -74,7 +74,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
       <img src="https://img.shields.io/badge/03-DYNAMIC_PLANS-27AE60?style=for-the-badge" alt="Dynamic Plans">
     </td>
     <td valign="top">
-      The user is presented with three tailored plans. The premiums are dynamic—calculated via custom pricing based on average daily salary and primary operating zone risk level.
+      <strong>The user is presented with three tailored plans.</strong> The premiums are <strong>dynamic—calculated</strong> via custom pricing based on <strong>average daily salary and primary operating zone risk level</strong>.
     </td>
   </tr>
   <tr>
@@ -82,7 +82,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
       <img src="https://img.shields.io/badge/04-BANK_&_MPIN-F39C12?style=for-the-badge" alt="Bank & MPIN">
     </td>
     <td valign="top">
-      The user provides bank account details auto-payouts and sets a secure 6-digit MPIN for high-level policy changes or sensitive logs.
+      The user provides bank account details for <strong>auto-payouts</strong> and sets a secure <strong>6-digit MPIN</strong> for high-level policy changes or sensitive logs.
     </td>
   </tr>
   <tr>
@@ -90,9 +90,9 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
       <img src="https://img.shields.io/badge/05-LIVENESS_&_SIGNING-16A085?style=for-the-badge" alt="Liveness & Signing">
     </td>
     <td valign="top">
-      Before policy activation:<br>
-      • <em>Liveness Check:</em> AI verifies user authenticity against the DigiLocker ID.<br>
-      • <em>Virtual Signing:</em> Digital acceptance of Terms & Conditions via secure gesture signature.
+      <strong>Before policy activation:</strong><br>
+      • <strong><em>Liveness Check:</em></strong> AI verifies user authenticity against the DigiLocker ID.<br>
+      • <strong><em>Virtual Signing:</em></strong> Digital acceptance of Terms & Conditions via secure gesture signature.
     </td>
   </tr>
   <tr>
@@ -100,7 +100,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
       <img src="https://img.shields.io/badge/06-PERSONA_DASHBOARD-2980B9?style=for-the-badge" alt="Persona Dashboard">
     </td>
     <td valign="top">
-      Displays <code>[ SAFE ]</code> vs. <code>[ HIGH RISK ]</code> status in real-time. If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.
+      <strong>Displays <code>[ SAFE ]</code> vs. <code>[ HIGH RISK ]</code> status in real-time.</strong> If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.
     </td>
   </tr>
 </table>
