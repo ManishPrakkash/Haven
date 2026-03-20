@@ -1,6 +1,7 @@
 <div align="center">
   <h1>🛡️ Haven</h1>
   <p><b>Parametric Income Protection for the Gig Economy</b></p>
+  <p><i>"NO WORK = NO PAY"</i></p>
   <p>
     An automated, data-driven insurance ecosystem designed to protect India's 12-million-strong gig workforce.
   </p>
@@ -105,7 +106,28 @@ Premiums are seamlessly collected weekly via the formula:
 
 ## 🧠 5. AI/ML Integration
 
-<br><br><br>
+### 🤖 AI-Driven Premium Calculation Plan
+The core of Haven’s financial logic is the **Automated Actuarial Engine**, which calculates the weekly premium using a multi-variable formula driven by real-time data ingestion.
+
+#### 1️⃣ The Dynamic Pricing Formula
+Every premium is custom-generated at the start of the billing cycle using the following supervised learning variables:
+
+> `Premium = Avg Daily Salary × Base Rate × Risk Multiplier × Age Multiplier`
+
+* **Average Daily Salary (The Feature Base):** The AI analyzes a 7–30 day lookback period of transaction records from the Mock Swiggy API to establish an income baseline.
+* **Base Rate (The Plan Selection):** Automatically assigned based on the user's chosen plan (7% for P1, 10% for P2, or 20% for P3).
+* **Risk & Age Multipliers (The ML Weights):** These are dynamic weights predicted by our **XGBoost Regression** model based on the worker's persona and operating environment.
+
+#### 2️⃣ Integration Strategy: XGBoost Regression Model
+To calculate the final multipliers, we utilize Supervised Learning (XGBoost) to perform Risk Scoring.
+* **Data Ingestion (DigiLocker & API):** The system fetches verified age from DigiLocker and location/activity data from the platform.
+* **Feature Engineering:** The model processes these inputs to categorize the user. For example, a 26-year-old in a flood-prone Tier-1 city is assigned an `Age Multiplier` of 1.2 and a `Risk Multiplier` of 1.2.
+* **Premium Normalization:** The AI identifies "Income Spikes" (e.g., abnormally high earnings during a festival) and normalizes them to prevent the user from being overcharged in their next premium cycle.
+
+#### 3️⃣ Real-Time Dynamic Adjustment Mechanism
+Unlike traditional insurance, Haven’s AI continuously revises the user's risk profile.
+* **Claim History Loading:** If the Isolation Forest fraud model confirms a clean record, the user may qualify for **No-Claim Bonus (NCB)** discounts (5%–15%). Conversely, frequent claim behavior may trigger "risk loading," increasing the premium for the next cycle.
+* **Geographic Risk Volatility:** If a specific zone sees a sudden increase in disaster frequency (e.g., early monsoon onset), the Haven Server dynamically reclassifies that zone from "Mid" to "High" risk, adjusting premiums prospectively.
 
 ## 🕵️‍♂️ 6. Fraud Detection
 
