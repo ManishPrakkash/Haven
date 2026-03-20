@@ -3,17 +3,7 @@
   <!-- Banner -->
   <img src="banner.png" alt="HAVEN — Parametric Income Protection for the Gig Economy" width="100%" />
 
-  <br/><br/>
-
-  <!-- Badges -->
-  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/React_Native-0.74-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React Native" /></a>
-  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
-  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/NestJS-10-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" /></a>
-  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" /></a>
-  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" /></a>
-  <a href="#vii-technology-stack"><img src="https://img.shields.io/badge/XGBoost-ML-FF6600?style=for-the-badge&logo=python&logoColor=white" alt="XGBoost" /></a>
-
-  <br/><br/>
+  <br/>
 
   <p><em>An automated, data-driven insurance ecosystem designed to protect India's 12-million-strong gig workforce.</em></p>
 
@@ -28,9 +18,34 @@
 By moving away from traditional indemnity insurance and adopting a <strong>Parametric Trigger</strong> model, Haven ensures that delivery partners and gig workers receive instant financial support when environmental disasters or social disruptions prevent them from earning.
 </blockquote>
 
+<br/>
+
+<!-- ───────────────────── TABLE OF CONTENTS ───────────────────── -->
+
+<details open>
+<summary><strong>📑 Table of Contents</strong></summary>
+
+<br/>
+
+| # | Section | Description |
+|:---:|:---|:---|
+| Ⅰ | [The Problem & Persona Scenarios](#i-the-problem--persona-scenarios) | The income-gap crisis facing gig workers |
+| Ⅱ | [Demo](#ii-demo) | Live product demonstration |
+| Ⅲ | [End-to-End User Workflow (Onboarding)](#iii-end-to-end-user-workflow-onboarding) | Step-by-step onboarding journey |
+| Ⅳ | [Premium Plans](#iv-premium-plans) | Tiered pricing — Economy, Value & Elite |
+| Ⅴ | [Platform Choices Justification](#v-platform-choices-justification) | Why native mobile + web portal |
+| Ⅵ | [Parametric Triggers](#vi-parametric-triggers) | Event-based automated payout logic |
+| Ⅶ | [AI/ML Integration](#vii-aiml-integration) | XGBoost pricing & dynamic risk models |
+| Ⅷ | [Adversarial Defence & Anti-Spoofing](#viii-adversarial-defence--anti-spoofing) | System resilience against manipulation |
+| Ⅸ | [Fraud Detection](#ix-fraud-detection) | Isolation Forest anomaly detection |
+| Ⅹ | [Technology Stack](#x-technology-stack) | Full-stack architecture overview |
+| Ⅺ | [Development Plan](#xi-development-plan) | Roadmap & milestones |
+
+</details>
+
 ---
 
-<h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">I. THE PROBLEM & PERSONA SCENARIOS</h3>
+<h3 id="i-the-problem--persona-scenarios" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">I. THE PROBLEM & PERSONA SCENARIOS</h3>
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 
@@ -56,7 +71,13 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 ---
 
-<h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">II. END-TO-END USER WORKFLOW (ONBOARDING)</h3>
+<h3 id="ii-demo" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">II. DEMO</h3>
+
+<p style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-style: italic;">(Demo video / link coming soon)</p>
+
+---
+
+<h3 id="iii-end-to-end-user-workflow-onboarding" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">III. END-TO-END USER WORKFLOW (ONBOARDING)</h3>
 
 <div align="center">
   <img src="workflow-labelled.png" alt="Haven Insurance Onboarding Journey" width="800"/>
@@ -65,7 +86,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 ---
 
-<h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">III. PREMIUM PLANS</h3>
+<h3 id="iv-premium-plans" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">IV. PREMIUM PLANS</h3>
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 
@@ -140,17 +161,37 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 ---
 
-<h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">IV. PARAMETRIC TRIGGERS</h3>
+<h3 id="v-platform-choices-justification" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">V. PLATFORM CHOICES JUSTIFICATION</h3>
+
+<div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">NATIVE MOBILE (User App)</strong>
+<p>The delivery partner's workplace is the road, not a desk. A native mobile application is the only viable interface for this demographic.</p>
+<ul>
+  <li><strong>Hardware Sensors:</strong> Native GPS is mandatory for "Proof of Presence" to trigger parametric payouts. Local Camera access enables required AI-driven liveness checks to prevent identity fraud.</li>
+</ul>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">WEB PORTAL (Admin Panel)</strong>
+<ul>
+  <li><strong>Data Density:</strong> Managing 12 million global profiles requires high-resolution Risk Heatmaps and Recharts analytics—only effective on large desktop displays.</li>
+  <li><strong>Actuarial Management:</strong> Adjusting XGBoost weights, reviewing insurance pool solvency, and generating manual trigger overrides demand a secure, high-speed input web environment.</li>
+</ul>
+
+</div>
+
+---
+
+<h3 id="vi-parametric-triggers" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">VI. PARAMETRIC TRIGGERS</h3>
 
 <p style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-style: italic;">(Data definitions pending)</p>
 
-<br>
+---
 
-<h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">V. AI/ML INTEGRATION</h3>
+<h3 id="vii-aiml-integration" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">VII. AI/ML INTEGRATION</h3>
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">AI-DRIVEN PREMIUM CALCULATION</strong>
-<p>The core of Haven’s financial logic is the Automated Actuarial Engine, outputting weekly premiums using a multi-variable formula driven by real-time data ingestion.</p>
+<p>The core of Haven's financial logic is the Automated Actuarial Engine, outputting weekly premiums using a multi-variable formula driven by real-time data ingestion.</p>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">A. THE DYNAMIC PRICING FORMULA</strong>
 <p>Every premium is custom-generated at the start of the billing cycle:</p>
@@ -174,24 +215,28 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 </ul>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">C. REAL-TIME DYNAMIC ADJUSTMENT</strong>
-<p>Unlike static policies, Haven’s AI continuously revises risk profiles.</p>
+<p>Unlike static policies, Haven's AI continuously revises risk profiles.</p>
 <ul>
   <li><strong>Claim History Loading:</strong> Isolation Forest fraud modeling confirms clean records, qualifying users for <strong>No-Claim Bonus (NCB)</strong> discounts (5%–15%). Frequent claim behavior triggers risk loading premiums.</li>
   <li><strong>Geographic Risk Volatility:</strong> High-frequency disaster spikes trigger deterministic reclassification by the Haven Server (e.g., <code>Mid</code> -> <code>High</code> risk), adjusting premiums prospectively.</li>
 </ul>
 </div>
 
-<br>
+---
 
-<h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">VI. FRAUD DETECTION</h3>
+<h3 id="viii-adversarial-defence--anti-spoofing" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">VIII. ADVERSARIAL DEFENCE & ANTI-SPOOFING</h3>
 
-<p style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-style: italic;">(System architecture pending)</p>
-
-<br>
+<p style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-style: italic;">(Architecture pending)</p>
 
 ---
 
-<h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">VII. TECHNOLOGY STACK</h3>
+<h3 id="ix-fraud-detection" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">IX. FRAUD DETECTION</h3>
+
+<p style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-style: italic;">(System architecture pending)</p>
+
+---
+
+<h3 id="x-technology-stack" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">X. TECHNOLOGY STACK</h3>
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 
@@ -233,20 +278,6 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 ---
 
-<h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">VIII. PLATFORM CHOICES JUSTIFICATION</h3>
+<h3 id="xi-development-plan" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">XI. DEVELOPMENT PLAN</h3>
 
-<div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
-
-<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">NATIVE MOBILE (User App)</strong>
-<p>The delivery partner's workplace is the road, not a desk. A native mobile application is the only viable interface for this demographic.</p>
-<ul>
-  <li><strong>Hardware Sensors:</strong> Native GPS is mandatory for "Proof of Presence" to trigger parametric payouts. Local Camera access enables required AI-driven liveness checks to prevent identity fraud.</li>
-</ul>
-
-<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">WEB PORTAL (Admin Panel)</strong>
-<ul>
-  <li><strong>Data Density:</strong> Managing 12 million global profiles requires high-resolution Risk Heatmaps and Recharts analytics—only effective on large desktop displays.</li>
-  <li><strong>Actuarial Management:</strong> Adjusting XGBoost weights, reviewing insurance pool solvency, and generating manual trigger overrides demand a secure, high-speed input web environment.</li>
-</ul>
-
-</div>
+<p style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-style: italic;">(Roadmap & milestones pending)</p>
