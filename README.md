@@ -213,12 +213,17 @@ Every premium is custom-generated at the start of the 7-day billing cycle using 
 
 > [!IMPORTANT]
 > **Weekly Premium Calculation:**
-> $$ \text{Weekly Premium} = S_d \times R_b \times M_r \times M_a $$
+> 
+> $$
+> \text{Weekly Premium} = S_d \times R_b \times M_r \times M_a
+> $$
 
 > ### 🧮 Mathematical Walkthrough Example
 > **Persona:** A 28-year-old rider in a "High Risk" zone like Chennai ($M_a = 1.2$, $M_r = 1.2$) earning an average of ₹900/day, who selects the Value Plan ($R_b = 10\%$).
 > 
-> $$ \text{Calculation: }  900 \times 0.10 \times 1.2 \times 1.2 = \mathbf{₹129.60 \text{ / week}} $$
+> $$
+> \text{Calculation: }  900 \times 0.10 \times 1.2 \times 1.2 = \mathbf{₹129.60 \text{ / week}}
+> $$
 > 
 > *This ensures that pricing is mathematically "fair"—workers in safer zones do not subsidize the higher risk of those in volatile metros.*
 
@@ -234,14 +239,21 @@ Unsupervised Anomaly Detection for Income Integrity. In decentralized gig work, 
 
 **Implementation**  
 We represent each user's income profile as a feature vector $\mathbf{x} \in \mathbb{R}^4$:
-$$ \mathbf{x} = [\text{Daily Earnings}, \text{Order Count}, \text{Avg Order Value}, \text{Peak Frequency}] $$
+
+$$
+\mathbf{x} = [\text{Daily Earnings}, \text{Order Count}, \text{Avg Order Value}, \text{Peak Frequency}]
+$$
 
 **Mathematical Logic**  
 The model builds an ensemble of $i$Trees. Because fraudulent "spikes" are few and different, they are isolated in very few splits, resulting in a short Path Length $h(x)$. We calculate the score $s(x, n)$ to determine if the income data is "truthful":
 
 > [!TIP]
 > **Anomaly Scoring Logic:**
-> $$ s(x, n) = 2^{-\frac{E(h(x))}{c(n)}} $$
+> 
+> $$
+> s(x, n) = 2^{-\frac{E(h(x))}{c(n)}}
+> $$
+> 
 > **Outcome:** If $s \to 1$ (High Anomaly), the system ignores the reported $S_d$ and normalizes it to the 90th Percentile Median for that worker's city tier, protecting the insurance pool's liquidity.
 
 <br>
@@ -255,7 +267,10 @@ Supervised Non-Linear Risk Scoring. Once the data is sanitized, XGBoost calculat
 Even without a finalized live training set, the model is architected to minimize a Regularized Objective Function, ensuring premiums remain stable across diverse urban clusters.
 
 **Mathematical Logic**  
-$$ \mathcal{L}(\phi) = \sum_i l(\hat{y}_i, y_i) + \sum_k \Omega(f_k) $$
+
+$$
+\mathcal{L}(\phi) = \sum_i l(\hat{y}_i, y_i) + \sum_k \Omega(f_k)
+$$
 
 The model builds additive trees sequentially, where each new tree corrects the "residual errors" of previous trees using a second-order Taylor expansion for high-precision convergence. We apply $L_1/L_2$ regularization ($\Omega$) to prevent the model from "overfitting" to a single freak weather event. 
 **Outcome:** The final leaves of the trees provide the precise numerical weights fed directly into our master formula.
