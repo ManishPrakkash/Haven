@@ -52,41 +52,58 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 
-> [!NOTE]
-> ### `01` PLATFORM AUTH
-> The worker installs Haven. The first gate is Platform Verification. The user enters their unique ID from platforms like Swiggy or Zomato. The app connects to our Mock Swiggy App(for data source we created it) API to verify active status and historical earning data.
-
-<br>
-
-> [!IMPORTANT]
-> ### `02` DIGILOCKER KYC
-> Haven integrates with DigiLocker for seamless KYC. We fetch verified Name, DOB, Gender, and PAN. This data feeds into the AI Risk Engine to determine age-based multipliers and ensure eligibility (20+).
-
-<br>
-
-> [!TIP]
-> ### `03` DYNAMIC PLANS
-> The user is presented with three tailored plans. The premiums are dynamic—calculated via custom pricing based on average daily salary and primary operating zone risk level.
-
-<br>
-
-> [!IMPORTANT]
-> ### `04` BANK & MPIN
-> The user provides bank account details auto-payouts and sets a secure 6-digit MPIN for high-level policy changes or sensitive logs.
-
-<br>
-
-> [!TIP]
-> ### `05` LIVENESS & SIGNING
-> Before policy activation:
-> * *Liveness Check:* AI verifies user authenticity against the DigiLocker ID.
-> * *Virtual Signing:* Digital acceptance of Terms & Conditions via secure gesture signature.
-
-<br>
-
-> [!NOTE]
-> ### `06` PERSONA DASHBOARD
-> Displays `[ SAFE ]` vs. `[ HIGH RISK ]` status in real-time. If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.
+<table width="100%">
+  <tr>
+    <td width="20%" align="center" valign="middle">
+      <img src="https://img.shields.io/badge/01-PLATFORM_AUTH-007EC6?style=for-the-badge" alt="Platform Auth">
+    </td>
+    <td width="80%" valign="top">
+      The worker installs Haven. The first gate is Platform Verification. The user enters their unique ID from platforms like Swiggy or Zomato. The app connects to our Mock Swiggy App(for data source we created it) API to verify active status and historical earning data.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="https://img.shields.io/badge/02-DIGILOCKER_KYC-8E44AD?style=for-the-badge" alt="DigiLocker KYC">
+    </td>
+    <td valign="top">
+      Haven integrates with DigiLocker for seamless KYC. We fetch verified Name, DOB, Gender, and PAN. This data feeds into the AI Risk Engine to determine age-based multipliers and ensure eligibility (20+).
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="https://img.shields.io/badge/03-DYNAMIC_PLANS-27AE60?style=for-the-badge" alt="Dynamic Plans">
+    </td>
+    <td valign="top">
+      The user is presented with three tailored plans. The premiums are dynamic—calculated via custom pricing based on average daily salary and primary operating zone risk level.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="https://img.shields.io/badge/04-BANK_&_MPIN-F39C12?style=for-the-badge" alt="Bank & MPIN">
+    </td>
+    <td valign="top">
+      The user provides bank account details auto-payouts and sets a secure 6-digit MPIN for high-level policy changes or sensitive logs.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="https://img.shields.io/badge/05-LIVENESS_&_SIGNING-16A085?style=for-the-badge" alt="Liveness & Signing">
+    </td>
+    <td valign="top">
+      Before policy activation:<br>
+      • <em>Liveness Check:</em> AI verifies user authenticity against the DigiLocker ID.<br>
+      • <em>Virtual Signing:</em> Digital acceptance of Terms & Conditions via secure gesture signature.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="https://img.shields.io/badge/06-PERSONA_DASHBOARD-2980B9?style=for-the-badge" alt="Persona Dashboard">
+    </td>
+    <td valign="top">
+      Displays <code>[ SAFE ]</code> vs. <code>[ HIGH RISK ]</code> status in real-time. If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.
+    </td>
+  </tr>
+</table>
 </div>
 
 ---
