@@ -22,11 +22,11 @@ export default function EarningsScreen() {
   ];
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <StatusBar style="dark" />
       
       {/* HEADER */}
-      <View style={styles.header}>
+      <View style={[styles.header, { paddingTop: insets.top + 14 }]}>
         <Text style={styles.headerTitle}>Earnings</Text>
       </View>
 
@@ -198,7 +198,7 @@ export default function EarningsScreen() {
         <Text style={styles.lastSyncedText}>Last synced: 2 min ago</Text>
 
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

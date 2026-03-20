@@ -29,11 +29,11 @@ export default function WorkerHomeScreen() {
   const rating = profile.performance.rating;
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <StatusBar style="dark" />
 
       {/* ---------- HEADER ---------- */}
-      <View style={styles.header}>
+      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
         <View style={styles.headerLeft}>
           <Text style={styles.logo}>swiggy</Text>
           <View>
@@ -130,7 +130,7 @@ export default function WorkerHomeScreen() {
       </ScrollView>
 
 
-    </SafeAreaView>
+    </View>
   );
 }
 

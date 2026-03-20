@@ -10,11 +10,11 @@ export default function ProfileScreen() {
   const { profile } = useUserStore();
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <StatusBar style="dark" />
 
       {/* HEADER SECTION (White Background) */}
-      <View style={styles.headerContainer}>
+      <View style={[styles.headerContainer, { paddingTop: insets.top }]}>
         <View style={styles.topRightActions}>
           <TouchableOpacity>
             <MaterialCommunityIcons name="dots-vertical" size={24} color="#6B7280" />
@@ -144,7 +144,7 @@ export default function ProfileScreen() {
         <Text style={styles.footerVersion}>Mock Swiggy v1.0.0 | GigShield Simulator</Text>
       </ScrollView>
 
-    </SafeAreaView>
+    </View>
   );
 }
 

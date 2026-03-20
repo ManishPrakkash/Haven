@@ -102,11 +102,11 @@ export default function PerformanceScreen() {
   const chartData = activeTab === 'week' ? weekChartData : monthChartData;
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <StatusBar style="dark" />
 
       {/* HEADER */}
-      <View style={styles.header}>
+      <View style={[styles.header, { paddingTop: insets.top + 14 }]}>
         <View style={styles.headerLeft}>
           <TouchableOpacity style={styles.backButton}>
             <Ionicons name="arrow-back" size={24} color="#1A1A1A" />
@@ -287,7 +287,7 @@ export default function PerformanceScreen() {
         </View>
       </Modal>
 
-    </SafeAreaView>
+    </View>
   );
 }
 
