@@ -51,26 +51,32 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 <br>
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
+
+> [!NOTE]
 > ### `01` PLATFORM AUTH
 > The worker installs Haven. The first gate is Platform Verification. The user enters their unique ID from platforms like Swiggy or Zomato. The app connects to our Mock Swiggy App(for data source we created it) API to verify active status and historical earning data.
 
 <br>
 
+> [!IMPORTANT]
 > ### `02` DIGILOCKER KYC
 > Haven integrates with DigiLocker for seamless KYC. We fetch verified Name, DOB, Gender, and PAN. This data feeds into the AI Risk Engine to determine age-based multipliers and ensure eligibility (20+).
 
 <br>
 
+> [!TIP]
 > ### `03` DYNAMIC PLANS
 > The user is presented with three tailored plans. The premiums are dynamic—calculated via custom pricing based on average daily salary and primary operating zone risk level.
 
 <br>
 
+> [!IMPORTANT]
 > ### `04` BANK & MPIN
 > The user provides bank account details auto-payouts and sets a secure 6-digit MPIN for high-level policy changes or sensitive logs.
 
 <br>
 
+> [!TIP]
 > ### `05` LIVENESS & SIGNING
 > Before policy activation:
 > * *Liveness Check:* AI verifies user authenticity against the DigiLocker ID.
@@ -78,6 +84,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 <br>
 
+> [!NOTE]
 > ### `06` PERSONA DASHBOARD
 > Displays `[ SAFE ]` vs. `[ HIGH RISK ]` status in real-time. If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.
 </div>
