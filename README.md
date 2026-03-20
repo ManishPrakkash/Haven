@@ -45,7 +45,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 <h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">II. END-TO-END USER WORKFLOW</h3>
 
 <div align="center">
-  <img src="workflow-labelled.png" alt="Haven Insurance Onboarding Journey" width="800"/>
+  <img src="./workflow-labelled.png" alt="Haven Insurance Onboarding Journey" width="800"/>
 </div>
 <br>
 
