@@ -57,7 +57,11 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PLAN 1: ECONOMY (SAFETY NET)</strong>
-<p style="margin-top: 5px; margin-bottom: 15px; font-size: 0.95em;">Designed as a budget-friendly entry point for workers seeking basic protection. This plan offers a 70% income replacement with a standard 2-week waiting period, making it ideal for those who want a baseline safety net against major environmental or social disruptions.</p>
+<ul style="margin-top: 8px; margin-bottom: 16px; font-size: 0.95em; padding-left: 20px; line-height: 1.6;">
+  <li>Budget-conscious workers seeking a low-cost entry point for basic protection.</li>
+  <li><strong>70%</strong> of your average daily income replacement.</li>
+  <li><strong>2 weeks</strong> standard activation period.</li>
+</ul>
 
 | Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -74,7 +78,11 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 <br>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PLAN 2: VALUE (INCOME REPLACEMENT)</strong>
-<p style="margin-top: 5px; margin-bottom: 15px; font-size: 0.95em;">The most balanced tier, aimed at full-time professionals who rely entirely on gig earnings. It provides 100% income replacement to ensure no financial gap during verified disruptions. It features a slightly longer 4-week waiting period to maintain lower premium accessibility for high-intensity workers.</p>
+<ul style="margin-top: 8px; margin-bottom: 16px; font-size: 0.95em; padding-left: 20px; line-height: 1.6;">
+  <li>Full-time professionals who depend entirely on their gig earnings for their livelihood.</li>
+  <li><strong>100%</strong> of your average daily income replacement.</li>
+  <li><strong>4 weeks</strong> standard activation period.</li>
+</ul>
 
 | Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -91,7 +99,11 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 <br>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PLAN 3: ELITE (IMMEDIATE PROTECTION)</strong>
-<p style="margin-top: 5px; margin-bottom: 15px; font-size: 0.95em;">Our high-priority tier for workers in volatile zones who cannot afford any delay in coverage. Offering 100% income replacement and an industry-leading 0-day waiting period, this plan activates the moment the policy is signed, providing instant peace of mind and maximum financial resilience.</p>
+<ul style="margin-top: 8px; margin-bottom: 16px; font-size: 0.95em; padding-left: 20px; line-height: 1.6;">
+  <li>High-intensity workers in volatile or high-risk zones who need immediate financial resilience.</li>
+  <li><strong>100%</strong> of your average daily income replacement.</li>
+  <li><strong>0 days</strong> (Instant activation the moment you sign the policy).</li>
+</ul>
 
 | Age Band | Avg Daily Salary | Base Rate | Risk Zone | Weekly Premium | Daily Payout | Waiting Time |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
