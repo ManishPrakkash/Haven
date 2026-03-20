@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Platform, Modal } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Platform, Modal, Dimensions } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Circle } from 'react-native-svg';
 import { StatusBar } from 'expo-status-bar';
 import { useUserStore, PROFILES_DATA } from '../store/userStore';
+import { LineChart } from 'react-native-chart-kit';
 
 const CircularProgress = ({ size, strokeWidth, progress, children }: { size: number, strokeWidth: number, progress: number, children?: React.ReactNode }) => {
   const center = size / 2;
@@ -33,9 +34,7 @@ const CircularProgress = ({ size, strokeWidth, progress, children }: { size: num
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
           fill="none"
-          rotation="-90"
-          originX={center}
-          originY={center}
+          transform={`rotate(-90 ${center} ${center})`}
         />
       </Svg>
       {children}
@@ -49,6 +48,26 @@ export default function PerformanceScreen() {
   const [showModal, setShowModal] = useState(false);
 
   const { rating, attendance, onTime, acceptance, streak, isTopPerformer, zone } = profile.performance;
+
+  const chartData = {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [
+      {
+        data: [
+          attendance - 10,
+          attendance - 5,
+          attendance + 2,
+          attendance - 8,
+          attendance,
+          attendance + 5,
+          attendance,
+        ],
+        color: (opacity = 1) => `rgba(252, 128, 25, ${opacity})`,
+        strokeWidth: 2
+      }
+    ],
+    legend: ["Attendance Trend"]
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -120,6 +139,37 @@ export default function PerformanceScreen() {
             </CircularProgress>
             <Text style={[styles.metricLabel, { marginTop: 10 }]}>Acceptance</Text>
           </View>
+        </View>
+
+        {/* CHART SECTION */}
+        <View style={styles.chartCard}>
+          <Text style={styles.chartTitle}>Performance Trend</Text>
+          <LineChart
+            data={chartData}
+            width={Dimensions.get("window").width - 64}
+            height={220}
+            chartConfig={{
+              backgroundColor: "#ffffff",
+              backgroundGradientFrom: "#ffffff",
+              backgroundGradientTo: "#ffffff",
+              decimalPlaces: 0,
+              color: (opacity = 1) => `rgba(252, 128, 25, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`,
+              style: {
+                borderRadius: 16
+              },
+              propsForDots: {
+                r: "4",
+                strokeWidth: "2",
+                stroke: "#FC8019"
+              }
+            }}
+            bezier
+            style={{
+              marginVertical: 8,
+              borderRadius: 16
+            }}
+          />
         </View>
 
         {/* STREAK CARD */}
@@ -320,6 +370,24 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#9CA3AF',
     fontWeight: '500',
+  },
+  chartCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    alignItems: 'center',
+    ...Platform.select({
+      ios: { shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 8 },
+      android: { elevation: 2 },
+    }),
+  },
+  chartTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+    alignSelf: 'flex-start',
+    marginBottom: 12,
   },
   detailCard: {
     flexDirection: 'row',
