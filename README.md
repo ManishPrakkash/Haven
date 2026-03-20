@@ -45,23 +45,23 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 <h3 style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">II. END-TO-END USER WORKFLOW</h3>
 
 <div align="center">
-  <img src="workflow.png" alt="Haven Insurance Onboarding Road" width="800"/>
+  <img src="workflow-labelled.png" alt="Haven Insurance Onboarding Journey" width="800"/>
 </div>
 <br>
 
 <div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
 <ol>
-  <li><strong>Installation & Platform Authentication:</strong> The worker installs Haven. The first gate is Platform Verification. The user enters their unique ID from platforms like Swiggy or Zomato. The app connects to our Mock Swiggy API to verify active status and historical earning data.</li>
-  <li><strong>Identity & Demographic Verification:</strong> Haven integrates with DigiLocker for seamless KYC. We fetch verified Name, DOB, Gender, and PAN. This data feeds into the AI Risk Engine to determine age-based multipliers and ensure eligibility (20+).</li>
-  <li><strong>Dynamic Plan Onboarding:</strong> The user is presented with three tailored plans. The premiums are dynamic—calculated via custom pricing based on average daily salary and primary operating zone risk level.</li>
-  <li><strong>Financial Setup & MPIN:</strong> The user provides bank account details auto-payouts and sets a secure 6-digit MPIN for high-level policy changes or sensitive logs.</li>
-  <li><strong>Anti-Fraud Liveness Checks:</strong> Before policy activation:
+  <li><strong>Platform Auth:</strong> The worker installs Haven. The first gate is Platform Verification. The user enters their unique ID from platforms like Swiggy or Zomato. The app connects to our Mock Swiggy API to verify active status and historical earning data.</li>
+  <li><strong>DigiLocker KYC:</strong> Haven integrates with DigiLocker for seamless KYC. We fetch verified Name, DOB, Gender, and PAN. This data feeds into the AI Risk Engine to determine age-based multipliers and ensure eligibility (20+).</li>
+  <li><strong>Dynamic Plans:</strong> The user is presented with three tailored plans. The premiums are dynamic—calculated via custom pricing based on average daily salary and primary operating zone risk level.</li>
+  <li><strong>Bank & MPIN:</strong> The user provides bank account details auto-payouts and sets a secure 6-digit MPIN for high-level policy changes or sensitive logs.</li>
+  <li><strong>Liveness & Signing:</strong> Before policy activation:
     <ul>
       <li><em>Liveness Check:</em> AI verifies user authenticity against the DigiLocker ID.</li>
       <li><em>Virtual Signing:</em> Digital acceptance of Terms & Conditions via secure gesture signature.</li>
     </ul>
   </li>
-  <li><strong>The Persona Dashboard:</strong> Displays <code style="font-family: 'Courier New', monospace;">[ SAFE ]</code> vs. <code style="font-family: 'Courier New', monospace;">[ HIGH RISK ]</code> status in real-time. If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.</li>
+  <li><strong>Persona Dashboard:</strong> Displays <code style="font-family: 'Courier New', monospace;">[ SAFE ]</code> vs. <code style="font-family: 'Courier New', monospace;">[ HIGH RISK ]</code> status in real-time. If a parametric event triggers, a deterministic progress bar displays the countdown to the 6-hour payout lock-in.</li>
 </ol>
 </div>
 
