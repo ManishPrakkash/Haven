@@ -106,8 +106,9 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 | 40+ | ₹1,200 | 20% | High | ₹432 | ₹1,200 | 0 Days |
 
 <br>
-<p style="margin-top: 15px; font-size: 0.85em; color: #7f8c8d; font-style: italic; border-left: 3px solid #bdc3c7; padding-left: 10px;">
-  <strong>Data Source:</strong> All income benchmarks are derived from research findings at <a href="https://www.thefinthusiastic.com/post/india-gig-economy-all-you-need-to-know" style="color: #3498db; text-decoration: none;">https://www.thefinthusiastic.com/post/india-gig-economy-all-you-need-to-know</a>
+
+<p style="font-size: 0.9em; color: #7f8c8d; font-style: italic; border-left: 3px solid #bdc3c7; padding-left: 10px; margin-top: 20px;">
+  <strong>Data Source:</strong> All income benchmarks are derived from research findings at <a href="https://www.thefinthusiastic.com/post/india-gig-economy-all-you-need-to-know" style="color: #2980b9;">The Finthusiastic: India's Gig Economy</a>. These data parameters dictate how we calculate the premiums dynamically.
 </p>
 
 </div>
