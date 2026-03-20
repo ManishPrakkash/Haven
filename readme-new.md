@@ -59,19 +59,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 <br>
 
-<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">THE FIVE COVERED DISRUPTIONS</strong>
 
-<p>Haven covers exactly <strong>five parametric trigger events</strong>. Each has a precisely defined threshold, an objective external data source, and requires zero worker testimony or documentation.</p>
-
-| # | Trigger | Threshold | Data Source | Rationale |
-|:---:|:---|:---|:---|:---|
-| 1 | 🌧️ **RAIN_EXTREME** | ≥ 64.5mm rainfall in 24h | OpenWeatherMap + IMD | IMD "heavy rainfall" — roads flood, orders stop |
-| 2 | 🌫️ **AQI_SEVERE** | AQI ≥ 300 sustained for 4+ hours | WAQI.info + CPCB | CPCB "hazardous" — outdoor work causes health harm |
-| 3 | 🔥 **HEAT_EXTREME** | ≥ 45°C for 2+ consecutive days | OWM + IMD heat alerts | Physiological danger for outdoor motorbike riders |
-| 4 | 📱 **PLATFORM_OUTAGE** | Platform down ≥ 120min during peak hours | HTTP probes (3 data centers) | Peak = 11am–2pm or 6pm–10pm; all 3 DCs must fail |
-| 5 | 🚫 **SOCIAL_DISRUPTION** | Curfew/bandh ≥ 6 hours | PIB RSS + govt announcements | Requires human verification; cannot be fully automated |
-
-<br>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PERSONA SCENARIOS</strong>
 
@@ -132,22 +120,7 @@ By moving away from traditional indemnity insurance and adopting a <strong>Param
 
 <br>
 
-<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">WHY THESE FIVE — AND NOT OTHERS?</strong>
 
-<p>Several triggers were considered and deliberately rejected because they violate the <strong>parametric model</strong> — they cannot be verified from external objective data alone:</p>
-
-| Rejected Trigger | Reason for Rejection |
-|:---|:---|
-| 🏍️ Vehicle theft | Requires loss assessment and documentation — not parametric |
-| 🏥 Health emergencies | Personal, not zone-wide; needs medical records — non-parametric |
-| 📉 Earnings drop | Could result from poor performance rather than external events |
-| 🔧 Vehicle breakdown | Cannot be verified externally without inspection |
-
-<p style="font-size: 0.9em; color: #7f8c8d; font-style: italic; border-left: 3px solid #bdc3c7; padding-left: 10px; margin-top: 12px;">
-The five chosen triggers are all <strong>verifiable from external objective data sources</strong> (weather APIs, platform monitoring, government announcements) without requiring any worker testimony, documentation, or adjuster involvement. This is what makes Haven truly parametric.
-</p>
-
-<br>
 
 <strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">PARAMETRIC vs TRADITIONAL — WHY IT MATTERS</strong>
 
@@ -321,7 +294,198 @@ The five chosen triggers are all <strong>verifiable from external objective data
 
 <h3 id="vi-parametric-triggers" style="font-family: Verdana, Geneva, sans-serif; font-weight: 600; letter-spacing: 1px;">VI. PARAMETRIC TRIGGERS</h3>
 
-<p style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-style: italic;">(Data definitions pending)</p>
+<div style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;">
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
+DUAL PARAMETRIC TRIGGER MODEL
+</strong>
+
+<p>
+Haven operates on a strictly defined <strong>Dual Trigger Parametric Model</strong>, where claims are not user-initiated but automatically activated when objective, verifiable conditions are satisfied. 
+These triggers are derived from real-time environmental signals and network-level behavioral disruptions, ensuring zero subjectivity and high fraud resistance.
+</p>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
+1. ENVIRONMENTAL TRIGGER (EXTERNAL DISRUPTION SIGNAL)
+</strong>
+
+<p>
+This trigger activates when adverse environmental conditions materially impact delivery operations within a defined geographic cluster.
+</p>
+
+<ul>
+  <li><strong>Data Source:</strong> Real-time Weather APIs + Historical Weather Validation</li>
+  <li><strong>Primary Condition:</strong> Rainfall intensity ≥ 2.5 mm/hr OR severe AQI thresholds</li>
+  <li><strong>Geo-Scope:</strong> Worker's live GPS coordinates mapped to city grid</li>
+</ul>
+
+<p><strong>Multi-Layer Validation (from system architecture):</strong></p>
+
+<ul>
+  <li><strong>Track B (Live Weather Engine):</strong>
+    <ul>
+      <li>Continuously ingests real-time weather signals</li>
+      <li>Generates initial disruption confidence (+0 to +15)</li>
+    </ul>
+  </li>
+
+  <li><strong>Track E (Historical Weather Engine):</strong>
+    <ul>
+      <li>Validates rainfall consistency using historical datasets</li>
+      <li>Acts as <strong>Final Verdict Signal</strong> (+0 to +50)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+<strong>Trigger Condition:</strong>  
+Environmental trigger is considered <strong>ACTIVE</strong> when:
+</p>
+
+<p style="font-family: 'Courier New', monospace; background-color: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 3px solid #34495e;">
+Weather_Severity ≥ Threshold  AND  Historical_Validation = TRUE
+</p>
+
+<p>
+This ensures that transient API spikes or false weather readings do not trigger payouts.
+</p>
+
+<hr>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
+2. BEHAVIORAL TRIGGER (NETWORK DISRUPTION SIGNAL)
+</strong>
+
+<p>
+This trigger activates when platform-level inefficiencies indicate systemic disruption affecting multiple workers simultaneously.
+</p>
+
+<ul>
+  <li><strong>Core Signals:</strong>
+    <ul>
+      <li>Prolonged waiting time (idle state while online)</li>
+      <li>Delivery delays across multiple workers</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Multi-Track + ML Validation:</strong></p>
+
+<ul>
+  <li><strong>Track C (Peer Corroboration Engine):</strong>
+    <ul>
+      <li>Analyzes workers within a 2 km radius</li>
+      <li>Computes disruption ratio (affected vs active workers)</li>
+      <li>Validates network-wide consistency (+0 to +25)</li>
+    </ul>
+  </li>
+
+  <li><strong>Track D (Baseline Income Engine):</strong>
+    <ul>
+      <li>Compares current earnings vs 3-week historical baseline</li>
+      <li>Detects abnormal drop in hourly income</li>
+      <li>Estimates financial impact (+0 to +10)</li>
+    </ul>
+  </li>
+
+  <li><strong>ML Scoring Layer:</strong>
+    <ul>
+      <li>Aggregates behavioral anomalies into a disruption probability score</li>
+      <li>Filters noise using learned patterns of normal vs disrupted demand cycles</li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+<strong>Trigger Condition:</strong>
+</p>
+
+<p style="font-family: 'Courier New', monospace; background-color: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 3px solid #34495e;">
+(Avg_Wait_Time ↑ AND Multi_User_Delay = TRUE)  <br>
+AND  <br>
+Disruption_Ratio ≥ Critical_Threshold
+</p>
+
+<p>
+This ensures that individual inefficiencies do not trigger claims—only systemic failures do.
+</p>
+
+<hr>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
+3. TRIGGER SYNCHRONIZATION LOGIC
+</strong>
+
+<p>
+A claim is activated only when both triggers align within a temporal window, ensuring causality between environmental conditions and economic disruption.
+</p>
+
+<p style="font-family: 'Courier New', monospace; background-color: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 3px solid #34495e;">
+FINAL TRIGGER = ENVIRONMENTAL_TRIGGER ∩ BEHAVIORAL_TRIGGER
+</p>
+
+<ul>
+  <li>Prevents false positives from isolated weather or platform noise</li>
+  <li>Ensures high-confidence parametric payouts</li>
+  <li>Feeds directly into the Confidence Aggregation Engine (0–100 scoring)</li>
+</ul>
+
+<hr>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">
+4. FRAUD GUARDRAIL (HARD VETO LAYER)
+</strong>
+
+<ul>
+  <li>GPS spoof detection</li>
+  <li>Device fingerprint validation</li>
+  <li>Blacklist checks</li>
+</ul>
+
+<p>
+<strong>Override Rule:</strong>
+</p>
+
+<p style="font-family: 'Courier New', monospace; background-color: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 3px solid #e74c3c;">
+Fraud_Flag = TRUE → Trigger Invalidated (Hard Veto)
+</p>
+
+<p>
+This ensures that even if both triggers are satisfied, fraudulent sessions are terminated before payout execution.
+</p>
+
+<br>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">THE FIVE COVERED DISRUPTIONS</strong>
+
+<p>Haven covers exactly <strong>five parametric trigger events</strong>. Each has a precisely defined threshold, an objective external data source, and requires zero worker testimony or documentation.</p>
+
+| # | Trigger | Threshold | Data Source | Rationale |
+|:---:|:---|:---|:---|:---|
+| 1 | 🌧️ **RAIN_EXTREME** | ≥ 64.5mm rainfall in 24h | OpenWeatherMap + IMD | IMD "heavy rainfall" — roads flood, orders stop |
+| 2 | 🌫️ **AQI_SEVERE** | AQI ≥ 300 sustained for 4+ hours | WAQI.info + CPCB | CPCB "hazardous" — outdoor work causes health harm |
+| 3 | 🔥 **HEAT_EXTREME** | ≥ 45°C for 2+ consecutive days | OWM + IMD heat alerts | Physiological danger for outdoor motorbike riders |
+| 4 | 📱 **PLATFORM_OUTAGE** | Platform down ≥ 120min during peak hours | HTTP probes (3 data centers) | Peak = 11am–2pm or 6pm–10pm; all 3 DCs must fail |
+| 5 | 🚫 **SOCIAL_DISRUPTION** | Curfew/bandh ≥ 6 hours | PIB RSS + govt announcements | Requires human verification; cannot be fully automated |
+
+<br>
+
+<strong style="font-family: 'Courier New', monospace; font-size: 1.1em; color: #2c3e50; font-weight: 800;">WHY THESE FIVE — AND NOT OTHERS?</strong>
+
+<p>Several triggers were considered and deliberately rejected because they violate the <strong>parametric model</strong> — they cannot be verified from external objective data alone:</p>
+
+| Rejected Trigger | Reason for Rejection |
+|:---|:---|
+| 🏍️ Vehicle theft | Requires loss assessment and documentation — not parametric |
+| 🏥 Health emergencies | Personal, not zone-wide; needs medical records — non-parametric |
+| 📉 Earnings drop | Could result from poor performance rather than external events |
+| 🔧 Vehicle breakdown | Cannot be verified externally without inspection |
+
+<p style="font-size: 0.9em; color: #7f8c8d; font-style: italic; border-left: 3px solid #bdc3c7; padding-left: 10px; margin-top: 12px;">
+The five chosen triggers are all <strong>verifiable from external objective data sources</strong> (weather APIs, platform monitoring, government announcements) without requiring any worker testimony, documentation, or adjuster involvement. This is what makes Haven truly parametric.
+</p>
+
+</div>
 
 ---
 
