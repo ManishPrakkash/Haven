@@ -24,6 +24,7 @@ export default function RootLayout() {
         <Stack.Screen name="pricing" options={{ headerShown: false, animation: 'slide_from_right' }} />
         <Stack.Screen name="onboarding-complete" options={{ headerShown: false, animation: 'fade' }} />
         <Stack.Screen name="plan-details" options={{ headerShown: false, animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="review-selection" options={{ headerShown: false, animation: 'slide_from_right' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
