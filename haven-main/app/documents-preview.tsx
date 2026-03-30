@@ -181,7 +181,7 @@ export default function DocumentsPreviewScreen() {
             <Button 
                title="Confirm & Continue"
                variant="secondary"
-               onPress={() => router.push('/onboarding-complete')}
+               onPress={() => router.push('/pricing')}
                style={styles.confirmButton}
                rightIcon={<Ionicons name="shield-checkmark-outline" size={20} color="white" style={{ marginLeft: 8 }} />}
             />
