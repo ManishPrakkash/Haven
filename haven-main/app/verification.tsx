@@ -30,7 +30,7 @@ const PLATFORMS = [
 export default function VerificationScreen() {
   const insets = useSafeAreaInsets();
   const [selectedPlatform, setSelectedPlatform] = useState('swiggy');
-  const [partnerId, setPartnerId] = useState('SW-CHE-004821');
+  const [partnerId, setPartnerId] = useState('');
 
   return (
     <View style={styles.container}>
@@ -140,8 +140,16 @@ export default function VerificationScreen() {
             <Button 
               title="Verify My ID" 
               variant="secondary"
-              onPress={() => router.push('/verified-success')}
-              style={styles.verifyButton}
+              disabled={!partnerId.trim()}
+              onPress={() => {
+                if (partnerId.trim()) {
+                  router.push('/verified-success');
+                }
+              }}
+              style={[
+                styles.verifyButton,
+                !partnerId.trim() && { opacity: 0.5 }
+              ]}
             />
 
             <View style={styles.lockFooter}>

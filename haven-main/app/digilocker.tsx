@@ -157,8 +157,16 @@ export default function DigiLockerScreen() {
             <Button 
               title="Send OTP via SMS" 
               variant="primary"
-              onPress={() => router.push('/otp')}
-              style={styles.otpButton}
+              disabled={mobile.length !== 10 || !consent}
+              onPress={() => {
+                if (mobile.length === 10 && consent) {
+                  router.push('/otp');
+                }
+              } }
+              style={[
+                styles.otpButton,
+                (mobile.length !== 10 || !consent) && { opacity: 0.5, backgroundColor: '#94A3B8' }
+              ]}
               leftIcon={<Ionicons name="chatbox-ellipses-outline" size={20} color="white" style={{ marginRight: 8 }} />}
             />
             
