@@ -23,6 +23,7 @@ export default function RootLayout() {
         <Stack.Screen name="documents-preview" options={{ headerShown: false, animation: 'slide_from_right' }} />
         <Stack.Screen name="pricing" options={{ headerShown: false, animation: 'slide_from_right' }} />
         <Stack.Screen name="onboarding-complete" options={{ headerShown: false, animation: 'fade' }} />
+        <Stack.Screen name="plan-details" options={{ headerShown: false, animation: 'slide_from_bottom' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

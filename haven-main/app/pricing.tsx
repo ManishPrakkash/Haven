@@ -224,7 +224,10 @@ export default function PricingScreen() {
                     ))}
                   </View>
 
-                  <TouchableOpacity style={styles.viewDetailsRow}>
+                  <TouchableOpacity 
+                    style={styles.viewDetailsRow}
+                    onPress={() => router.push('/plan-details')}
+                  >
                     <Typography variant="caption" color={BrandColors.accent} style={styles.viewDetailsText}>
                       View Details
                     </Typography>
