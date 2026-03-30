@@ -163,7 +163,7 @@ export default function PolicyAgreementScreen() {
             <Button 
               title="Continue to Identity Verification" 
               variant="secondary"
-              onPress={() => router.push('/verification')}
+              onPress={() => router.push('/identity-verification')}
               style={styles.continueButton}
             />
           </View>
