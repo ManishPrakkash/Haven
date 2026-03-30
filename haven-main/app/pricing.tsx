@@ -195,7 +195,7 @@ export default function PricingScreen() {
                   <Button 
                     title={plan.id === 'economy' ? 'Select Economy' : plan.buttonText}
                     variant="outline"
-                    onPress={() => router.push('/onboarding-complete')}
+                    onPress={() => router.replace('/(tabs)')}
                     style={[
                       styles.planButton,
                       { borderColor: BrandColors.secondary }

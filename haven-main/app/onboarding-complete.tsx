@@ -45,10 +45,10 @@ export default function OnboardingCompleteScreen() {
       })
     ]).start();
 
-    // Auto-navigate to dashboard after 3.5 seconds
+    // Auto-navigate to pricing after 3 seconds
     const timer = setTimeout(() => {
-      router.replace('/(tabs)');
-    }, 3500);
+      router.replace('/pricing');
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
