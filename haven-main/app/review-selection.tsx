@@ -170,7 +170,7 @@ export default function ReviewSelectionScreen() {
                 title="Proceed to Agreement" 
                 variant="secondary"
                 leftIcon={<Ionicons name="document-text" size={20} color="white" style={{marginRight: 4}} />}
-                onPress={() => router.push('/onboarding-complete')}
+                onPress={() => router.push('/policy-agreement')}
                 style={styles.proceedButton}
             />
             
