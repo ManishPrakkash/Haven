@@ -39,10 +39,10 @@ export default function IdentityVerifiedSummaryScreen() {
       })
     ]).start();
 
-    // Auto-navigate to pricing after 3.5 seconds
+    // Auto-navigate to payment after 4 seconds
     const timer = setTimeout(() => {
-      router.replace('/pricing');
-    }, 3500);
+      router.replace('/secure-payment');
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
