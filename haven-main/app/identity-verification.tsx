@@ -158,7 +158,7 @@ export default function IdentityVerificationScreen() {
             <Button 
               title="Begin Verification" 
               variant="secondary"
-              onPress={() => router.push('/verified-success')}
+              onPress={() => router.push('/face-verification')}
               style={styles.beginButton}
             />
 
