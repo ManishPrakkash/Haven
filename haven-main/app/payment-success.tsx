@@ -32,8 +32,8 @@ const ExpectItem = ({ icon, color, title, subtitle }: { icon: any, color: string
 
 export default function PaymentSuccessScreen() {
   const handleViewPolicy = () => {
-    // Navigate to policies tab
-    router.replace('/(tabs)');
+    // Navigate to the new dashboard
+    router.replace('/home-dashboard');
   };
 
   return (
