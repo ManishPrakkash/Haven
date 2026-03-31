@@ -39,7 +39,7 @@ export default function SecurePaymentScreen() {
 
   const handlePay = () => {
     // Payment logic or success navigation
-    router.replace('/onboarding-complete');
+    router.replace('/payment-processing');
   };
 
   return (
