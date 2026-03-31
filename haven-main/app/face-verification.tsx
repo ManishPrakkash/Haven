@@ -91,18 +91,17 @@ export default function FaceVerificationScreen() {
         >
           {/* Overlay Mask */}
           <View style={styles.overlay}>
-             {/* Top Mask */}
-             <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.6)' }} />
+             <View style={{ flex: 1, backgroundColor: 'rgba(10, 15, 25, 0.8)' }} />
              
-             {/* Center Row with Oval Hole */}
              <View style={{ flexDirection: 'row', height: OVAL_HEIGHT }}>
-                <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.6)' }} />
-                <View style={styles.ovalHole} />
-                <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.6)' }} />
+                <View style={{ flex: 1, backgroundColor: 'rgba(10, 15, 25, 0.8)' }} />
+                <View style={styles.ovalHole}>
+                   <View style={styles.ovalDot} />
+                </View>
+                <View style={{ flex: 1, backgroundColor: 'rgba(10, 15, 25, 0.8)' }} />
              </View>
              
-             {/* Bottom Mask */}
-             <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.6)' }} />
+             <View style={{ flex: 1, backgroundColor: 'rgba(10, 15, 25, 0.8)' }} />
           </View>
         </CameraView>
       ) : (
@@ -110,41 +109,77 @@ export default function FaceVerificationScreen() {
       )}
 
       <SafeAreaView style={styles.safeArea}>
-        {/* Header */}
+        {/* Header - Liveness Check */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} style={styles.closeButton}>
-            <Ionicons name="close" size={28} color="white" />
+          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+            <Ionicons name="arrow-back" size={24} color="white" />
           </TouchableOpacity>
-          <Typography variant="bodySemiBold" color="white" style={styles.headerTitle}>
-            Face Verification
-          </Typography>
+          <View style={styles.headerTitleContainer}>
+            <View style={styles.shieldContainer}>
+               <Ionicons name="shield-checkmark" size={16} color="white" />
+               <Typography variant="bodySemiBold" color="white" style={styles.headerTitle}>
+                 LIVENESS CHECK
+               </Typography>
+            </View>
+            <Typography variant="caption" color="rgba(255, 255, 255, 0.6)" align="center">
+              Follow the instruction below
+            </Typography>
+          </View>
           <View style={{ width: 40 }} />
         </View>
 
-        {/* Instructions */}
+        {/* Instruction pill */}
         {!capturedImage && (
-          <View style={styles.instructionContainer}>
-            <Typography variant="h4" color="white" align="center" style={styles.instructionMain}>
-              Position your face inside the oval
-            </Typography>
-            <Typography variant="body" color="rgba(255, 255, 255, 0.8)" align="center" style={styles.instructionSub}>
-              Ensure good lighting and remove glasses
-            </Typography>
+          <View style={styles.instructionPillContainer}>
+            <View style={styles.instructionPill}>
+              <Ionicons name="eye" size={20} color="#60A5FA" style={{ marginRight: 10 }} />
+              <Typography variant="bodySemiBold" color="white" style={{ fontSize: 18 }}>
+                Blink slowly, twice
+              </Typography>
+            </View>
           </View>
         )}
 
         <View style={{ flex: 1 }} />
 
-        {/* Capture Button (only when not captured) */}
+        {/* Footer Actions */}
         {!capturedImage && (
-          <View style={styles.captureContainer}>
-            <TouchableOpacity 
-              style={styles.captureButton} 
-              onPress={takePicture}
-              disabled={isCapturing}
-            >
-              <View style={styles.captureButtonInner} />
-            </TouchableOpacity>
+          <View style={styles.footerContainer}>
+            {/* Progress indicator */}
+            <View style={styles.progressContainer}>
+               <View style={[styles.progressSegment, styles.progressActive]} />
+               <View style={styles.progressSegment} />
+               <View style={styles.progressSegment} />
+            </View>
+
+            <View style={styles.actionsRow}>
+              <TouchableOpacity style={styles.sideAction}>
+                <Ionicons name="image" size={24} color="white" />
+              </TouchableOpacity>
+
+              <TouchableOpacity 
+                style={styles.shutterButton} 
+                onPress={takePicture}
+                disabled={isCapturing}
+              >
+                <View style={styles.shutterInner}>
+                  <Ionicons name="aperture" size={32} color="#0F172A" />
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.sideAction}>
+                <View style={styles.whiteCircle} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.bottomTextContainer}>
+               <Typography variant="bodySemiBold" color="#00CED1" style={{ fontSize: 14 }}>
+                 Step 1 of 3
+               </Typography>
+               <Typography variant="caption" color="rgba(255, 255, 255, 0.7)">
+                 Keep your face within the frame
+               </Typography>
+            </View>
           </View>
         )}
 
@@ -193,7 +228,7 @@ export default function FaceVerificationScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#0F172A',
   },
   centeredContainer: {
     flex: 1,
@@ -209,17 +244,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    height: 56,
+    paddingHorizontal: 16,
+    paddingTop: 10,
   },
-  closeButton: {
+  backButton: {
     width: 40,
     height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(0,0,0,0.3)',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  headerTitleContainer: {
+    alignItems: 'center',
+  },
+  shieldContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginBottom: 2,
+  },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 14,
+    letterSpacing: 0.5,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -229,48 +276,99 @@ const styles = StyleSheet.create({
     width: OVAL_WIDTH,
     height: OVAL_HEIGHT,
     borderRadius: OVAL_WIDTH / 2,
-    borderWidth: 3,
-    borderColor: '#00C853',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255, 255, 255, 0.4)',
     backgroundColor: 'transparent',
-  },
-  instructionContainer: {
-    marginTop: 20,
-    paddingHorizontal: 40,
-  },
-  instructionMain: {
-    fontSize: 20,
-    fontWeight: '700',
-    marginBottom: 8,
-  },
-  instructionSub: {
-    fontSize: 14,
-  },
-  captureContainer: {
     alignItems: 'center',
-    paddingBottom: 40,
   },
-  captureButton: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  ovalDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#00CED1',
+    marginTop: -5,
+  },
+  instructionPillContainer: {
+    alignItems: 'center',
+    marginTop: 40,
+  },
+  instructionPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(15, 35, 60, 0.9)',
+    paddingHorizontal: 24,
+    paddingVertical: 14,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'rgba(100, 180, 255, 0.2)',
+  },
+  footerContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 20,
+  },
+  progressContainer: {
+    flexDirection: 'row',
+    gap: 8,
+    marginBottom: 30,
+    justifyContent: 'center',
+  },
+  progressSegment: {
+    height: 4,
+    width: 60,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 2,
+  },
+  progressActive: {
+    backgroundColor: '#00C853',
+  },
+  actionsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
+  shutterButton: {
+    width: 84,
+    height: 84,
+    borderRadius: 42,
+    backgroundColor: 'transparent',
+    borderWidth: 4,
+    borderColor: 'rgba(255, 255, 255, 0.3)',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 4,
-    borderColor: 'white',
   },
-  captureButtonInner: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+  shutterInner: {
+    width: 66,
+    height: 66,
+    borderRadius: 33,
     backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sideAction: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  whiteCircle: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: 'white',
+  },
+  bottomTextContainer: {
+    alignItems: 'center',
+    gap: 4,
   },
   bottomSheet: {
     backgroundColor: 'white',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 24,
-    paddingTop: 60, // Space for the floating thumbnail
+    paddingTop: 60,
     paddingBottom: 40,
     marginTop: 'auto',
   },
@@ -326,6 +424,6 @@ const styles = StyleSheet.create({
     borderColor: '#E2E8F0',
   },
   confirmButton: {
-    backgroundColor: '#008080', // Teal-ish color from design
+    backgroundColor: '#008080',
   },
 });
