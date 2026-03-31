@@ -27,7 +27,7 @@ export default function DigitalSignatureScreen() {
   const handleOK = (signature: string) => {
     // Usually save the base64 signature here
     console.log(signature);
-    router.push('/onboarding-complete');
+    router.push('/identity-verified-summary');
   };
 
   const handleClear = () => {
