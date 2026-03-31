@@ -70,7 +70,7 @@ export default function FaceVerificationScreen() {
   };
 
   const handleConfirm = () => {
-    router.push('/verified-success');
+    router.push('/digital-signature');
   };
 
   const handleRetake = () => {
