@@ -10,6 +10,7 @@ import { BrandColors } from '@/constants/theme';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import { FeatureItem } from '@/components/common/feature-item';
+import { TelemetryCard } from '@/components/dashboard/telemetry-card';
 
 const { height } = Dimensions.get('window');
 
@@ -62,6 +63,7 @@ export default function HomeScreen() {
               minHeight: height * 0.55
             }
           ]}>
+            <TelemetryCard workerId="worker-123" />
             <Typography variant="h2">Welcome</Typography>
             <Typography variant="body" style={styles.mainDescription}>
               GigShield provides seamless income protection tailored for delivery partners. Secure your earnings today.

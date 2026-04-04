@@ -7,8 +7,11 @@ import { WeatherService } from '../weather/weather.service';
 import { H3Service } from '../../h3/h3.service';
 import { PayoutService } from '../payout/payout.service';
 import { RedisService } from '../../redis/redis.service';
+import { TelemetryService } from '../telemetry/telemetry.service';
+import * as h3 from 'h3-js';
 import { CreateClaimDto } from './dto/create-claim.dto';
 import { CLAIMS_QUEUE, PROCESS_CLAIM_JOB } from './constants';
+import { SimulationPayload } from '../triggers/triggers.controller';
 
 @Injectable()
 export class ClaimsService {
@@ -20,13 +23,13 @@ export class ClaimsService {
     private readonly h3Service: H3Service,
     private readonly payoutService: PayoutService,
     private readonly redisService: RedisService,
+    private readonly telemetryService: TelemetryService,
     private readonly configService: ConfigService,
     @InjectQueue(CLAIMS_QUEUE) private readonly claimsQueue: Queue,
   ) {}
 
   /**
    * Public API to submit a claim. Enqueues for background processing.
-   * If Redis is offline, bypasses queue for synchronous execution.
    */
   async processClaim(dto: CreateClaimDto): Promise<void> {
     this.logger.log(`Enqueuing claim for policy ${dto.policy_id}`);
@@ -37,6 +40,132 @@ export class ClaimsService {
         delay: 5000,
       },
     });
+  }
+
+  /**
+   * The 3-Layer Simulator Fraud Pipeline.
+   * This is triggered by Swiggy Mock "SIMULATE" buttons.
+   */
+  async processSimulation(payload: SimulationPayload): Promise<any> {
+    // LAYER 0: IDEMPOTENCY & CONCURRENCY (10+ Year Developer Grid)
+    const timeBucket = new Date().toISOString().substring(0, 13); // Hourly bucket
+    const lockKey = `claim:lock:${payload.workerId}:${payload.eventType}:${timeBucket}`;
+    const acquired = await this.redisService.acquireLock(lockKey, 60000); // 1-minute lock
+    
+    if (!acquired) {
+      this.logger.warn(`Duplicate trigger detected for worker ${payload.workerId}. Aborting.`);
+      return { status: 'DENIED', reason: 'Conflict: Claim already being processed.', layer: 0 };
+    }
+
+    try {
+      this.logger.log(`Executing 3-Layer Fraud Engine for Simulator: ${payload.workerId}`);
+    
+    // FETCH THE ACTIVE POLICY FOR THIS WORKER
+    const { data: policy } = await this.supabaseService.client
+      .from('policies')
+      .select('id, created_at, plan_type, status')
+      .eq('user_id', payload.workerId)
+      .eq('status', 'ACTIVE')
+      .maybeSingle();
+
+    if (!policy) {
+      this.logger.error(`[Layer 1] FRAUD BLOCKED. No active policy found for worker ${payload.workerId}.`);
+      return { status: 'DENIED', reason: 'No active policy found.', layer: 1 };
+    }
+
+    // LAYER 1: VETO CHECKS (Wait Period)
+    const createdAt = new Date(policy.created_at).getTime();
+    const waitHours = policy.plan_type === 'PRO' ? 72 : 168; // 3 days for Pro, 7 days for Economy
+    const now = Date.now();
+    
+    if (now - createdAt < waitHours * 60 * 60 * 1000) {
+      this.logger.warn(`[Layer 1] FRAUD BLOCKED. Policy ${policy.id} is still in its ${waitHours}h waiting period.`);
+      return { status: 'DENIED', reason: `In ${waitHours}h mandatory waiting period.`, layer: 1 };
+    }
+
+    this.logger.debug(`[Layer 1] Wait Period Check Passed.`);
+
+    // LAYER 2: TELEMETRY & H3 CORROBORATION (The Zero-Trust Math)
+    const activeTelemetryRecord = await this.redisService.get(`worker:active:${payload.workerId}`);
+    
+    if (!activeTelemetryRecord) {
+      this.logger.error(`[Layer 2] FRAUD BLOCKED. No active background telemetry found for ${payload.workerId} in the last 10 minutes.`);
+      return { status: 'DENIED', reason: 'Absent Telemetry. Spoofing suspected.', layer: 2 };
+    }
+
+    const telemetry = JSON.parse(activeTelemetryRecord);
+    const workerHistory = await this.telemetryService.getWorkerHistory(payload.workerId);
+    
+    // ACCURACY: Use Level 10 Hex for Laser Precision (~38m edge, ~66m diameter)
+    const incidentCell = h3.latLngToCell(payload.lat, payload.lng, 10);
+    
+    // LAYER 2.5: SPATIAL-TEMPORAL TRAJECTORY (The 'Trajectory' Gap)
+    // Even if current ping is slightly off, we check if ANY of the last 5 pings were within proximity.
+    const isPresentHistorically = workerHistory.some(ping => {
+      const dist = h3.gridDistance(ping.h3Cell, incidentCell);
+      return dist <= 2; // Within 2 Res-10 Hexes (~130m range)
+    });
+
+    if (!isPresentHistorically) {
+      this.logger.error(`[Layer 2] FRAUD BLOCKED. Worker ${payload.workerId} spatial footprint not found in incident zone.`);
+      return { status: 'DENIED', reason: 'Spatial mismatch: Trajectory doesn\'t cross epicenter.', layer: 2 };
+    }
+
+    // ACCURACY: Calculated Displacement
+    const latestHexDist = h3.gridDistance(telemetry.h3Cell, incidentCell);
+    const exactDistanceMeters = latestHexDist * 66; // Approx diameter for Res 10
+    
+    this.logger.log(`[Layer 2] Telemetry physically corroborated. Hex Distance: ${latestHexDist}. Displacement: ~${exactDistanceMeters}m.`);
+
+    // LAYER 3: PEER CORROBORATION & ESCROW
+    const peerScore = await this.simulatePeerCorroboration(incidentCell);
+    
+    if (peerScore < 0.5) {
+      this.logger.warn(`[Layer 3] Low Peer Corroboration. Placing funds in Escrow for Admin Review.`);
+      return { status: 'ESCROW', reason: 'Insufficient peer corroboration in Hex.', layer: 3 };
+    }
+
+    this.logger.log(`[Layer 3] Peer network confirmed disruption. Escrow released.`);
+    
+    // LAYER 4: TRANSACTIONAL PERSISTENCE (Supabase Claim Entry)
+    const { data: claim, error: claimError } = await this.supabaseService.client
+      .from('claims')
+      .insert({
+        policy_id: policy.id,
+        trigger_type: payload.eventType.toUpperCase(),
+        trigger_value: 100, // Simulated intensity
+        payout_amount: 1500,
+        status: 'VALIDATED_FOR_PAYOUT',
+        created_at: new Date().toISOString()
+      })
+      .select()
+      .single();
+
+    if (claimError) {
+      this.logger.error(`[DB Error] Failed to persist claim: ${claimError.message}`);
+      return { status: 'ERROR', reason: 'Database persistence failure.' };
+    }
+
+    this.logger.log(`[DB Success] Claim created: ${claim.id}`);
+
+    // Trigger Black Swan Liability Check via Payouts
+    const success = await this.payoutService.processPayout(claim.id, 1500, payload.workerId);
+
+    return { 
+      status: success ? 'APPROVED' : 'POOLED_LIQUIDITY_LIMIT', 
+      claimId: claim.id,
+      payout: success ? '₹1500' : '₹0', 
+      distance: `${exactDistanceMeters.toFixed(1)}m`,
+      layer: 4
+    };
+    } finally {
+      // RELEASE IDEMPOTENCY LOCK
+      await this.redisService.releaseLock(lockKey);
+    }
+  }
+
+  private async simulatePeerCorroboration(hexCell: string) {
+    return 0.85; 
   }
 
   /**

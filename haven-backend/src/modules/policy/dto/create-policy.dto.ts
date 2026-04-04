@@ -7,7 +7,7 @@ export enum PlanType {
 }
 
 export class CreatePolicyDto {
-  @IsUUID()
+  @IsString()
   @IsNotEmpty()
   user_id: string;
 

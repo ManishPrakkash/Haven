@@ -1,11 +1,15 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { SupabaseService } from '../../supabase/supabase.service';
+import { RedisService } from '../../redis/redis.service';
 
 @Injectable()
 export class PayoutService {
   private readonly logger = new Logger(PayoutService.name);
 
-  constructor(private readonly supabaseService: SupabaseService) {}
+  constructor(
+    private readonly supabaseService: SupabaseService,
+    private readonly redisService: RedisService,
+  ) {}
 
   /**
    * Processes an automated payout via mock Razorpay integration.
@@ -23,7 +27,27 @@ export class PayoutService {
       return false;
     }
 
-    this.logger.log(`Initiating automated payout for claim ${claimId} of amount ${amount} to ${workerUpi}`);
+    // 0.5 GIGSHIELD ENTERPRISE: Payout Velocity Circuit Breaker (Black Swan Protection)
+    const velocityKey = `payout:velocity:global:${new Date().toISOString().substring(0, 13)}`; // Hourly bucket
+    const velocity = await this.redisService.client.incr(velocityKey);
+    if (velocity === 1) await this.redisService.client.expire(velocityKey, 3600);
+    
+    if (velocity > 5) {
+      this.logger.error(`[BLACK SWAN: VELOCITY] Global payout threshold exceeded (${velocity}/5). Automated payouts SUSPENDED.`);
+      return false;
+    }
+
+    // 1. Black Swan Solvency Check (Pool Liability Limits)
+    // In a real production system, we query the Liquidity Pool vault balance.
+    const MOCK_POOL_BALANCE = 50000; // ₹50,000 left in the active pool
+    const CRITICAL_THRESHOLD = 5000; // If pool < ₹5,000, trigger "Black Swan" protocol
+    
+    if (MOCK_POOL_BALANCE < CRITICAL_THRESHOLD) {
+      this.logger.error(`[BLACK SWAN EVENT] Solvency at risk. Pool Balance: ₹${MOCK_POOL_BALANCE}. Automated payouts Halted.`);
+      return false;
+    }
+
+    this.logger.log(`Initiating automated payout for claim ${claimId} of amount ₹${amount} to ${workerUpi}`);
 
     try {
       // Mock API latency

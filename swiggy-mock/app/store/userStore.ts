@@ -28,7 +28,11 @@ export const PROFILES_DATA = [
       deliveriesToday: 12,
       hoursToday: 6.5,
       isOnline: false,
-      deliveryZone: 'Anna Nagar'
+      deliveryZone: 'Anna Nagar',
+      lat: 13.0827,
+      lng: 80.2707,
+      isDrifting: false,
+      locationOffset: { lat: 0, lng: 0 }
     },
     earningsStats: {
       weekTotal: '4,200',
@@ -70,7 +74,11 @@ export const PROFILES_DATA = [
       deliveriesToday: 8,
       hoursToday: 5.2,
       isOnline: false,
-      deliveryZone: 'T. Nagar'
+      deliveryZone: 'T. Nagar',
+      lat: 11.0168,
+      lng: 76.9558,
+      isDrifting: false,
+      locationOffset: { lat: 0, lng: 0 }
     },
     earningsStats: {
       weekTotal: '3,100',
@@ -112,7 +120,11 @@ export const PROFILES_DATA = [
       deliveriesToday: 15,
       hoursToday: 7.8,
       isOnline: false,
-      deliveryZone: 'Adyar'
+      deliveryZone: 'Adyar',
+      lat: 12.9716,
+      lng: 77.5946,
+      isDrifting: false,
+      locationOffset: { lat: 0, lng: 0 }
     },
     earningsStats: {
       weekTotal: '1,500',
@@ -154,7 +166,11 @@ export const PROFILES_DATA = [
       deliveriesToday: 10,
       hoursToday: 6.0,
       isOnline: false,
-      deliveryZone: 'Velachery'
+      deliveryZone: 'Velachery',
+      lat: 17.3850,
+      lng: 78.4867,
+      isDrifting: false,
+      locationOffset: { lat: 0, lng: 0 }
     },
     earningsStats: {
       weekTotal: '6,800',
@@ -182,6 +198,14 @@ export const userStore = {
     currentUserIndex = index;
     listeners.forEach((l) => l());
   },
+  setDrift: (drifting: boolean) => {
+    PROFILES_DATA[currentUserIndex].homeStats.isDrifting = drifting;
+    listeners.forEach((l) => l());
+  },
+  setLocationOffset: (lat: number, lng: number) => {
+    PROFILES_DATA[currentUserIndex].homeStats.locationOffset = { lat, lng };
+    listeners.forEach((l) => l());
+  },
   subscribe: (listener: Listener) => {
     listeners.add(listener);
     return () => {
@@ -203,6 +227,8 @@ export function useUserStore() {
   return {
     currentUserIndex: index,
     profile: userStore.getProfile(),
-    setCurrentUserIndex: userStore.setCurrentUserIndex
+    setCurrentUserIndex: userStore.setCurrentUserIndex,
+    setDrift: userStore.setDrift,
+    setLocationOffset: userStore.setLocationOffset
   };
 }

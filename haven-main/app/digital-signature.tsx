@@ -24,10 +24,34 @@ export default function DigitalSignatureScreen() {
   const [hasSigned, setHasSigned] = useState(false);
   const [scrollEnabled, setScrollEnabled] = useState(true);
 
-  const handleOK = (signature: string) => {
-    // Usually save the base64 signature here
-    console.log(signature);
-    router.push('/identity-verified-summary');
+  const handleOK = async (signature: string) => {
+    try {
+      // Finalize Parametric Contract in Supabase
+      console.log('Signature captured, syncing to Supabase...');
+      
+      const response = await fetch('http://localhost:3000/policy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: '1', // Default partner for demo
+          plan_type: 'Economy',
+          risk_zone: 'Chennai',
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Policy created:', data.policy_id);
+        
+        // Ensure visual feedback delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        router.push('/identity-verified-summary');
+      } else {
+        console.error('Failed to create policy');
+      }
+    } catch (e) {
+      console.error('Finalization failed');
+    }
   };
 
   const handleClear = () => {

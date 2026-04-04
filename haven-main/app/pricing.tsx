@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   View, 
   StyleSheet, 
@@ -73,6 +73,49 @@ const PLANS = [
 export default function PricingScreen() {
   const insets = useSafeAreaInsets();
   const [billingCycle, setBillingCycle] = useState<'annual' | 'monthly'>('annual');
+  const [dynamicPlans, setDynamicPlans] = useState(PLANS);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch AI Reactively Calculated Quotes from Haven Backend
+  useEffect(() => {
+    async function loadDynamicPricing() {
+      try {
+        const payload = {
+          avgDailySalary: 1200,    // Mocked from their actual income history
+          city: 'Chennai',         // Determines City Risk Index (CRI)
+          age: 26,                 // Modulates variance risk
+          planLevel: 'ECONOMY',    // Gets scaled for all 3 based on baseline
+          isCleanRecord: true      // 8-week clear history
+        };
+
+        const res = await fetch('http://localhost:3000/policy/quotes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          const json = await res.json();
+          // We apply the returned weekly premium dynamically across our UI
+          // For simplicity in simulation, we just overwrite the Economy price
+          // (Since the backend calculates per plan currently)
+          const newPlans = [...PLANS];
+          const economyIndex = newPlans.findIndex(p => p.id === 'economy');
+          if (economyIndex >= 0) {
+            newPlans[economyIndex].price = `₹${json.data.premiumWeekly}`;
+            newPlans[economyIndex].period = '/week';
+            newPlans[economyIndex].description = `Actuarial base: ₹1200/day. Risk Multiplier: ${json.data.appliedCRI}`;
+          }
+          setDynamicPlans(newPlans);
+        }
+      } catch (err) {
+        console.warn('Failed to load dynamic quotes, using fallback.');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadDynamicPricing();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -176,7 +219,7 @@ export default function PricingScreen() {
               snapToInterval={CARD_WIDTH + CARD_MARGIN}
               decelerationRate="fast"
             >
-              {PLANS.map((plan) => (
+              {dynamicPlans.map((plan) => (
                 <View 
                   key={plan.id} 
                   style={styles.planCard}
@@ -184,12 +227,18 @@ export default function PricingScreen() {
                   <Typography variant="h2" style={styles.planName}>{plan.name}</Typography>
                   
                   <View style={styles.priceRow}>
-                    <Typography variant="h1" style={styles.priceText}>{plan.price}</Typography>
-                    <Typography variant="body" color={BrandColors.text.muted} style={styles.periodText}>{plan.period}</Typography>
+                    {isLoading ? (
+                      <Typography variant="h1" style={styles.priceText}>...</Typography>
+                    ) : (
+                      <>
+                        <Typography variant="h1" style={styles.priceText}>{plan.price}</Typography>
+                        <Typography variant="body" color={BrandColors.text.muted} style={styles.periodText}>{plan.period}</Typography>
+                      </>
+                    )}
                   </View>
 
                   <Typography variant="caption" color={BrandColors.text.muted} style={styles.planDescription}>
-                    {plan.description}
+                    {isLoading ? "Calculating personalized ML risk algorithms..." : plan.description}
                   </Typography>
 
                   <Button 

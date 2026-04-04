@@ -1,8 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
+import { useTelemetryInterval } from '../../hooks/useTelemetryInterval';
 
 export default function TabLayout() {
+  useTelemetryInterval();
+
   return (
     <Tabs
       screenOptions={{

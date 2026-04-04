@@ -14,6 +14,7 @@ import { PayoutModule } from './modules/payout/payout.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { PolicyModule } from './modules/policy/policy.module';
 import { RedisModule } from './redis/redis.module';
+import { TelemetryModule } from './modules/telemetry/telemetry.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { RedisModule } from './redis/redis.module';
     PayoutModule,
     ProfileModule,
     PolicyModule,
+    TelemetryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

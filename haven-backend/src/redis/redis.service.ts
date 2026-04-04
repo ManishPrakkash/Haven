@@ -10,6 +10,20 @@ export class RedisService {
   ) {}
 
   /**
+   * Expose the underlying Redis client for complex operations (LPUSH, LTRIM, etc.)
+   */
+  get client(): Redis {
+    return this.redis;
+  }
+
+  /**
+   * Deletes a key from Redis
+   */
+  async del(key: string): Promise<void> {
+    await this.redis.del(key);
+  }
+
+  /**
    * Acquires a distributed lock for a specific resource key using Redis.
    */
   async acquireLock(key: string, ttl: number = 30000): Promise<boolean> {
@@ -42,6 +56,33 @@ export class RedisService {
       this.logger.debug(`Lock released for ${key}`);
     } catch (error) {
       this.logger.warn(`Redis releaseLock failed: ${error.message}`);
+    }
+  }
+
+  /**
+   * Set a key-value pair in Redis with an optional TTL in seconds
+   */
+  async set(key: string, value: string, ttlSeconds?: number): Promise<void> {
+    try {
+      if (ttlSeconds) {
+        await this.redis.set(key, value, 'EX', ttlSeconds);
+      } else {
+        await this.redis.set(key, value);
+      }
+    } catch (error) {
+      this.logger.error(`Redis set failed for key ${key}: ${error.message}`);
+    }
+  }
+
+  /**
+   * Get a value from Redis by key
+   */
+  async get(key: string): Promise<string | null> {
+    try {
+      return await this.redis.get(key);
+    } catch (error) {
+      this.logger.error(`Redis get failed for key ${key}: ${error.message}`);
+      return null;
     }
   }
 }
